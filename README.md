@@ -235,6 +235,8 @@ if __name__ == '__main__':
 
 - **Checkbox**
 - **Dropdown list**
-- ...
+- **Scrollview**
+- **Carousel Widget**
+- **Slider**
 # Animace 
 

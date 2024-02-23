@@ -198,7 +198,8 @@ if __name__ == '__main__':
 ```
   
 - **Label** = slouží pro výpis
-  Mění barvu Label
+
+  - Mění barvu Label
 
   ```
   class HelloWorld(App):
@@ -233,8 +234,10 @@ if __name__ == '__main__':
     
 
 
-- **Checkbox**
-- **Dropdown list**
+- **Checkbox** = umožňuje provést dvě volbu, např. ano nebo ne
+
+- **Dropdown list** = umožňuje zobrazit seznam voleb. Může být tlačítko, fotka, ...
+
 - **Scrollview**
 - **Carousel Widget**
 - **Slider**

@@ -1,11 +1,11 @@
 # Co je Kivy?
-Kivy je open-source framework Pythonu, který umožňuje vytvořit apliakce pro Windows, Mac OS, Linux, Android, iOS, Raspberry-Pi.
+Kivy je open-source framework Pythonu, který umožňuje vytvořit aplikace pro Windows, Mac OS, Linux, Android, iOS, Raspberry-Pi.
 
 # Co podporuje Kivy?
 - multi-touch: je ideální pro tvorbu her a aplikací na dotyková zařížení
-- multi-platform: vytvoříme kód jednou, pak může spouštět na různých operačních systémů a na různých zařízeních, tedy zobrazuje stejný a podobný pohled na všech platformách
+- multi-platform: vytvoříme kód jednou, pak ho můžeme spouštět na různých operačních systémech a zařízeních, tedy zobrazuje stejný a podobný vzhled na všech platformách
 
-# Instalance
+# Instalace
 ```
 py -m pip install kivy
 ```

@@ -101,9 +101,9 @@ class Calculator(GridLayout):
         self.rows = 4 # radky
         # vytvoření displaye
         display = BoxLayout(orientation="vertical", size_hint_x = "3")
-
-        #Vytcoření tlačítek
         self.add_widget(display)
+
+        #Vytcoření tlačítek    
         self.add_widget(Button(text='1'))
         self.add_widget(Button(text='2'))
         self.add_widget(Button(text='3'))
@@ -129,7 +129,64 @@ if __name__ == '__main__':
     MyApp().run()
 ```
   - Styl
+    - font_size = velikost písma
+    - background_color = barva pozadí
+    - color = barvatextu
+    - size = velikost
+    - size_hint = relativní velikost tlačítka
+      - size_hint=(None, None) = pevná velikost
+    - pos = pozice tlačítka
+      
+```
+Tady bude změnit styl tlačítek
+```
   - Funkce
+    
+```
+```
+from kivy.app import App
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.widget import Widget
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
+
+class Calculator(GridLayout):
+    def __init__(self, **kwargs):
+        super(Calculator, self).__init__(**kwargs)
+        self.cols = 4 # sloupce
+        self.rows = 4 # radky
+        # vytvoření displaye
+        display = BoxLayout(orientation="vertical", size_hint_x = "3")
+        self.add_widget(display)
+
+        #Vytvoření tlačítek
+        self.add_widget(Button(text='1', on_press=self.pridej_1)) # vytvori tlacitka, on_press funkce
+        self.add_widget(Button(text='2', on_press=self.pridej_2))
+        self.add_widget(Button(text='3', on_press=self.pridej_3))
+        self.add_widget(Button(text='+', on_press=self.pricti))
+        self.add_widget(Button(text='4', on_press=self.pridej_4))
+        self.add_widget(Button(text='5', on_press=self.pridej_5))
+        self.add_widget(Button(text='6', on_press=self.pridej_6))
+        self.add_widget(Button(text='-', on_press=self.odecti))
+        self.add_widget(Button(text='7', on_press=self.pridej_7))
+        self.add_widget(Button(text='8', on_press=self.pridej_8))
+        self.add_widget(Button(text='9', on_press=self.pridej_9))
+        self.add_widget(Button(text='*', on_press=self.vynasob))
+        self.add_widget(Button(text='/', on_press=self.vydel))
+        self.add_widget(Button(text='=', on_press=self.vypocitej))
+        self.add_widget(Button(text='AC', on_press=self.smaz))
+
+
+class MyApp(App):
+    def build(self):
+        return Calculator()
+
+if __name__ == '__main__':
+    MyApp().run()
+```
+```
   
 - **Label** = slouží pro výpis
   Mění barvu Label

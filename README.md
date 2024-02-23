@@ -55,10 +55,7 @@ if __name__ == '__main__':
 
 # Ovládací prvky = widget 
 Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomocí vzoru: 
-from kivy.uix.<nazev_prvek> import <Nazev_prvek>
-
-- GridLayout
-  
+from kivy.uix.<nazev_prvek> import <Nazev_prvek>  
 
 
 - Label = slouží pro výpis

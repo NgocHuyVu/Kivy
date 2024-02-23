@@ -10,7 +10,8 @@ Kivy je open-source framework Pythonu, který umožňuje vytvořit aplikace pro 
 py -m pip install kivy
 ```
 
-#Layout 
+# Layout 
+
 Layout zajišťuje uspořádání a pozicování prvků GUI. Máme růžné typy rozložení:
 - FloatLayout umožňuje umístit relativně prvky podle šírky a výšky okna. Růžné zařížení mají růžné rozměry, podle kterých budou prvky automaticky se přizpůsobit, mění jejich rozměry a pozice. Jetliže měníme velkikost okna, taky prvky budou se přizpůsobit.
   

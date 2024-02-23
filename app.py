@@ -10,7 +10,7 @@ class Calculator(GridLayout):
     def __init__(self, **kwargs):
         super(Calculator, self).__init__(**kwargs)
         self.cols = 4 # sloupce
-        self.rows = 4 # radky 
+        self.rows = 5 # radky 
 
         # VYTVORENI displaye
         display = BoxLayout(orientation="vertical", size_hint_x = "3") 

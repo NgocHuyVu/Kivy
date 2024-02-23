@@ -140,9 +140,17 @@ if __name__ == '__main__':
 ```
 Tady bude změnit styl tlačítek
 ```
+      
+  - Přídání fotky do pozadí tlačítka
+    - background_normal =  zobrazí, kdy není stisknuto
+    - background_down = zobrazí, kdy je stisknuto
+    - background_disabled_normal = zobrazí, kdy není stisknuto a zároveň není aktivováno
+      
+
   - Funkce
+
+    Používáme on_press pro přídání funkce. Pokud uživatel stiskne tlačítko, tak volá funkce 
     
-```
 ```
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
@@ -185,7 +193,6 @@ class MyApp(App):
 
 if __name__ == '__main__':
     MyApp().run()
-```
 ```
   
 - **Label** = slouží pro výpis

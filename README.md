@@ -8,6 +8,14 @@ Kivy je open-source framework Pythonu, který umožňuje vytvořit aplikace pro 
 # Instalace
 ```
 py -m pip install kivy
+
+Aktivace virtuálního prostředí
+
+Windows
+kivy_venv\Scripts\activate
+
+Linux nebo macOS
+source kivy_venv/bin/activate
 ```
 
 # Vzor kódu = Hello World
@@ -22,32 +30,32 @@ from kivy.uix.textinput import TextInput
 
 class HelloWorld(App):
     def build(self):
-        # Vrátí label, který se má zobrazit Hello World
+        # Vrátí label, který zobrazí Hello World
         return Label(text ="Hello World")
     
 if __name__ == "__main__":
-    # Spouští instance třídy, a vytvoří windows
+    # Spouští instanci třídy, a vytvoří windows (máš na mysli okno?)
     HelloWorld().run()
 ```
 
 # Ovládací prvky = widget 
-Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomocí vzoru: 
-from kivy.uix.<nazev_prvek> import <Nazev_prvek>
+Když potřebujeme použít některý prvek, tak musíme nejprve importovat pomocí vzoru: 
+from kivy.uix.<nazev_prvku> import <nazev_prvku>
 
 - Label = slouží pro výpis
-  Mění barvu Label
+  Mění barvu Labelu
   ```
   class HelloWorld(App):
     def build(self):
-        # Vrátí label, který se má zobrazit Hello World
+        # Vrátí label, který má zobrazit Hello World
         return Label(text ="Hello World", color =(0.41, 0.42, 0.74, 1))
   ```
-    Pouzíváme Text Markup, aby můžeme měnit styl textu
+    Používáme Text Markup, abychom mohli měnit styl textu
     [styl]text[/styl]
       ```
       class HelloWorld(App):
         def build(self):
-            # Vrátí label, který se má zobrazit Hello World
+            # Vrátí label, který má zobrazit Hello World
             return Label(text ="[b]Hello World[b]", color =(0.41, 0.42, 0.74, 1), markup = True)
       ```
     [b][/b] -> tučný

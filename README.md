@@ -136,6 +136,8 @@ if __name__ == '__main__':
     - size_hint = relativní velikost tlačítka
       - size_hint=(None, None) = pevná velikost
     - pos = pozice tlačítka
+    - border = kulaté rohy
+      např. border = (30, 30, 30, 30)
       
 ```
 Tady bude změnit styl tlačítek
@@ -146,7 +148,6 @@ Tady bude změnit styl tlačítek
     - background_down = zobrazí, kdy je stisknuto
     - background_disabled_normal = zobrazí, kdy není stisknuto a zároveň není aktivováno
       
-
   - **Funkce**
 
     Používáme on_press pro přídání funkce. Pokud uživatel stiskne tlačítko, tak volá funkce 

@@ -2,8 +2,8 @@
 Kivy je open-source framework Pythonu, který umožňuje vytvořit aplikace pro Windows, Mac OS, Linux, Android, iOS, Raspberry-Pi.
 
 # Co podporuje Kivy?
-- multi-touch: je ideální pro tvorbu her a aplikací na dotyková zařížení
-- multi-platform: vytvoříme kód jednou, pak ho můžeme spouštět na různých operačních systémech a zařízeních, tedy zobrazuje stejný a podobný vzhled na všech platformách
+- **multi-touch**: je ideální pro tvorbu her a aplikací na dotyková zařížení
+- **multi-platform**: vytvoříme kód jednou, pak ho můžeme spouštět na různých operačních systémech a zařízeních, tedy zobrazuje stejný a podobný vzhled na všech platformách
 
 # Instalace
 ```
@@ -12,21 +12,21 @@ py -m pip install kivy
 
 # Layout 
 
-Layout zajišťuje uspořádání a pozicování prvků GUI. Máme růžné typy rozložení:
-- FloatLayout umožňuje umístit relativně prvky podle šírky a výšky okna. Růžné zařížení mají růžné rozměry, podle kterých budou prvky automaticky se přizpůsobit, mění jejich rozměry a pozice. Jetliže měníme velkikost okna, taky prvky budou se přizpůsobit.
+**Layout** zajišťuje uspořádání a pozicování prvků GUI. Máme růžné typy rozložení:
+- **FloatLayout** umožňuje umístit relativně prvky podle šírky a výšky okna. Růžné zařížení mají růžné rozměry, podle kterých budou prvky automaticky se přizpůsobit, mění jejich rozměry a pozice. Jetliže měníme velkikost okna, taky prvky budou se přizpůsobit.
   
-- BoxLayout = prvky jsou umíštěny podle vertikální a horizontální směru.
+- **BoxLayout** = prvky jsou umíštěny podle vertikální a horizontální směru.
   
-- AnchorLayout = prvky jsou umíštěny ve rohu nebo střed
-  - anchor_x: "left", "right" a "center"
-  - anchor_y: "top",  "bottom" a "center"
+- **AnchorLayout** = prvky jsou umíštěny ve rohu nebo střed
+  - **anchor_x**: "left", "right" a "center"
+  - **anchor_y**: "top",  "bottom" a "center"
   - Např. anchor_x="left", anchor_y="top"
     
     ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/2301dfce-9c65-43c9-8dc0-46df86447e4b)
 
-- RelativeLayout umožňuje umístit relativně prvky podle šírky a výšky Layout
+- **RelativeLayout** umožňuje umístit relativně prvky podle šírky a výšky Layout
   
-- GridLayout umožňuje umíštit prvky ve maticovém tvaru, určíme počet řádků a sloupců. Prvky jsou umíštěny od levého horního rohu, plní se aktuální řádku, a pak se přechází na další řádek.
+- **GridLayout** umožňuje umíštit prvky ve maticovém tvaru, určíme počet řádků a sloupců. Prvky jsou umíštěny od levého horního rohu, plní se aktuální řádku, a pak se přechází na další řádek.
   
 ```
 from kivy.app import App
@@ -55,10 +55,10 @@ if __name__ == '__main__':
 
 # Ovládací prvky = widget 
 Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomocí vzoru: 
-from kivy.uix.<nazev_prvek> import <Nazev_prvek>  
+**from kivy.uix.<nazev_prvek> import <Nazev_prvek>**  
 
 
-- Label = slouží pro výpis
+- **Label** = slouží pro výpis
   Mění barvu Label
 
   ```
@@ -86,16 +86,16 @@ from kivy.uix.<nazev_prvek> import <Nazev_prvek>
   - [sub][/sub] -> Zobrazí text na pozici dolního indexu vzhledem k textu před ním.
   - [sup][/sup] -> Zobrazí text na pozici horního indexu vzhledem k textu před ním.
   
-- TextInput = textové pole pro zadání textu od uživatele
+- **TextInput** = textové pole pro zadání textu od uživatele
   ```
   TextInput(text='Hello world', multiline=False)
   ```
   - multiline = víceřádkový pomocí Enter
     
-- Button = tlačítko pro zavolání metody
+- **Button** = tlačítko pro zavolání metody
 
-- Checkbox
-- Dropdown list
+- **Checkbox**
+- **Dropdown list**
 - ...
 # Animace 
 

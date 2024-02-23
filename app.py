@@ -32,6 +32,7 @@ class Calculator(GridLayout):
         self.add_widget(Button(text='*', on_press=self.vynasob))
         self.add_widget(Button(text='/', on_press=self.vydel))
         self.add_widget(Button(text='=', on_press=self.vypocitej))
+        self.add_widget(Button(text='AC', on_press=self.smaz))
         #self.result = TextInput(multiline=False)
         #self.add_widget(self.result)
 
@@ -64,6 +65,8 @@ class Calculator(GridLayout):
         self.result.text += "/"
     def vypocitej(self, instance):
         self.result.text += "="
+    def smaz(self, instance):
+        self.result.text = ""
     
 class MyApp(App):
     def build(self):

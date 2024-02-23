@@ -17,6 +17,7 @@ import kivy
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
 
 
 class HelloWorld(App):
@@ -58,9 +59,11 @@ from kivy.uix.<nazev_prvek> import <Nazev_prvek>
     [color=#][/color] -> barva textu
     [sub][/sub] -> Zobrazí text na pozici dolního indexu vzhledem k textu před ním.
     [sup][/sup] -> Zobrazí text na pozici horního indexu vzhledem k textu před ním.
-   
-- Button = tlačítko pro zavolání metody
+  
 - TextInput = textové pole pro zadání textu od uživatele
+  
+- Button = tlačítko pro zavolání metody
+
 - Checkbox
 - Dropdown list
 - ...

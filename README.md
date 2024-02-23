@@ -137,6 +137,7 @@ if __name__ == '__main__':
       - size_hint=(None, None) = pevná velikost
     - pos = pozice tlačítka
     - border = kulaté rohy
+      
       např. border = (30, 30, 30, 30)
       
 ```

@@ -15,7 +15,6 @@ py -m pip install kivy
 **Layout** zajišťuje uspořádání a pozicování prvků GUI. Máme růžné typy rozložení:
 - **FloatLayout** umožňuje umístit relativně prvky podle šírky a výšky okna. Růžné zařížení mají růžné rozměry, podle kterých budou prvky automaticky se přizpůsobit, mění jejich rozměry a pozice. Jetliže měníme velkikost okna, taky prvky budou se přizpůsobit.
   
-- **BoxLayout** = prvky jsou umíštěny podle vertikální a horizontální směru.
   
 - **AnchorLayout** = prvky jsou umíštěny ve rohu nebo střed
   - **anchor_x**: "left", "right" a "center"
@@ -53,11 +52,39 @@ if __name__ == '__main__':
 ```
 
 
+- **BoxLayout** = prvky jsou umíštěny podle vertikální a horizontální směru.
+```
+from kivy.app import App
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.widget import Widget
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
+
+class Calculator(GridLayout):
+    def __init__(self, **kwargs):
+        super(Calculator, self).__init__(**kwargs)
+        self.cols = 4 # sloupce
+        self.rows = 4 # radky
+        # vytvoření displaye
+        display = BoxLayout(orientation="vertical", size_hint_x = "3") 
+
+
+class MyApp(App):
+    def build(self):
+        return Calculator()
+
+if __name__ == '__main__':
+    MyApp().run()
+```
+  
 # Ovládací prvky = widget 
 Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomocí vzoru: 
 **from kivy.uix.<nazev_prvek> import <Nazev_prvek>**  
 
-
+- **Button** = tlačítko pro zavolání metody
+  
 - **Label** = slouží pro výpis
   Mění barvu Label
 
@@ -92,7 +119,7 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
   ```
   - multiline = víceřádkový pomocí Enter
     
-- **Button** = tlačítko pro zavolání metody
+
 
 - **Checkbox**
 - **Dropdown list**

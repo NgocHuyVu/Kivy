@@ -83,7 +83,53 @@ if __name__ == '__main__':
 Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomocí vzoru: 
 **from kivy.uix.<nazev_prvek> import <Nazev_prvek>**  
 
-- **Button** = tlačítko pro zavolání metody
+- **Button** = tlačítko spouštějí se po stisknutí
+  - Vytvoření
+```
+from kivy.app import App
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.widget import Widget
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
+
+class Calculator(GridLayout):
+    def __init__(self, **kwargs):
+        super(Calculator, self).__init__(**kwargs)
+        self.cols = 4 # sloupce
+        self.rows = 4 # radky
+        # vytvoření displaye
+        display = BoxLayout(orientation="vertical", size_hint_x = "3")
+
+        #Vytcoření tlačítek
+        self.add_widget(display)
+        self.add_widget(Button(text='1'))
+        self.add_widget(Button(text='2'))
+        self.add_widget(Button(text='3'))
+        self.add_widget(Button(text='+'))
+        self.add_widget(Button(text='4'))
+        self.add_widget(Button(text='5'))
+        self.add_widget(Button(text='6'))
+        self.add_widget(Button(text='-'))
+        self.add_widget(Button(text='7'))
+        self.add_widget(Button(text='8'))
+        self.add_widget(Button(text='9'))
+        self.add_widget(Button(text='*'))
+        self.add_widget(Button(text='/'))
+        self.add_widget(Button(text='='))
+        self.add_widget(Button(text='AC'))
+
+
+class MyApp(App):
+    def build(self):
+        return Calculator()
+
+if __name__ == '__main__':
+    MyApp().run()
+```
+  - Styl
+  - Funkce
   
 - **Label** = slouží pro výpis
   Mění barvu Label

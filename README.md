@@ -23,6 +23,9 @@ class HelloWorld(App):
     def build(self):
         # Vrátí label, který se má zobrazit Hello World
         return Label(text ="Hello World")
+    
+if __name__ == "__main__":
+    HelloWorld().run()
 ```
 
 # Ovládací prvky = widget 

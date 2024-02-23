@@ -84,7 +84,7 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
 **from kivy.uix.<nazev_prvek> import <Nazev_prvek>**  
 
 - **Button** = tlačítko spouštějí se po stisknutí
-  - Vytvoření
+  - **Vytvoření tlačítka**
 ```
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
@@ -128,7 +128,7 @@ class MyApp(App):
 if __name__ == '__main__':
     MyApp().run()
 ```
-  - Styl
+  - **Styl**
     - font_size = velikost písma
     - background_color = barva pozadí
     - color = barvatextu
@@ -141,13 +141,13 @@ if __name__ == '__main__':
 Tady bude změnit styl tlačítek
 ```
       
-  - Přídání fotky do pozadí tlačítka
+  - **Přídání fotky do pozadí tlačítka**
     - background_normal =  zobrazí, kdy není stisknuto
     - background_down = zobrazí, kdy je stisknuto
     - background_disabled_normal = zobrazí, kdy není stisknuto a zároveň není aktivováno
       
 
-  - Funkce
+  - **Funkce**
 
     Používáme on_press pro přídání funkce. Pokud uživatel stiskne tlačítko, tak volá funkce 
     

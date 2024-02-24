@@ -80,7 +80,9 @@ if __name__ == "__main__":
     
 # Kivy language
 
-Kivy language se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Bude uložit do .kv souboru, díky tomu oděllíme od zdrojového kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale jestliže používáme kivy jazyk, pak kód je čitelnější. 
+Kivy language se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Kivy language kód píšeme do souboru s příponou .kv , díky tomu oděllíme od zdrojového kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale jestliže používáme kivy jazyk, pak kód je čitelnější. 
+
+Kivi soubor by se měl jmenovat stejně jako název třídy aplikacene. Nemusí se nutně jmenovat stejně, ale pokud ho Kivy nenajde podle názvu třídy aplikace, museli bychom jej importovat ručně pomocí Builder.load_file(soubor)).
 
 
 - helloworld.py

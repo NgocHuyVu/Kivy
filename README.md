@@ -105,7 +105,9 @@ if __name__ == "__main__":
   <HelloWorld>:
     # Vzhled pro HelloWorld třídu
     Label:
-        text: "Hello World"
+        text: "[b]Hello World[/b]"
+        color: 0.41, 0.42, 0.74, 1
+        markup: True
  ```
 
   

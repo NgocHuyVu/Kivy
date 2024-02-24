@@ -9,6 +9,9 @@ Kivy je open-source framework Pythonu, který umožňuje vytvořit aplikace pro 
 ```
 py -m pip install kivy
 ```
+# Kivy language
+
+Kivy language se používá pro pozicování a vzhled aplikace. Bude uložit do .kv souboru, díky tomu oděllíme od zdrojového kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale jestliže používáme kivy jazyk, pak kód je rozumitelnější. 
 
 # Layout 
 

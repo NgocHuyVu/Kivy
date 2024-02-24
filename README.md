@@ -224,99 +224,101 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
 
 - **Button** = tlačítko spouštějí se po stisknutí
   - **Vytvoření tlačítka**
-```
-<CalculatorWidget>:
-    BoxLayout
-        orientation: "vertical"
-        size: root.width, root.height
-
-        TextInput:
-            id: vstup
-            text: "0"
-            font_size: 64
-            multiline: False
-            disabled: True # zakaze psat do displeje
-            halign: "right" #odkud kam se zapisuje
-        
-        TextInput:
-            id: vystup
-            text: ""
-            font_size: 64
-            multiline: False
-            halign: "right" #odkud kam se zapisuje
-
-        GridLayout: #udava pocet sloupcu, radku
-            cols: 4
-            rows: 5
-
-            # SLOUPEC 1##################
-            Button:
-                text: "1"
-                font_size: 32
-
-            Button:
-                text: "2"
-                font_size: 32
-
-            Button:
-                text: "3"
-                font_size: 32
-
-            Button:
-                text: "+"
-                font_size: 32
-
-            # SLOUPEC 2######################
-            Button:
-                text: "4"
-                font_size: 32
-
-            Button:
-                text: "5"
-                font_size: 32
-
-            Button:
-                text: "6"
-                font_size: 32
-
-            Button:
-                text: "-"
-                font_size: 32
-
-            # SLOUPEC 3#######################
-            Button:
-                text: "7"
-                font_size: 32
-
-            Button:
-                text: "8"
-                font_size: 32
-
-            Button:
-                text: "9"
-                font_size: 32
-
-            Button:
-                text: "*"
-                font_size: 32
-
-            # SLOUPEC 4########################
-            Button:
-                text: "="
-                font_size: 32
-
-            Button:
-                text: "0"
-                font_size: 32
-            
-            Button:
-                text: "AC"
-                font_size: 32
-
-            Button:
-                text: "/"
-                font_size: 32
     ```
+    <CalculatorWidget>:
+        BoxLayout
+            orientation: "vertical"
+            size: root.width, root.height
+    
+            TextInput:
+                id: vstup
+                text: "0"
+                font_size: 64
+                multiline: False
+                disabled: True # zakaze psat do displeje
+                halign: "right" #odkud kam se zapisuje
+            
+            TextInput:
+                id: vystup
+                text: ""
+                font_size: 64
+                multiline: False
+                halign: "right" #odkud kam se zapisuje
+    
+            GridLayout: #udava pocet sloupcu, radku
+                cols: 4
+                rows: 5
+    
+                # SLOUPEC 1##################
+                Button:
+                    text: "1"
+                    font_size: 32
+    
+                Button:
+                    text: "2"
+                    font_size: 32
+    
+                Button:
+                    text: "3"
+                    font_size: 32
+    
+                Button:
+                    text: "+"
+                    font_size: 32
+    
+                # SLOUPEC 2######################
+                Button:
+                    text: "4"
+                    font_size: 32
+    
+                Button:
+                    text: "5"
+                    font_size: 32
+    
+                Button:
+                    text: "6"
+                    font_size: 32
+    
+                Button:
+                    text: "-"
+                    font_size: 32
+    
+                # SLOUPEC 3#######################
+                Button:
+                    text: "7"
+                    font_size: 32
+    
+                Button:
+                    text: "8"
+                    font_size: 32
+    
+                Button:
+                    text: "9"
+                    font_size: 32
+    
+                Button:
+                    text: "*"
+                    font_size: 32
+    
+                # SLOUPEC 4########################
+                Button:
+                    text: "="
+                    font_size: 32
+    
+                Button:
+                    text: "0"
+                    font_size: 32
+                
+                Button:
+                    text: "AC"
+                    font_size: 32
+    
+                Button:
+                    text: "/"
+                    font_size: 32
+
+    ```
+    
   - **Styl**
     - font_size = velikost písma
     - background_color = barva pozadí

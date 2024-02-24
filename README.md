@@ -120,7 +120,7 @@ if __name__ == "__main__":
 - **AnchorLayout** = prvky jsou umíštěny ve rohu nebo střed
   - **anchor_x**: "left", "right" a "center"
   - **anchor_y**: "top",  "bottom" a "center"
-  - Např. anchor_x="left", anchor_y="top"
+  - Např. Vlevo nahoře: anchor_x="left", anchor_y="top"
     
     ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/2301dfce-9c65-43c9-8dc0-46df86447e4b)
 

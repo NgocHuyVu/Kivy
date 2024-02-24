@@ -15,23 +15,6 @@ py -m pip install kivy
 Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomocí vzoru: 
 **from kivy.uix.<nazev_prvek> import <Nazev_prvek>** 
 
-```
-#importujme Kivy a další ovládací prvky např. label, button
-import kivy
-from kivy.app import App
-from kivy.uix.label import Label
-from kivy.uix.button import Button
-
-
-class HelloWorld(App):
-    def build(self):
-        # Vrátí label, který se má zobrazit Hello World
-        return Label(text ="Hello World")
-    
-if __name__ == "__main__":
-    HelloWorld().run()
-```
-
 Label je prvek (widget), který slouží pro zápis textu. Můžeme měnit jeho vzhled
 
 ```

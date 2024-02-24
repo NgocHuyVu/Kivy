@@ -36,6 +36,9 @@ class CalculatorWidget(Widget):
     def cisla(self, cislo): #funkce na cisla
         vstup_cisla = self.ids.vstup.text
 
+        if "Nesprávný vstup" in vstup_cisla:
+            vstup_cisla = ""
+
         if vstup_cisla == "0":
             self.ids.vstup.text = ""
             self.ids.vstup.text += (f"{cislo}")
@@ -53,7 +56,11 @@ class CalculatorWidget(Widget):
     
     def vypocitej(self): #nakonec jsem udelal to pocitani, jen tam osetri deleni 0 a asi nejspis pridej horizontalni polohu
         vstup = self.ids.vstup.text
-        self.ids.vystup.text = str(eval(vstup))
+        try:
+            self.ids.vystup.text = str(eval(vstup))
+            self.ids.vstup.text  = self.ids.vstup.text + "="
+        except:
+            self.ids.vystup.text = "Nesprávný vstup"
     
 class MyApp(App):
     def build(self):

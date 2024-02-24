@@ -8,10 +8,18 @@
     padding: 10
     spacing: 10
  
-    BoxLayout: # display pro postup, pridat vysledek
+    BoxLayout: # display pro postup
         TextInput:
             id: vstup
-            font_size: 32
+            font_size: 64
+            multiline: False
+            disabled: True # zakaze psat do displeje
+            halign: 'right'
+            valign: 'middle'
+        
+        TextInput: # vysledek, pohrát si s velikostí a hodit to pod sebe
+            id: vysledek
+            font_size: 128
             multiline: False
   
     BoxLayout: #zbytek, kdyztak to prehazim
@@ -73,6 +81,7 @@
         Tlacitko:
             text: "/"
             on_press: vstup.text += self.text
+    
     #BoxLayout:
      #   Tlacitko:
       #      font_size: 20

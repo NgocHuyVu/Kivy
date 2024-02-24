@@ -34,7 +34,7 @@ class CalculatorWidget(Widget):
         else:
             self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
     
-    def vypocitej(self):
+    def vypocitej(self): #nakonec jsem udelal to pocitani, jen tam osetri deleni 0 a asi nejspis pridej horizontalni polohu
         vstup = self.ids.vstup.text
         self.ids.vystup.text = str(eval(vstup))
     

@@ -16,7 +16,24 @@ class CalculatorWidget(Widget):
     def smaz(self): #funkce na mazani, je tam chyba
         self.ids.vstup.text = "0"
 
-    def tlacitka_cisla(self, cislo): #funkce na cisla
+    def vedecka_kalkulacka(self, operace):
+        vstup_cisla = self.ids.vstup.text
+
+        if operace == "1/x":
+            self.ids.vstup.text = str(1 / float(vstup_cisla))
+
+        elif operace == "x^2":
+            self.ids.vstup.text = str(float(vstup_cisla) ** 2)
+        
+        
+        elif operace == "x^3":
+            self.ids.vstup.text = str(float(vstup_cisla) ** 3)
+
+        elif operace == "√":
+             self.ids.vstup.text = str(float(vstup_cisla) ** 0.5)
+
+
+    def cisla(self, cislo): #funkce na cisla
         vstup_cisla = self.ids.vstup.text
 
         if vstup_cisla == "0":
@@ -25,7 +42,7 @@ class CalculatorWidget(Widget):
         else:
             self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
     
-    def pridej_znak(self, znak):
+    def operace(self, znak):
         znaky = ["+", "-", "*", "/"]
         vstup_znaku = self.ids.vstup.text
 
@@ -44,4 +61,4 @@ class MyApp(App):
 
 
 if __name__ == '__main__':
-    MyApp().run() #my.kv se spousti podle tridy MyApp, neco jako C# oddeli velky pismena jako slovo
+    MyApp().run() 

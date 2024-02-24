@@ -21,6 +21,8 @@ class CalculatorWidget(Widget):
         if vstup_cisla == "0":
             self.ids.vstup.text = ""
             self.ids.vstup.text += (f"{cislo}")
+        else:
+            self.ids.vstup.text  = (f"{vstup_cisla}{cislo}")
 
     '''
     TOHLE je teoreticky funkcni, jen staci loadnout vstup na sledovani

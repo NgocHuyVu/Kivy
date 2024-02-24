@@ -36,7 +36,7 @@ class CalculatorWidget(Widget):
     
     def vypocitej(self):
         vstup = self.ids.vstup.text
-        self.ids.vystup.text = eval(vstup)
+        self.ids.vystup.text = str(eval(vstup))
     
 class MyApp(App):
     def build(self):

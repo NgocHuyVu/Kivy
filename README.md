@@ -80,8 +80,33 @@ if __name__ == "__main__":
     
 # Kivy language
 
-Kivy language se používá pro pozicování a vzhled aplikace. Bude uložit do .kv souboru, díky tomu oděllíme od zdrojového kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale jestliže používáme kivy jazyk, pak kód je rozumitelnější. 
+Kivy language se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Bude uložit do .kv souboru, díky tomu oděllíme od zdrojového kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale jestliže používáme kivy jazyk, pak kód je rozumitelnější. 
 
+
+- helloworld.py
+```
+#importujme Kivy a další ovládací prvky např. label, button
+import kivy
+from kivy.app import App
+from kivy.uix.label import Label
+
+class HelloWorld(App):
+    def build(self):
+        return Label(text="Hello World")
+
+if __name__ == "__main__":
+    HelloWorld().run()
+```
+- styl.kv
+  
+ ```
+  <HelloWorld>:
+    # Vzhled pro HelloWorld třídu
+    Label:
+        text: "Hello World"
+ ```
+
+  
 # Layout 
 
 **Layout** zajišťuje uspořádání a pozicování prvků GUI. Máme růžné typy rozložení:

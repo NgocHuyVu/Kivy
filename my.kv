@@ -8,9 +8,9 @@
             text: "0"
             font_size: 64
             multiline: False
-            halign: "right"
+            halign: "right" #odkud kam se zapisuje
 
-        GridLayout:
+        GridLayout: #udava pocet sloupcu, radku
             cols: 4
             rows: 5
 
@@ -18,7 +18,7 @@
             Button:
                 text: "1"
                 font_size: 32
-                on_press: root.tlacitka_cisla(1)
+                on_press: root.tlacitka_cisla(1) #root je dulezitej, za tim jmeno funkce
 
             Button:
                 text: "2"
@@ -33,6 +33,7 @@
             Button:
                 text: "+"
                 font_size: 32
+                on_press: root.pridej_znak("+")
 
             # SLOUPEC 2######################
             Button:
@@ -80,14 +81,14 @@
                 font_size: 32
 
             Button:
-                text: "AC"
-                font_size: 32
-                on_press: root.smaz()
-
-            Button:
                 text: "0"
                 font_size: 32
                 on_press: root.tlacitka_cisla(0)
+            
+            Button:
+                text: "AC"
+                font_size: 32
+                on_press: root.smaz()
 
             Button:
                 text: "/"

@@ -12,6 +12,7 @@ Builder.load_file("./my.kv") #loadnes file z root slozky
 Window.size = (350, 600) #velikost okna, sirka/vyska
 
 class CalculatorWidget(Widget):
+
     def smaz(self): #funkce na mazani, je tam chyba
         self.ids.vstup.text = "0"
 
@@ -22,7 +23,16 @@ class CalculatorWidget(Widget):
             self.ids.vstup.text = ""
             self.ids.vstup.text += (f"{cislo}")
         else:
-            self.ids.vstup.text  = (f"{vstup_cisla}{cislo}")
+            self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
+    
+    def pridej_znak(self, znak):
+        znaky = ["+", "-", "*", "/"]
+        vstup_znaku = self.ids.vstup.text
+
+        if vstup_znaku[-1] in znaky or (len(vstup_znaku) < 2 and vstup_znaku == 0): # logiku aby neslo pridat znamenko 1.
+            pass
+        else:
+            self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
 
     '''
     TOHLE je teoreticky funkcni, jen staci loadnout vstup na sledovani

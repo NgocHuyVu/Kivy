@@ -13,7 +13,7 @@
         
         TextInput:
             id: vystup
-            text: "0"
+            text: ""
             font_size: 64
             multiline: False
             halign: "right" #odkud kam se zapisuje
@@ -89,6 +89,7 @@
             Button:
                 text: "="
                 font_size: 32
+                on_press: root.vypocitej()
 
             Button:
                 text: "0"

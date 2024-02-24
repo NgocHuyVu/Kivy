@@ -33,24 +33,10 @@ class CalculatorWidget(Widget):
             pass
         else:
             self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
-
-    '''
-    TOHLE je teoreticky funkcni, jen staci loadnout vstup na sledovani
-
-    def operatory_duplicita(self, button):
-        text = button.text
+    
+    def vypocitej(self):
         vstup = self.ids.vstup.text
-        self.vstup = TextInput()
-        if text.isdigit():
-            vstup.text += text
-            self.check_char = text
-        elif text in self.operatory:
-            if self.check_char not in self.operatory:
-                self.vstup.text += f" {text} "
-                self.check_char = text
-    '''
-
-
+        self.ids.vystup.text = eval(vstup)
     
 class MyApp(App):
     def build(self):

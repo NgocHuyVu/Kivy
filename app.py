@@ -12,9 +12,12 @@ Builder.load_file("./my.kv") #loadnes file z root slozky
 Window.size = (350, 600) #velikost okna, sirka/vyska
 
 class CalculatorWidget(Widget):
+    temp_cislo = "" #pro to abychom mohli tamto cos chtel
 
     def smaz(self): #funkce na mazani, je tam chyba
         self.ids.vstup.text = "0"
+        self.ids.vystup.text = ""
+        CalculatorWidget.temp_cislo = ""
 
     def vedecka_kalkulacka(self, operace):
         vstup_cisla = self.ids.vstup.text
@@ -35,9 +38,7 @@ class CalculatorWidget(Widget):
 
     def cisla(self, cislo): #funkce na cisla
         vstup_cisla = self.ids.vstup.text
-
-        if "Nesprávný vstup" in vstup_cisla:
-            vstup_cisla = ""
+        vystup_cisla = self.ids.vystup.text
 
         if vstup_cisla == "0":
             self.ids.vstup.text = ""
@@ -48,19 +49,31 @@ class CalculatorWidget(Widget):
     def operace(self, znak):
         znaky = ["+", "-", "*", "/"]
         vstup_znaku = self.ids.vstup.text
+        vystup_znaku = self.ids.vystup.text
 
-        if vstup_znaku[-1] in znaky or (len(vstup_znaku) < 2 and vstup_znaku == 0): # logiku aby neslo pridat znamenko 1.
-            pass
+        if CalculatorWidget.temp_cislo != "":
+            self.ids.vstup.text  = (f"{CalculatorWidget.temp_cislo}{znak}")
+            CalculatorWidget.temp_cislo = ""
         else:
-            self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
+            #if vstup_znaku[-1] in znaky or (len(vstup_znaku) <= 1 and vstup_znaku == "0"): #resi znamenka
+            if (len(vstup_znaku) <= 1 and vstup_znaku == "0"): #resi znamenka
+                pass
+            else: #zmena znamenek pri duplicitnim pouziti
+                if vstup_znaku[-1] in znaky:
+                    self.ids.vstup.text = vstup_znaku[:-1] + znak
+                else:
+                    self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
     
-    def vypocitej(self): #nakonec jsem udelal to pocitani, jen tam osetri deleni 0 a asi nejspis pridej horizontalni polohu
+    def vypocitej(self):
         vstup = self.ids.vstup.text
         try:
             self.ids.vystup.text = str(eval(vstup))
             self.ids.vstup.text  = self.ids.vstup.text + "="
+            CalculatorWidget.temp_cislo = self.ids.vystup.text
+            print(CalculatorWidget.temp_cislo)
         except:
-            self.ids.vystup.text = "Nesprávný vstup"
+            self.ids.vystup.text = "Error"
+            self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
     
 class MyApp(App):
     def build(self):

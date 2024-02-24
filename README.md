@@ -87,27 +87,41 @@ Kivi soubor by se měl jmenovat stejně jako název třídy aplikace. Nemusí se
 
 - helloworld.py
 ```
-#importujme Kivy a další ovládací prvky např. label, button
 import kivy
 from kivy.app import App
 from kivy.uix.label import Label
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.textinput import TextInput
+from kivy.uix.button import Button
+from kivy.uix.widget import Widget
 
-class HelloWorld(App):
+
+class Grid(Widget):
+    pass
+
+
+class MyApp(App):
     def build(self):
-        return Label(text="Hello World")
+        return Grid()
+
 
 if __name__ == "__main__":
-    HelloWorld().run()
+    MyApp().run()
 ```
 - styl.kv
   
  ```
-  <HelloWorld>:
-    # Vzhled pro HelloWorld třídu
-    Label:
-        text: "[b]Hello World[/b]"
-        color: 0.41, 0.42, 0.74, 1
-        markup: True
+  <Grid>:
+    GridLayout:
+        cols:1
+        size: root.width, root.height
+
+        GridLayout:
+            cols:1
+            Label:
+                text: "Hello World "
+                color: 0.41, 0.42, 0.74, 1
+                markup: True
  ```
 
   

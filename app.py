@@ -16,4 +16,4 @@ class MyApp(App):
 
 
 if __name__ == '__main__':
-    MyApp().run()
+    MyApp().run() #my.kv se spousti podle tridy MyApp, neco jako C# oddeli velky pismena jako slovo

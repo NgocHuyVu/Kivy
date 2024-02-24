@@ -58,7 +58,7 @@ class CalculatorWidget(Widget):
         vstup = self.ids.vstup.text
         try:
             self.ids.vystup.text = str(eval(vstup))
-            self.ids.vstup.text  = self.ids.vstup.text + "="
+            self.ids.vstup.text  = self.ids.vstup.text
         except:
             self.ids.vystup.text = "Nesprávný vstup"
     

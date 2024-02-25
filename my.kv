@@ -1,3 +1,5 @@
+#<Button@Button>
+#    background_normal: ''
 <CalculatorWidget>:
     BoxLayout:
         id: rezim
@@ -199,8 +201,6 @@
                 background_normal: 'Day_night.jpeg'
 
             Button:
-                id: rezim_button_23
-                text: "/"
+                background_normal: 'veda.jpg'
                 font_size: 32
-                on_press: root.operace("/")      
-                background_color: (0.7, 0.7, 0.7, 1)  
+                on_press: root.vedecka_kalkulacka()  

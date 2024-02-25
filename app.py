@@ -13,7 +13,8 @@ Window.size = (350, 600) #velikost okna, sirka/vyska
 
 class CalculatorWidget(Widget):
     temp_cislo = "" #pro to abychom mohli tamto cos chtel
-    rezim_barva = 0
+    #rezim_barva = 0
+    rezim_velikost = 0
 
     def smaz(self): #funkce na mazani, je tam chyba
         self.ids.vstup.text = "0"
@@ -96,6 +97,14 @@ class CalculatorWidget(Widget):
                     button.background_color = [0.7, 0.7, 0.7, 1]
                 else:
                     button.background_color = [0, 1, 1, 1]
+    
+    def vedecka_kalkulacka(self):
+        if CalculatorWidget.rezim_velikost == 0:
+            Window.size = (600,350)
+            CalculatorWidget.rezim_velikost = 1
+        else:
+            Window.size = (350,600)
+            CalculatorWidget.rezim_velikost = 0
 
     
 class MyApp(App):

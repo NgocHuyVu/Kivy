@@ -624,7 +624,8 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
 - **Scrollview** umožňuje uživatelům posouvat obsah (například text, obrázky nebo další widgety) v rámci určené oblasti, která je ohraničena velikostí ScrollView
 
 # Navigace mezi multi-screen
-Vytvoříme vědeckou kalkulačku, která obsahuje druhou mocninu, třetí mocninu, odmocninu, ...
+
+Vytvoříme **vědeckou kalkulačku**, která obsahuje druhou mocninu, třetí mocninu, odmocninu, ...
 
 Import modulů
 ```

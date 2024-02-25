@@ -336,6 +336,20 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
     - background_normal =  zobrazí, kdy není stisknuto
     - background_down = zobrazí, kdy je stisknuto
     - background_disabled_normal = zobrazí, kdy není stisknuto a zároveň není aktivováno
+   
+      ```
+      Button:
+                font_size: 32
+                on_press: root.zmen_rezim()
+                background_normal: 'Day_night.jpeg'
+
+            Button:
+                background_normal: 'veda.jpg'
+                font_size: 32
+                #on_press: root.vedecka_kalkulacka_velikost()  
+                #on_press: root.current = 'sc_kalkulacka'
+                on_release: app.root.current = "second"
+      ```
       
   - **Funkce**
 
@@ -535,12 +549,9 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
     
 
 
-- **Checkbox** = umožňuje provést dvě volbu, např. ano nebo ne
+- **Checkbox** umožňuje provést dvě volbu, např. ano nebo ne
 
-- **Dropdown list** = umožňuje zobrazit seznam voleb. Může být tlačítko, fotka, ...
+- **Dropdown list** umožňuje zobrazit seznam voleb. Může být tlačítko, fotka, ...
 
-- **Scrollview**
-- **Carousel Widget**
-- **Slider**
-# Animace 
+- **Scrollview** umožňuje uživatelům posouvat obsah (například text, obrázky nebo další widgety) v rámci určené oblasti, která je ohraničena velikostí ScrollView
 

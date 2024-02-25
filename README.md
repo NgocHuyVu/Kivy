@@ -3,7 +3,7 @@ Kivy je open-source framework Pythonu, který umožňuje vytvořit aplikace pro 
 
 # Co podporuje Kivy?
 - **multi-touch**: je ideální pro tvorbu her a aplikací na dotyková zařížení
-- **multi-platform**: vytvoříme kód jednou, pak ho můžeme spouštět na různých operačních systémech a zařízeních, tedy zobrazuje stejný a podobný vzhled na všech platformách
+- **multi-platform**: vytvoříme kód jednou, pak ho můžeme spouštět na různých operačních systémech a zařízeních, tedy zobrazuje stejný nebo podobný vzhled na všech platformách
 
 # Instalace
 ```
@@ -12,7 +12,7 @@ py -m pip install kivy
 
 # První aplikace 
 
-Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomocí vzoru: 
+Když poutřebujeme použít některý prvek, tak ho nejprve musíme importovat pomocí vzoru: 
 **from kivy.uix.<nazev_prvek> import <Nazev_prvek>** 
 
 Label je prvek (widget), který slouží pro zápis textu. Můžeme měnit jeho vzhled
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     
 # Kivy language
 
-Kivy language se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Kivy language kód píšeme do souboru s příponou .kv , díky tomu oděllíme od zdrojového kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale jestliže používáme kivy jazyk, pak kód je čitelnější. 
+Kivy language se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho oddělíme od zdrojového kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale jestliže používáme kivy language, pak kód je čitelnější. 
 
 Kivi soubor by se měl jmenovat stejně jako název třídy aplikace. Nemusí se nutně jmenovat stejně, ale pokud ho Kivy nenajde podle názvu třídy aplikace, museli bychom jej importovat ručně pomocí Builder.load_file(soubor)).
 

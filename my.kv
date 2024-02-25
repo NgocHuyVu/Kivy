@@ -63,7 +63,9 @@ CalculatorManager:
                 font_size: 32
                 #on_press: root.vedecka_kalkulacka_velikost()  
                 #on_press: root.current = 'sc_kalkulacka'
-                on_release: app.root.current = "second"
+                on_release: 
+                    app.root.current = "druhy"
+                    root.manager.transition.direction = "left"
 
             # SLOUPEC 2
             Button:
@@ -187,7 +189,7 @@ CalculatorManager:
             
      
 <ScienceCalculatorWidget>:
-    name: "second"
+    name: "druhy"
 
     BoxLayout:
         id: rezim
@@ -244,7 +246,9 @@ CalculatorManager:
                 font_size: 32
                 #on_press: root.vedecka_kalkulacka_velikost()  
                 #on_press: root.current = 'sc_kalkulacka'
-                on_release: app.root.current = "prvni"
+                on_release: 
+                    app.root.current = "prvni"
+                    root.manager.transition.direction = "right"
 
             # SLOUPEC 2
 

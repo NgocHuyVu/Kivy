@@ -8,6 +8,7 @@ from kivy.uix.textinput import TextInput
 from kivy.core.window import Window
 from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+import math
 
 #Builder.load_file("./my.kv") #loadnes file z root slozky
 Window.size = (350, 600) #velikost okna, sirka/vyska
@@ -33,6 +34,8 @@ class CalculatorWidget(Screen):
         if vstup_cisla == "0":
             self.ids.vstup.text = ""
             self.ids.vstup.text += (f"{cislo}")
+        elif vstup_cisla == "PI":
+            self.ids.vstup.text = str(math.pi)
         else:
             self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
     
@@ -104,13 +107,21 @@ class ScienceCalculatorWidget(Screen):
 
         elif operace == "x^2":
             self.ids.vstup.text = str(float(vstup_cisla) ** 2)
-        
-        
+
         elif operace == "x^3":
             self.ids.vstup.text = str(float(vstup_cisla) ** 3)
 
-        elif operace == "√":
-             self.ids.vstup.text = str(float(vstup_cisla) ** 0.5)
+        elif operace == "√" and (float(vstup_cisla) >= 0):
+            self.ids.vstup.text = str(float(vstup_cisla) ** 0.5)
+
+        elif operace == "10^x":
+            self.ids.vstup.text = str(10 ** float(vstup_cisla))
+
+        elif operace == "log" and (float(vstup_cisla) >= 0):
+            self.ids.vstup.text = str(math.log10(float(vstup_cisla)))
+            
+        elif operace == "ln" and (float(vstup_cisla) >= 0):
+            self.ids.vstup.text = str(math.log(float(vstup_cisla)))
 
 
     def cisla(self, cislo): #funkce na cisla
@@ -120,6 +131,8 @@ class ScienceCalculatorWidget(Screen):
         if vstup_cisla == "0":
             self.ids.vstup.text = ""
             self.ids.vstup.text += (f"{cislo}")
+        elif vstup_cisla == "PI":
+            self.ids.vstup.text = str(math.pi)
         else:
             self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
     

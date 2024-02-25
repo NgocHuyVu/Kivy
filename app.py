@@ -7,8 +7,9 @@ from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from kivy.core.window import Window
 from kivy.lang.builder import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
 
-Builder.load_file("./my.kv") #loadnes file z root slozky
+#Builder.load_file("./my.kv") #loadnes file z root slozky
 Window.size = (350, 600) #velikost okna, sirka/vyska
 
 class CalculatorWidget(Widget):
@@ -78,16 +79,6 @@ class CalculatorWidget(Widget):
         except:
             self.ids.vystup.text = "Error"
             self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
-
-    '''
-    def zmen_rezim(self, btn):
-        if CalculatorWidget.rezim_barva == 0:
-            btn.background_color = 0,0,0,0.5
-            CalculatorWidget.rezim_barva = 1
-        else:
-            btn.background_color = 1,1,1,0.5
-            CalculatorWidget.rezim_barva = 0
-    '''
     
     def zmen_rezim(self):
         for button_id in self.ids.keys():
@@ -98,19 +89,42 @@ class CalculatorWidget(Widget):
                 else:
                     button.background_color = [0, 1, 1, 1]
     
-    def vedecka_kalkulacka(self):
+    def vedecka_kalkulacka_velikost(self):
         if CalculatorWidget.rezim_velikost == 0:
             Window.size = (600,350)
             CalculatorWidget.rezim_velikost = 1
+            #self.sm.current = "sc_kalkulacka"
+            #Builder.unload_file("./my.kv")
         else:
             Window.size = (350,600)
             CalculatorWidget.rezim_velikost = 0
 
+class ScienceCalculatorWidget(Widget):
+    pass
+
+class CalculatorScreen(Screen):
+    def __init__(self, **kwargs):
+        super(CalculatorScreen, self).__init__(**kwargs)
+        self.add_widget(CalculatorWidget())
+
+class ScienceCalculatorScreen(Screen):
+    def __init__(self, **kwargs):
+        super(ScienceCalculatorScreen, self).__init__(**kwargs)
+        self.add_widget(ScienceCalculatorWidget())
+
     
 class MyApp(App):
     def build(self):
+        Builder.load_file("./my.kv") #loadnes file z root slozky
+        sm = ScreenManager()
+        sm.add_widget(CalculatorScreen(name='kalkulacka'))
+        sm.add_widget(ScienceCalculatorScreen(name='sc_kalkulacka'))
+        return sm
+'''
+class MyApp(App): Původní file
+    def build(self):
         return CalculatorWidget()
-
+'''
 
 if __name__ == '__main__':
     MyApp().run() 

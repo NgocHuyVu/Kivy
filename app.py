@@ -89,12 +89,13 @@ class CalculatorWidget(Widget):
     '''
     
     def zmen_rezim(self):
-        if CalculatorWidget.rezim_barva == 0:
-            self.ids.rezim.background_color = 0,0,0,0.5
-            CalculatorWidget.rezim_barva = 1
-        else:
-            self.ids.rezim.background_color = 1,1,1,0.5
-            CalculatorWidget.rezim_barva = 0
+        for button_id in self.ids.keys():
+            button = self.ids[button_id]
+            if isinstance(button, Button):
+                if button.background_color == [0, 1, 1, 1]:
+                    button.background_color = [0.7, 0.7, 0.7, 1]
+                else:
+                    button.background_color = [0, 1, 1, 1]
 
     
 class MyApp(App):

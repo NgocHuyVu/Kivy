@@ -623,3 +623,575 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
 
 - **Scrollview** umožňuje uživatelům posouvat obsah (například text, obrázky nebo další widgety) v rámci určené oblasti, která je ohraničena velikostí ScrollView
 
+# Navigace mezi multi-screen
+Vytvoříme vědeckou kalkulačku, která obsahuje druhou mocninu, třetí mocninu, odmocninu, ...
+
+Import modulů
+```
+from kivy.uix.screenmanager import ScreenManager, Screen
+```
+
+Pro každé kalkulačky, které bychom chtěli vytvořit, musíme vytvořit třídy CalculatorWidget a ScienceCalculatorWidget, které dědí z třídy Screen. Pokud budeme pracovat s více než jedním oknem, musíme vytvořit třídu CalculatorManager, která bude řídit navigaci mezi těmito okny. Tato třída bude muset zdědit ze ScreenManager.
+```
+class CalculatorManager(ScreenManager):
+    pass
+class CalculatorWidget(Screen):
+    temp_cislo = "" #pro to abychom mohli tamto cos chtel
+    #rezim_barva = 0
+    rezim_velikost = 0
+
+    def smaz(self): #funkce na mazani, je tam chyba
+        self.ids.vstup.text = "0"
+        self.ids.vystup.text = ""
+        CalculatorWidget.temp_cislo = ""
+
+    def vymaz_jedno(self):
+        self.ids.vstup.text = self.ids.vstup.text[:-1]
+
+    def cisla(self, cislo): #funkce na cisla
+        vstup_cisla = self.ids.vstup.text
+        vystup_cisla = self.ids.vystup.text
+
+        if vstup_cisla == "0":
+            self.ids.vstup.text = ""
+            self.ids.vstup.text += (f"{cislo}")
+        else:
+            self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
+    
+    def operace(self, znak):
+        znaky = ["+", "-", "*", "/", "."]
+        vstup_znaku = self.ids.vstup.text
+        vystup_znaku = self.ids.vystup.text
+
+        if CalculatorWidget.temp_cislo != "":
+            self.ids.vstup.text  = (f"{CalculatorWidget.temp_cislo}{znak}")
+            CalculatorWidget.temp_cislo = ""
+        else:
+            if (len(vstup_znaku) <= 1 and vstup_znaku == "0"): #resi znamenka
+                pass
+            else: #zmena znamenek pri duplicitnim pouziti
+                if vstup_znaku[-1] in znaky:
+                    self.ids.vstup.text = vstup_znaku[:-1] + znak
+                else:
+                    self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
+    
+    def vypocitej(self):
+        vstup = self.ids.vstup.text
+        try:
+            self.ids.vystup.text = str(eval(vstup))
+            self.ids.vstup.text  = self.ids.vstup.text + "="
+            CalculatorWidget.temp_cislo = self.ids.vystup.text
+            #print(CalculatorWidget.temp_cislo)
+        except:
+            self.ids.vystup.text = "Error"
+            self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
+    
+    def zmen_rezim(self):
+        for button_id in self.ids.keys():
+            button = self.ids[button_id]
+            if isinstance(button, Button):
+                if button.background_color == [0, 1, 1, 1]:
+                    button.background_color = [0.7, 0.7, 0.7, 1]
+                else:
+                    button.background_color = [0, 1, 1, 1]
+    
+    def vedecka_kalkulacka_velikost(self):
+        if CalculatorWidget.rezim_velikost == 0:
+            Window.size = (600,350)
+            CalculatorWidget.rezim_velikost = 1
+            #self.sm.current = "sc_kalkulacka"
+            #Builder.unload_file("./my.kv")
+        else:
+            Window.size = (350,600)
+            CalculatorWidget.rezim_velikost = 0
+
+class ScienceCalculatorWidget(Screen):
+    temp_cislo = "" #pro to abychom mohli tamto cos chtel
+    #rezim_barva = 0
+    rezim_velikost = 0
+
+    def smaz(self): #funkce na mazani, je tam chyba
+        self.ids.vstup.text = "0"
+        self.ids.vystup.text = ""
+        CalculatorWidget.temp_cislo = ""
+
+    def vymaz_jedno(self):
+        self.ids.vstup.text = self.ids.vstup.text[:-1]
+
+    def vedecka_kalkulacka(self, operace):
+        vstup_cisla = self.ids.vstup.text
+
+        if operace == "1/x" and (float(vstup_cisla) > 0 or float(vstup_cisla) < 0):
+            self.ids.vstup.text = str(1 / float(vstup_cisla))
+
+        elif operace == "x^2":
+            self.ids.vstup.text = str(float(vstup_cisla) ** 2)
+        
+        
+        elif operace == "x^3":
+            self.ids.vstup.text = str(float(vstup_cisla) ** 3)
+
+        elif operace == "√":
+             self.ids.vstup.text = str(float(vstup_cisla) ** 0.5)
+
+
+    def cisla(self, cislo): #funkce na cisla
+        vstup_cisla = self.ids.vstup.text
+        vystup_cisla = self.ids.vystup.text
+
+        if vstup_cisla == "0":
+            self.ids.vstup.text = ""
+            self.ids.vstup.text += (f"{cislo}")
+        else:
+            self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
+    
+    def operace(self, znak):
+        znaky = ["+", "-", "*", "/", "."]
+        vstup_znaku = self.ids.vstup.text
+        vystup_znaku = self.ids.vystup.text
+
+        if CalculatorWidget.temp_cislo != "":
+            self.ids.vstup.text  = (f"{CalculatorWidget.temp_cislo}{znak}")
+            CalculatorWidget.temp_cislo = ""
+        else:
+            if (len(vstup_znaku) <= 1 and vstup_znaku == "0"): #resi znamenka
+                pass
+            else: #zmena znamenek pri duplicitnim pouziti
+                if vstup_znaku[-1] in znaky:
+                    self.ids.vstup.text = vstup_znaku[:-1] + znak
+                else:
+                    self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
+    
+    def vypocitej(self):
+        vstup = self.ids.vstup.text
+        try:
+            self.ids.vystup.text = str(eval(vstup))
+            self.ids.vstup.text  = self.ids.vstup.text + "="
+            CalculatorWidget.temp_cislo = self.ids.vystup.text
+            #print(CalculatorWidget.temp_cislo)
+        except:
+            self.ids.vystup.text = "Error"
+            self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
+    
+    def zmen_rezim(self):
+        for button_id in self.ids.keys():
+            button = self.ids[button_id]
+            if isinstance(button, Button):
+                if button.background_color == [0, 1, 1, 1]:
+                    button.background_color = [0.7, 0.7, 0.7, 1]
+                else:
+                    button.background_color = [0, 1, 1, 1]
+    
+    def vedecka_kalkulacka_velikost(self):
+        if CalculatorWidget.rezim_velikost == 0:
+            Window.size = (600,350)
+            CalculatorWidget.rezim_velikost = 1
+            #self.sm.current = "sc_kalkulacka"
+            #Builder.unload_file("./my.kv")
+        else:
+            Window.size = (350,600)
+            CalculatorWidget.rezim_velikost = 0
+```
+
+GUI
+```
+#<Button@Button>
+#    background_normal: ''
+
+CalculatorManager:
+    CalculatorWidget:
+    ScienceCalculatorWidget:
+
+<CalculatorWidget>:
+    name: "prvni"
+
+    BoxLayout:
+        id: rezim
+        orientation: "vertical"
+        size: root.width, root.height
+
+        TextInput:
+            id: vstup
+            text: "0"
+            font_size: 32
+            multiline: True
+            disabled: True # zakaze psat do displeje
+            halign: "right" #odkud kam se zapisuje
+            size_hint_y: None
+            height: 64
+        
+        TextInput:
+            id: vystup
+            text: ""
+            font_size: 32
+            multiline: True
+            disabled: True 
+            halign: "right" #odkud kam se zapisuje
+            size_hint_y: None
+            height: 128
+
+        GridLayout: #udava pocet sloupcu, radku
+            cols: 4
+            rows: 5
+            
+            # Sloupec 1
+
+            Button:
+                id: rezim_button_19
+                text: "AC"
+                font_size: 32
+                on_press: root.smaz()
+                background_color: (0, 0, 0, 1)if root.ids.vstup.text == 'Error' else (0.7, 0.7, 0.7, 1)
+            
+            Button:
+                id: rezim_button_22
+                text: "C"
+                font_size: 32
+                on_press: root.vymaz_jedno()
+                background_color: (0.7, 0.7, 0.7, 1)
+            
+            Button:
+                font_size: 32
+                on_press: root.zmen_rezim()
+                background_normal: 'Day_night.jpeg'
+
+            Button:
+                background_normal: 'veda.jpg'
+                font_size: 32
+                #on_press: root.vedecka_kalkulacka_velikost()  
+                #on_press: root.current = 'sc_kalkulacka'
+                on_release: app.root.current = "second"
+
+            # SLOUPEC 2
+            Button:
+                id: rezim_button_5
+                text: "7"
+                font_size: 32
+                on_press: root.cisla(7) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_6
+                text: "8"
+                font_size: 32
+                on_press: root.cisla(8) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_7
+                text: "9"
+                font_size: 32
+                on_press: root.cisla(9) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_8
+                text: "*"
+                font_size: 32
+                on_press: root.operace("*") 
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 3
+            Button:
+                id: rezim_button_9
+                text: "4"
+                font_size: 32
+                on_press: root.cisla(4) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_10
+                text: "5"
+                font_size: 32
+                on_press: root.cisla(5) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_11
+                text: "6"
+                font_size: 32
+                on_press: root.cisla(6) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_12
+                text: "-"
+                font_size: 32
+                on_press: root.operace("-")
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 4
+            Button:
+                id: rezim_button_13
+                text: "1"
+                font_size: 32
+                on_press: root.cisla(1) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_14
+                text: "2"
+                font_size: 32
+                on_press: root.cisla(2) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_15
+                text: "3"
+                font_size: 32
+                on_press: root.cisla(3) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+
+            Button:
+                id: rezim_button_16
+                text: "+"
+                font_size: 32
+                on_press: root.operace("+") 
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 5
+            
+            Button:
+                id: rezim_button_21
+                text: "."
+                font_size: 32
+                on_press: root.operace(".")
+                background_color: (0.7, 0.7, 0.7, 1)
+            Button:
+                id: rezim_button_18
+                text: "0"
+                font_size: 32
+                on_press: root.cisla(0)
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+            
+
+            Button:
+                id: rezim_button_17
+                text: "="
+                font_size: 32
+                on_press: root.vypocitej()
+                background_color: (0.7, 0.7, 0.7, 1)
+            
+
+            Button:
+                id: rezim_button_20
+                text: "/"
+                font_size: 32
+                on_press: root.operace("/")
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            
+     
+<ScienceCalculatorWidget>:
+    name: "second"
+
+    BoxLayout:
+        id: rezim
+        orientation: "vertical"
+        size: root.width, root.height
+
+        TextInput:
+            id: vstup
+            text: "0"
+            font_size: 32
+            multiline: True
+            disabled: True # zakaze psat do displeje
+            halign: "right" #odkud kam se zapisuje
+            size_hint_y: None
+            height: 64
+        
+        TextInput:
+            id: vystup
+            text: ""
+            font_size: 32
+            multiline: True
+            disabled: True 
+            halign: "right" #odkud kam se zapisuje
+            size_hint_y: None
+            height: 128
+
+        GridLayout: #udava pocet sloupcu, radku
+            cols: 4
+            rows: 6
+
+            # Sloupec 1
+
+            Button:
+                id: rezim_button_19
+                text: "AC"
+                font_size: 32
+                on_press: root.smaz()
+                background_color: (0, 0, 0, 1)if root.ids.vstup.text == 'Error' else (0.7, 0.7, 0.7, 1)
+            
+            Button:
+                id: rezim_button_22
+                text: "C"
+                font_size: 32
+                on_press: root.vymaz_jedno()
+                background_color: (0.7, 0.7, 0.7, 1)
+            
+            Button:
+                font_size: 32
+                on_press: root.zmen_rezim()
+                background_normal: 'Day_night.jpeg'
+
+            Button:
+                background_normal: 'veda.jpg'
+                font_size: 32
+                #on_press: root.vedecka_kalkulacka_velikost()  
+                #on_press: root.current = 'sc_kalkulacka'
+                on_release: app.root.current = "prvni"
+
+            # SLOUPEC 2
+
+            #Pokud už používá operace +,-,/,*,= tak nejde použivat vedeckou operace
+            Button:
+                id: rezim_button_1
+                text: "1/x"
+                font_size: 32
+                on_press: root.vedecka_kalkulacka("1/x") if not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_2
+                text: "x^2"
+                font_size: 32
+                on_press: root.vedecka_kalkulacka("x^2") if not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_3
+                text: "x^3"
+                font_size: 32
+                on_press: root.vedecka_kalkulacka("x^3") if not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_4
+                text: "√"
+                font_size: 32
+                on_press: root.vedecka_kalkulacka("√") if not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else (0, 0, 0, 1)
+
+
+            # SLOUPEC 3
+            Button:
+                id: rezim_button_5
+                text: "7"
+                font_size: 32
+                on_press: root.cisla(7) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_6
+                text: "8"
+                font_size: 32
+                on_press: root.cisla(8) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_7
+                text: "9"
+                font_size: 32
+                on_press: root.cisla(9) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_8
+                text: "*"
+                font_size: 32
+                on_press: root.operace("*") 
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 4
+            Button:
+                id: rezim_button_9
+                text: "4"
+                font_size: 32
+                on_press: root.cisla(4) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_10
+                text: "5"
+                font_size: 32
+                on_press: root.cisla(5) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_11
+                text: "6"
+                font_size: 32
+                on_press: root.cisla(6) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_12
+                text: "-"
+                font_size: 32
+                on_press: root.operace("-")
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 5
+            Button:
+                id: rezim_button_13
+                text: "1"
+                font_size: 32
+                on_press: root.cisla(1) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_14
+                text: "2"
+                font_size: 32
+                on_press: root.cisla(2) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_15
+                text: "3"
+                font_size: 32
+                on_press: root.cisla(3) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+
+            Button:
+                id: rezim_button_16
+                text: "+"
+                font_size: 32
+                on_press: root.operace("+") 
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 6
+            
+            Button:
+                id: rezim_button_21
+                text: "."
+                font_size: 32
+                on_press: root.operace(".")
+                background_color: (0.7, 0.7, 0.7, 1)
+            Button:
+                id: rezim_button_18
+                text: "0"
+                font_size: 32
+                on_press: root.cisla(0)
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+            
+
+            Button:
+                id: rezim_button_17
+                text: "="
+                font_size: 32
+                on_press: root.vypocitej()
+                background_color: (0.7, 0.7, 0.7, 1)
+            
+
+            Button:
+                id: rezim_button_20
+                text: "/"
+                font_size: 32
+                on_press: root.operace("/")
+                background_color: (0.7, 0.7, 0.7, 1)  
+
+```

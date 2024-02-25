@@ -18,11 +18,14 @@ class CalculatorWidget(Widget):
         self.ids.vstup.text = "0"
         self.ids.vystup.text = ""
         CalculatorWidget.temp_cislo = ""
+        
+    def vymaz_jedno(self):
+        self.ids.vstup.text = self.ids.vstup.text[:-1]
 
     def vedecka_kalkulacka(self, operace):
         vstup_cisla = self.ids.vstup.text
 
-        if operace == "1/x":
+        if operace == "1/x" and (float(vstup_cisla) > 0 or float(vstup_cisla) < 0):
             self.ids.vstup.text = str(1 / float(vstup_cisla))
 
         elif operace == "x^2":
@@ -47,7 +50,7 @@ class CalculatorWidget(Widget):
             self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
     
     def operace(self, znak):
-        znaky = ["+", "-", "*", "/"]
+        znaky = ["+", "-", "*", "/", "."]
         vstup_znaku = self.ids.vstup.text
         vystup_znaku = self.ids.vystup.text
 
@@ -55,7 +58,6 @@ class CalculatorWidget(Widget):
             self.ids.vstup.text  = (f"{CalculatorWidget.temp_cislo}{znak}")
             CalculatorWidget.temp_cislo = ""
         else:
-            #if vstup_znaku[-1] in znaky or (len(vstup_znaku) <= 1 and vstup_znaku == "0"): #resi znamenka
             if (len(vstup_znaku) <= 1 and vstup_znaku == "0"): #resi znamenka
                 pass
             else: #zmena znamenek pri duplicitnim pouziti

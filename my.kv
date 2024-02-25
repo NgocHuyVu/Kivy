@@ -1,3 +1,9 @@
+<Tlacitka_Svetly@Button>
+    color: 0, 0, 0, 0.5
+    background_normal: ''
+    background_color: 1,1,1,0.5
+    font_size: 32
+
 <CalculatorWidget>:
     BoxLayout
         orientation: "vertical"
@@ -129,6 +135,28 @@
                 text: "AC"
                 font_size: 32
                 on_press: root.smaz()
+
+            Button:
+                text: "/"
+                font_size: 32
+                on_press: root.operace("/")
+
+            # SLOUPEC 6
+
+            Button:
+                text: "."
+                font_size: 32
+                on_press: root.operace(".")
+
+            Button:
+                text: "C"
+                font_size: 32
+                on_press: root.vymaz_jedno()
+
+            Button:
+                text: "/"
+                font_size: 32
+                on_press: root.operace("/")
 
             Button:
                 text: "/"

@@ -11,7 +11,8 @@ CalculatorManager:
     BoxLayout:
         id: rezim
         orientation: "vertical"
-        size: root.width, root.height
+        height: 600
+        width: 350
 
         TextInput:
             id: vstup
@@ -64,6 +65,7 @@ CalculatorManager:
                 #on_press: root.vedecka_kalkulacka_velikost()  
                 #on_press: root.current = 'sc_kalkulacka'
                 on_release: 
+                    root.vedecka_kalkulacka_velikost()  
                     app.root.current = "druhy"
                     root.manager.transition.direction = "left"
 
@@ -194,6 +196,7 @@ CalculatorManager:
     BoxLayout:
         id: rezim
         orientation: "vertical"
+        #orientation: "horizontal" pozdeji jeste prepsat 
         size: root.width, root.height
 
         TextInput:
@@ -246,7 +249,8 @@ CalculatorManager:
                 font_size: 32
                 #on_press: root.vedecka_kalkulacka_velikost()  
                 #on_press: root.current = 'sc_kalkulacka'
-                on_release: 
+                on_release:
+                    root.vedecka_kalkulacka_velikost()  
                     app.root.current = "prvni"
                     root.manager.transition.direction = "right"
 

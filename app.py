@@ -16,8 +16,6 @@ Window.size = (350, 600) #velikost okna, sirka/vyska
 #Přepsal jsem z widget na Screen
 class CalculatorWidget(Screen):
     temp_cislo = "" #pro to abychom mohli tamto cos chtel
-    #rezim_barva = 0
-    rezim_velikost = 0
 
     def smaz(self): #funkce na mazani, je tam chyba
         self.ids.vstup.text = "0"
@@ -77,21 +75,14 @@ class CalculatorWidget(Screen):
                     button.background_color = [0, 1, 1, 1]
     
     def vedecka_kalkulacka_velikost(self):
-        if CalculatorWidget.rezim_velikost == 0:
-            Window.size = (600,350)
-            CalculatorWidget.rezim_velikost = 1
-            #self.sm.current = "sc_kalkulacka"
-            #Builder.unload_file("./my.kv")
-        else:
-            Window.size = (350,600)
-            CalculatorWidget.rezim_velikost = 0
+        Window.size = (700,400)
 
 class ScienceCalculatorWidget(Screen):
     temp_cislo = "" #pro to abychom mohli tamto cos chtel
     #rezim_barva = 0
     rezim_velikost = 0
 
-    def smaz(self): #funkce na mazani, je tam chyba
+    def smaz(self):
         self.ids.vstup.text = "0"
         self.ids.vystup.text = ""
         CalculatorWidget.temp_cislo = ""
@@ -174,14 +165,7 @@ class ScienceCalculatorWidget(Screen):
                     button.background_color = [0, 1, 1, 1]
     
     def vedecka_kalkulacka_velikost(self):
-        if CalculatorWidget.rezim_velikost == 0:
-            Window.size = (600,350)
-            CalculatorWidget.rezim_velikost = 1
-            #self.sm.current = "sc_kalkulacka"
-            #Builder.unload_file("./my.kv")
-        else:
-            Window.size = (350,600)
-            CalculatorWidget.rezim_velikost = 0
+        Window.size = (350,600)
 
 
 class CalculatorManager(ScreenManager):

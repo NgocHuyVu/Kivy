@@ -13,12 +13,13 @@ Window.size = (350, 600) #velikost okna, sirka/vyska
 
 class CalculatorWidget(Widget):
     temp_cislo = "" #pro to abychom mohli tamto cos chtel
+    rezim_barva = 0
 
     def smaz(self): #funkce na mazani, je tam chyba
         self.ids.vstup.text = "0"
         self.ids.vystup.text = ""
         CalculatorWidget.temp_cislo = ""
-        
+
     def vymaz_jedno(self):
         self.ids.vstup.text = self.ids.vstup.text[:-1]
 
@@ -72,10 +73,28 @@ class CalculatorWidget(Widget):
             self.ids.vystup.text = str(eval(vstup))
             self.ids.vstup.text  = self.ids.vstup.text + "="
             CalculatorWidget.temp_cislo = self.ids.vystup.text
-            print(CalculatorWidget.temp_cislo)
+            #print(CalculatorWidget.temp_cislo)
         except:
             self.ids.vystup.text = "Error"
             self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
+
+    '''
+    def zmen_rezim(self, btn):
+        if CalculatorWidget.rezim_barva == 0:
+            btn.background_color = 0,0,0,0.5
+            CalculatorWidget.rezim_barva = 1
+        else:
+            btn.background_color = 1,1,1,0.5
+            CalculatorWidget.rezim_barva = 0
+    '''
+    def zmen_rezim(self):
+        if CalculatorWidget.rezim_barva == 0:
+            self.ids.rezim.background_color = 0,0,0,0.5
+            CalculatorWidget.rezim_barva = 1
+        else:
+            self.ids.rezim.background_color = 1,1,1,0.5
+            CalculatorWidget.rezim_barva = 0
+
     
 class MyApp(App):
     def build(self):

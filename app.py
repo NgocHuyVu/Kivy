@@ -23,7 +23,11 @@ class CalculatorWidget(Screen):
         CalculatorWidget.temp_cislo = ""
 
     def vymaz_jedno(self):
-        self.ids.vstup.text = self.ids.vstup.text[:-1]
+        if len(self.ids.vstup.text) > 1:
+            self.ids.vstup.text = self.ids.vstup.text[:-1]
+        else:
+            self.ids.vstup.text = "0"
+
 
     def cisla(self, cislo): #funkce na cisla
         vstup_cisla = self.ids.vstup.text
@@ -88,7 +92,10 @@ class ScienceCalculatorWidget(Screen):
         CalculatorWidget.temp_cislo = ""
 
     def vymaz_jedno(self):
-        self.ids.vstup.text = self.ids.vstup.text[:-1]
+        if len(self.ids.vstup.text) > 1:
+            self.ids.vstup.text = self.ids.vstup.text[:-1]
+        else:
+            self.ids.vstup.text = "0"
 
     def vedecka_kalkulacka(self, operace):
         vstup_cisla = self.ids.vstup.text

@@ -1,6 +1,13 @@
 #<Button@Button>
 #    background_normal: ''
+
+CalculatorManager:
+    CalculatorWidget:
+    ScienceCalculatorWidget:
+
 <CalculatorWidget>:
+    name: "prvni"
+
     BoxLayout:
         id: rezim
         orientation: "vertical"
@@ -203,14 +210,17 @@
             Button:
                 background_normal: 'veda.jpg'
                 font_size: 32
-                on_press: root.vedecka_kalkulacka_velikost()  
+                #on_press: root.vedecka_kalkulacka_velikost()  
                 #on_press: root.current = 'sc_kalkulacka'
+                on_release: app.root.current = "second"
 
     # SEM musime preskupit uplne vše a bude to na dlouho #####
 <ScienceCalculatorWidget>:
+    name: "second"
+
     BoxLayout:
         id: rezim
-        orientation: "horizontal"
+        orientation: "vertical"
         size: root.width, root.height
 
         TextInput:
@@ -299,12 +309,12 @@
                 background_color: (0.7, 0.7, 0.7, 1)
 
             # SLOUPEC 3
-            #Button:
-             #   id: rezim_button_9
-              #  text: "4"
-               # font_size: 32
-                #on_press: root.cisla(4) if root.ids.vstup.text[-1] not in ('=') else None
-                #background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+            Button:
+                id: rezim_button_9
+                text: "4"
+                font_size: 32
+                on_press: root.cisla(4) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
 
             Button:
                 id: rezim_button_10
@@ -410,6 +420,8 @@
             Button:
                 background_normal: 'veda.jpg'
                 font_size: 32
-                on_press: root.vedecka_kalkulacka()  
+                #on_press: root.vedecka_kalkulacka_velikost()  
+                #on_press: root.current = 'sc_kalkulacka'
+                on_release: app.root.current = "prvni"
 
 

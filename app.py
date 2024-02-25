@@ -12,7 +12,8 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 #Builder.load_file("./my.kv") #loadnes file z root slozky
 Window.size = (350, 600) #velikost okna, sirka/vyska
 
-class CalculatorWidget(Widget):
+#Přepsal jsem z widget na Screen
+class CalculatorWidget(Screen):
     temp_cislo = "" #pro to abychom mohli tamto cos chtel
     #rezim_barva = 0
     rezim_velikost = 0
@@ -99,27 +100,18 @@ class CalculatorWidget(Widget):
             Window.size = (350,600)
             CalculatorWidget.rezim_velikost = 0
 
-class ScienceCalculatorWidget(Widget):
+class ScienceCalculatorWidget(Screen):
     pass
 
-class CalculatorScreen(Screen):
-    def __init__(self, **kwargs):
-        super(CalculatorScreen, self).__init__(**kwargs)
-        self.add_widget(CalculatorWidget())
+class CalculatorManager(ScreenManager):
+    pass
 
-class ScienceCalculatorScreen(Screen):
-    def __init__(self, **kwargs):
-        super(ScienceCalculatorScreen, self).__init__(**kwargs)
-        self.add_widget(ScienceCalculatorWidget())
+kv = Builder.load_file("./my.kv")
 
-    
 class MyApp(App):
     def build(self):
-        Builder.load_file("./my.kv") #loadnes file z root slozky
-        sm = ScreenManager()
-        sm.add_widget(CalculatorScreen(name='kalkulacka'))
-        sm.add_widget(ScienceCalculatorScreen(name='sc_kalkulacka'))
-        return sm
+        return kv
+
 '''
 class MyApp(App): Původní file
     def build(self):

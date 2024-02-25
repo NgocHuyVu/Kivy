@@ -87,6 +87,7 @@ class CalculatorWidget(Widget):
             btn.background_color = 1,1,1,0.5
             CalculatorWidget.rezim_barva = 0
     '''
+    
     def zmen_rezim(self):
         if CalculatorWidget.rezim_barva == 0:
             self.ids.rezim.background_color = 0,0,0,0.5

@@ -357,113 +357,184 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
     
     
     ```
-    <CalculatorWidget>:
-    BoxLayout
+<CalculatorWidget>:
+    name: "prvni"
+
+    BoxLayout:
+        id: rezim
         orientation: "vertical"
         size: root.width, root.height
 
         TextInput:
             id: vstup
             text: "0"
-            font_size: 64
-            multiline: False
+            font_size: 32
+            multiline: True
             disabled: True # zakaze psat do displeje
             halign: "right" #odkud kam se zapisuje
+            size_hint_y: None
+            height: 64
         
         TextInput:
             id: vystup
             text: ""
-            font_size: 64
-            multiline: False
+            font_size: 32
+            multiline: True
+            disabled: True 
             halign: "right" #odkud kam se zapisuje
+            size_hint_y: None
+            height: 128
 
         GridLayout: #udava pocet sloupcu, radku
             cols: 4
             rows: 5
-
-            # SLOUPEC 1##################
-            Button:
-                text: "1"
-                font_size: 32
-                on_press: root.tlacitka_cisla(1) #root je dulezitej, za tim jmeno funkce
-
-            Button:
-                text: "2"
-                font_size: 32
-                on_press: root.tlacitka_cisla(2)
-
-            Button:
-                text: "3"
-                font_size: 32
-                on_press: root.tlacitka_cisla(3)
-
-            Button:
-                text: "+"
-                font_size: 32
-                on_press: root.pridej_znak("+")
-
-            # SLOUPEC 2######################
-            Button:
-                text: "4"
-                font_size: 32
-                on_press: root.tlacitka_cisla(4)
-
-            Button:
-                text: "5"
-                font_size: 32
-                on_press: root.tlacitka_cisla(5)
-
-            Button:
-                text: "6"
-                font_size: 32
-                on_press: root.tlacitka_cisla(6)
-
-            Button:
-                text: "-"
-                font_size: 32
-                on_press: root.pridej_znak("-")
-
-            # SLOUPEC 3#######################
-            Button:
-                text: "7"
-                font_size: 32
-                on_press: root.tlacitka_cisla(7)
-
-            Button:
-                text: "8"
-                font_size: 32
-                on_press: root.tlacitka_cisla(8)
-
-            Button:
-                text: "9"
-                font_size: 32
-                on_press: root.tlacitka_cisla(9)
-
-            Button:
-                text: "*"
-                font_size: 32
-                on_press: root.pridej_znak("*")
-
-            # SLOUPEC 4########################
-            Button:
-                text: "="
-                font_size: 32
-                on_press: root.vypocitej()
-
-            Button:
-                text: "0"
-                font_size: 32
-                on_press: root.tlacitka_cisla(0)
             
+            # Sloupec 1
+
             Button:
+                id: rezim_button_19
                 text: "AC"
                 font_size: 32
                 on_press: root.smaz()
+                background_color: (0, 0, 0, 1)if root.ids.vstup.text == 'Error' else (0.7, 0.7, 0.7, 1)
+            
+            Button:
+                id: rezim_button_22
+                text: "C"
+                font_size: 32
+                on_press: root.vymaz_jedno()
+                background_color: (0.7, 0.7, 0.7, 1)
+            
+            Button:
+                font_size: 32
+                on_press: root.zmen_rezim()
+                background_normal: 'Day_night.jpeg'
 
             Button:
+                background_normal: 'veda.jpg'
+                font_size: 32
+                #on_press: root.vedecka_kalkulacka_velikost()  
+                #on_press: root.current = 'sc_kalkulacka'
+                on_release: app.root.current = "second"
+
+            # SLOUPEC 2
+            Button:
+                id: rezim_button_5
+                text: "7"
+                font_size: 32
+                on_press: root.cisla(7) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_6
+                text: "8"
+                font_size: 32
+                on_press: root.cisla(8) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_7
+                text: "9"
+                font_size: 32
+                on_press: root.cisla(9) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_8
+                text: "*"
+                font_size: 32
+                on_press: root.operace("*") 
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 3
+            Button:
+                id: rezim_button_9
+                text: "4"
+                font_size: 32
+                on_press: root.cisla(4) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_10
+                text: "5"
+                font_size: 32
+                on_press: root.cisla(5) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_11
+                text: "6"
+                font_size: 32
+                on_press: root.cisla(6) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_12
+                text: "-"
+                font_size: 32
+                on_press: root.operace("-")
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 4
+            Button:
+                id: rezim_button_13
+                text: "1"
+                font_size: 32
+                on_press: root.cisla(1) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_14
+                text: "2"
+                font_size: 32
+                on_press: root.cisla(2) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_15
+                text: "3"
+                font_size: 32
+                on_press: root.cisla(3) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+
+            Button:
+                id: rezim_button_16
+                text: "+"
+                font_size: 32
+                on_press: root.operace("+") 
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 5
+            
+            Button:
+                id: rezim_button_21
+                text: "."
+                font_size: 32
+                on_press: root.operace(".")
+                background_color: (0.7, 0.7, 0.7, 1)
+            Button:
+                id: rezim_button_18
+                text: "0"
+                font_size: 32
+                on_press: root.cisla(0)
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+            
+
+            Button:
+                id: rezim_button_17
+                text: "="
+                font_size: 32
+                on_press: root.vypocitej()
+                background_color: (0.7, 0.7, 0.7, 1)
+            
+
+            Button:
+                id: rezim_button_20
                 text: "/"
                 font_size: 32
-                on_press: root.pridej_znak("/")
+                on_press: root.operace("/")
+                background_color: (0.7, 0.7, 0.7, 1)
     ```
 
     - app.py

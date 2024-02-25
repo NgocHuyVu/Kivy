@@ -633,8 +633,6 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 
 Pro každé kalkulačky, které bychom chtěli vytvořit, musíme vytvořit třídy CalculatorWidget a ScienceCalculatorWidget, které dědí z třídy Screen. Pokud budeme pracovat s více než jedním oknem, musíme vytvořit třídu CalculatorManager, která bude řídit navigaci mezi těmito okny. Tato třída bude muset zdědit ze ScreenManager.
 ```
-class CalculatorManager(ScreenManager):
-    pass
 class CalculatorWidget(Screen):
     temp_cislo = "" #pro to abychom mohli tamto cos chtel
     #rezim_barva = 0
@@ -791,6 +789,10 @@ class ScienceCalculatorWidget(Screen):
         else:
             Window.size = (350,600)
             CalculatorWidget.rezim_velikost = 0
+
+
+class CalculatorManager(ScreenManager):
+    pass
 ```
 
 GUI

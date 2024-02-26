@@ -62,15 +62,15 @@ if __name__ == "__main__":
 
 **Úkol 3: Zobrazuje text "Hello World" v tučném písmu.**
  ```
-  class HelloWorld(App):
-  def build(self):
-      # Vrátí label, který se má zobrazit Hello World
-      return Label(text ="[b]Hello World[b]", color =(0.41, 0.42, 0.74, 1), markup = True)
+ class HelloWorld(App):
+ def build(self):
+ 	# Vrátí label, který se má zobrazit Hello World
+	return Label(text ="[b]Hello World[b]", color =(0.41, 0.42, 0.74, 1), markup = True)
   ```
     
 # Kivy language
 
-**Kivy language** se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho oddělíme od zdrojového kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale jestliže používáme kivy language, pak kód je čitelnější. 
+**Kivy language** se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho oddělíme od zdrojového logického kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale jestliže používáme kivy language, pak kód je čitelnější, a je snadnější údržbu a správu aplikace.
 
 Kivi soubor by se měl jmenovat stejně jako název třídy aplikace. Nemusí se nutně jmenovat stejně, ale pokud ho Kivy nenajde podle názvu třídy aplikace, museli bychom jej importovat ručně pomocí Builder.load_file(soubor)).
 
@@ -118,6 +118,8 @@ if __name__ == "__main__":
   
 # Layout 
 
+**Layout** zajišťuje uspořádání a pozicování prvků GUI. Máme růžné typy rozložení:
+
 **Úkol 4: Vytvořte vzhled jednoduché kalkulačky, která obsahuje čísla, operace +, -, *, /, a smázání**
 
 Kalkulačka 
@@ -149,11 +151,8 @@ class MyApp(App):
 if __name__ == '__main__':
     MyApp().run()
 ```
-  
 
-**Layout** zajišťuje uspořádání a pozicování prvků GUI. Máme růžné typy rozložení:
-
-- **BoxLayout** = prvky jsou umíštěny podle vertikální nebo horizontální směru.
+- **BoxLayout** = prvky jsou umístěny podle vertikální nebo horizontální směru.
   - my.kv
     ```
     <CalculatorWidget>:
@@ -161,7 +160,7 @@ if __name__ == '__main__':
             orientation: "vertical"
             size: root.width, root.height
     ```
--  **GridLayout** umožňuje umíštit prvky ve maticovém tvaru, určíme počet řádků a sloupců. Prvky jsou umíštěny od levého horního rohu, plní se aktuální řádku, a pak se přechází na další řádek.
+-  **GridLayout** umožňuje umístit prvky ve maticovém tvaru, určíme počet řádků a sloupců. Prvky jsou umístěny od levého horního rohu, plní se aktuální řádku, a pak se přechází na další řádek.
  ```
 <CalculatorWidget>:
     BoxLayout
@@ -188,7 +187,7 @@ if __name__ == '__main__':
             rows: 5
   ```
 
-- **FloatLayout** umožňuje umístit relativně prvky podle šírky a výšky okna. Růžné zařížení mají růžné rozměry, podle kterých budou prvky automaticky se přizpůsobit, mění jejich rozměry a pozice. Jetliže měníme velkikost okna, taky prvky budou se přizpůsobit.
+- **FloatLayout** umožňuje umístit relativně prvky podle šířky a výšky okna. Růžné zařízení mají růžné rozměry, podle kterých budou prvky automaticky se přizpůsobit, mění jejich rozměry a pozice. Jestliže měníme velikost okna, taky prvky budou se přizpůsobit.
   
 - **AnchorLayout** = prvky jsou umíštěny ve rohu nebo střed
   - **anchor_x**: "left", "right" a "center"
@@ -197,7 +196,7 @@ if __name__ == '__main__':
     
     ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/2301dfce-9c65-43c9-8dc0-46df86447e4b)
 
-- **RelativeLayout** umožňuje umístit relativně prvky podle šírky a výšky Layout
+- **RelativeLayout** umožňuje umístit relativně prvky podle šířky a výšky Layout
   
   
 # Ovládací prvky = widget 
@@ -1349,5 +1348,4 @@ CalculatorManager:
                 font_size: 32
                 on_press: root.operace("/")
                 background_color: (0.7, 0.7, 0.7, 1)  
-
 ```

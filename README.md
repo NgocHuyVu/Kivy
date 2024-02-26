@@ -712,10 +712,68 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
 
 
 - **Checkbox** umožňuje provést dvě volbu, např. ano nebo ne
+```
+import kivy
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.uix.label import Label
+from kivy.uix.checkbox import CheckBox
+from kivy.uix.gridlayout import GridLayout
 
+
+# Container class for the app's widgets
+class check_box(GridLayout):
+
+	def __init__(self, **kwargs):
+		super(check_box, self).__init__(**kwargs)
+
+		# 2 columns in grid layout
+		self.cols = 2
+
+		# Add checkbox, widget and labels
+		self.add_widget(Label(text ='Muž'))
+		self.active = CheckBox(active = True)
+		self.add_widget(self.active)
+
+		self.add_widget(Label(text ='Žena'))
+		self.active = CheckBox(active = True)
+		self.add_widget(self.active)
+
+		self.add_widget(Label(text ='Jiný'))
+		self.active = CheckBox(active = True)
+		self.add_widget(self.active)
+
+	
+class CheckBoxApp(App):
+	def build(self):	 
+		return check_box()
+
+if __name__ == '__main__':
+	CheckBoxApp().run()
+
+```
 - **Dropdown list** umožňuje zobrazit seznam voleb. Může být tlačítko, fotka, ...
+```
+import kivy 
+from kivy.uix.dropdown import DropDown
+from kivy.uix.button import Button
+from kivy.base import runTouchApp
+
+dropdown = DropDown()
+options = ["Muž", "Žena", "Jiné"] 
+for option in options:
+    btn = Button(text=option, size_hint_y=None, height=40)
+    btn.bind(on_release=lambda btn: dropdown.select(btn.text))
+    dropdown.add_widget(btn)
+mainbutton = Button(text ='Pohlaví', size_hint =(None, None), pos =(600, 300))
+mainbutton.bind(on_release = dropdown.open)
+dropdown.bind(on_select = lambda instance, x: setattr(mainbutton, 'text', x))
+runTouchApp(mainbutton)
+```
 
 - **Scrollview** umožňuje uživatelům posouvat obsah (například text, obrázky nebo další widgety) v rámci určené oblasti, která je ohraničena velikostí ScrollView
+```
+```
 
 # Navigace mezi multi-screen
 
@@ -892,9 +950,6 @@ class CalculatorManager(ScreenManager):
 
 GUI
 ```
-#<Button@Button>
-#    background_normal: ''
-
 CalculatorManager:
     CalculatorWidget:
     ScienceCalculatorWidget:

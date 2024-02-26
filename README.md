@@ -12,14 +12,15 @@ py -m pip install kivy
 
 # První aplikace 
 
-**Úkol 1: Vytvořte aplikace Helloworld, která zobrazuje nějaký text na obrazovku.**
+**Úkol 1: Vytvořte aplikace Helloworld, která zobrazuje nějaký text na obrazovku pomocí prvku Label.**
 
 Potřebujeme prvek (widget) **Label**, který slouží pro zápis textu. Bude zobrazovat HelloWord na obrázovku. 
 
 Když poutřebujeme použít některý prvek, tak ho nejprve musíme importovat pomocí vzoru: 
 **from kivy.uix.<nazev_prvek> import <Nazev_prvek>** 
 
-Label
+V náš případě potřebujeme importovat Label.
+from kivy.uix.label import Label
 
 ```
 #importujme Kivy a další ovládací prvky např. label, button
@@ -36,41 +37,44 @@ if __name__ == "__main__":
     HelloWorld().run()
 ```
 
-**Úkol 2: Předchozí aplikace má bílý text. Změňte barvu text, aby je fialový (0.41, 0.42, 0.74, 1)**
+**Úkol 2: Předchozí aplikace má bílý text. Změňte barvu text, aby je fialový ve formátu RGBA (0.41, 0.42, 0.74, 1)**
  - Mění barvu Label
-
+   Nástroj umožňuje vybírat barvy a získávat k nim příslušné hodnoty RGB: https://rgbcolorpicker.com/0-1	
   ```
   class HelloWorld(App):
     def build(self):
         # Vrátí label, který se má zobrazit Hello World
         return Label(text ="Hello World", color =(0.41, 0.42, 0.74, 1))
   ```
-  -  Pouzíváme Text Markup, aby můžeme měnit styl textu
-    [styl]text[/styl]
+  -  Pouzíváme **Text Markup**, aby můžeme měnit **formát textu**
+    **[formát]text[/formát], markup = True**
 
-  ```
+ 
+  - [b][/b] -> tučný
+  - [i][/i] -> kurzíva
+  - [u][/u] -> podtržení
+  - [s][/s] -> přeškrtnut
+  - [font=][/font] ->  typ písma
+  - [size=][/size]] ->  velikost písma
+  - [color=#][/color] -> barva textu
+  - [sub][/sub] -> zobrazí text na pozici dolního indexu vzhledem k textu před ním.
+  - [sup][/sup] -> zobrazí text na pozici horního indexu vzhledem k textu před ním.
+
+**Úkol 3: Zobrazuje text "Hello World" v tučném písmu.**
+ ```
   class HelloWorld(App):
   def build(self):
       # Vrátí label, který se má zobrazit Hello World
       return Label(text ="[b]Hello World[b]", color =(0.41, 0.42, 0.74, 1), markup = True)
   ```
-  - [b][/b] -> tučný
-  - [i][/i] -> kurzíva
-  - [u][/u] -> Podtržení
-  - [s][/s] -> Přeškrtnut
-  - [font=][/font] ->  typ písma
-  - [size=][/size]] ->  velikost písma
-  - [color=#][/color] -> barva textu
-  - [sub][/sub] -> Zobrazí text na pozici dolního indexu vzhledem k textu před ním.
-  - [sup][/sup] -> Zobrazí text na pozici horního indexu vzhledem k textu před ním.
     
 # Kivy language
 
-Kivy language se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho oddělíme od zdrojového kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale jestliže používáme kivy language, pak kód je čitelnější. 
+**Kivy language** se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho oddělíme od zdrojového kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale jestliže používáme kivy language, pak kód je čitelnější. 
 
 Kivi soubor by se měl jmenovat stejně jako název třídy aplikace. Nemusí se nutně jmenovat stejně, ale pokud ho Kivy nenajde podle názvu třídy aplikace, museli bychom jej importovat ručně pomocí Builder.load_file(soubor)).
 
-**Úkol 3: Pomocí Kivy language rozdělte část v Pythonu, která umožňuje pro vzhled aplikace, aby je psán do souboru .kv**
+**Úkol 4: Pomocí Kivy language rozdělte část v Pythonu, která umožňuje pro vzhled aplikace, aby je psán do souboru .kv**
 
 - helloworld.py
 ```

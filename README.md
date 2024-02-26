@@ -11,11 +11,14 @@ py -m pip install kivy
 ```
 
 # První aplikace 
+Budeme vytvořit jendoduchou aplikace HelloWorld.
+
+Potřebujeme prvek (widget) **Label**, který slouží pro zápis textu. Bude zobrazovat HelloWord na obrázovku. 
 
 Když poutřebujeme použít některý prvek, tak ho nejprve musíme importovat pomocí vzoru: 
 **from kivy.uix.<nazev_prvek> import <Nazev_prvek>** 
 
-Label je prvek (widget), který slouží pro zápis textu. Můžeme měnit jeho vzhled
+Label
 
 ```
 #importujme Kivy a další ovládací prvky např. label, button

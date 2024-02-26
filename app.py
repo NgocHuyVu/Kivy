@@ -12,11 +12,16 @@ from kivy.uix.screenmanager import NoTransition
 from kivy.graphics import Rectangle
 from kivy.graphics import Color
 from kivy.clock import Clock
+#from kivy.config import Config
+from kivy.utils import platform
 import math
 from random import randint
 
 #Builder.load_file("./my.kv") #loadnes file z root slozky
-Window.size = (350, 600) #velikost okna, sirka/vyska
+#Window.size = (350, 600) #velikost okna, sirka/vyska
+#Config.set('graphics', 'resizable', False)
+#Config.set('graphics', 'width', '350')
+#Config.set('graphics', 'height', '600')
 
 #Přepsal jsem z widget na Screen
 class CalculatorWidget(Screen):
@@ -265,16 +270,20 @@ class SnakeCalculator(Screen):
             self.snake[i].rect.pos = self.snake[i].pos
 
     def pohyb_nahoru(self, instance):
-        self.smer = 'nahoru'
+        if self.smer != 'dolu':
+            self.smer = 'nahoru'
 
     def pohyb_dolu(self, instance):
-        self.smer = 'dolu'
+        if self.smer != 'nahoru':
+            self.smer = 'dolu'
 
     def pohyb_vlevo(self, instance):
-        self.smer = 'doleva'
+        if self.smer != 'doprava':
+            self.smer = 'doleva'
 
     def pohyb_vpravo(self, instance):
-        self.smer = 'doprava'
+        if self.smer != 'doleva':
+            self.smer = 'doprava'
 
     def nahodnaLokace(self):
         #return [randint(0, 650), randint(1000,1170)]
@@ -289,6 +298,10 @@ kv = Builder.load_file("./my.kv")
 
 class MyApp(App):
     def build(self):
+        if(platform == 'android' or platform == 'ios'):
+            Window.maximize()
+        else:
+            Window.size = (350, 600)
         return kv
 
 

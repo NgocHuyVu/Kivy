@@ -12,7 +12,7 @@ py -m pip install kivy
 
 # První aplikace 
 
-##Úkol 1: Vytvořte aplikace Helloworld, která zobrazuje nějaký text na obrazovku.##
+**Úkol 1: Vytvořte aplikace Helloworld, která zobrazuje nějaký text na obrazovku.**
 
 Potřebujeme prvek (widget) **Label**, který slouží pro zápis textu. Bude zobrazovat HelloWord na obrázovku. 
 
@@ -36,7 +36,7 @@ if __name__ == "__main__":
     HelloWorld().run()
 ```
 
-##Úkol 2: Předchozí aplikace má bílý text. Změňte barvu text, aby je fialový (0.41, 0.42, 0.74, 1)##
+**Úkol 2: Předchozí aplikace má bílý text. Změňte barvu text, aby je fialový (0.41, 0.42, 0.74, 1)**
  - Mění barvu Label
 
   ```
@@ -70,7 +70,7 @@ Kivy language se používá pro pozicování a vzhled aplikace. Má stejný úč
 
 Kivi soubor by se měl jmenovat stejně jako název třídy aplikace. Nemusí se nutně jmenovat stejně, ale pokud ho Kivy nenajde podle názvu třídy aplikace, museli bychom jej importovat ručně pomocí Builder.load_file(soubor)).
 
-##Úkol 3: Pomocí Kivy language rozdělte část v Pythonu, která umožňuje pro vzhled aplikace, aby je psán do souboru .kv##
+**Úkol 3: Pomocí Kivy language rozdělte část v Pythonu, která umožňuje pro vzhled aplikace, aby je psán do souboru .kv**
 
 - helloworld.py
 ```
@@ -631,7 +631,7 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
 
 # Navigace mezi multi-screen
 
-## Úkol 5: Vytvořte vědeckou kalkulačku, která obsahuje druhou mocninu, třetí mocninu, odmocninu, ...##
+**Úkol 5: Vytvořte vědeckou kalkulačku, která obsahuje druhou mocninu, třetí mocninu, odmocninu, ...**
 
 Import modulů
 ```

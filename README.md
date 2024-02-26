@@ -11,7 +11,7 @@ py -m pip install kivy
 ```
 
 # První aplikace 
-Budeme vytvořit jendoduchou aplikace HelloWorld.
+Úkol 1: Vytvořte aplikace Helloworld, která zobrazuje nějaký text na obrazovku.
 
 Potřebujeme prvek (widget) **Label**, který slouží pro zápis textu. Bude zobrazovat HelloWord na obrázovku. 
 
@@ -35,6 +35,7 @@ if __name__ == "__main__":
     HelloWorld().run()
 ```
 
+Úkol 2: Předchozí aplikace má bílý text. Změňte barvu text, aby je fialový (0.41, 0.42, 0.74, 1)
  - Mění barvu Label
 
   ```
@@ -68,6 +69,7 @@ Kivy language se používá pro pozicování a vzhled aplikace. Má stejný úč
 
 Kivi soubor by se měl jmenovat stejně jako název třídy aplikace. Nemusí se nutně jmenovat stejně, ale pokud ho Kivy nenajde podle názvu třídy aplikace, museli bychom jej importovat ručně pomocí Builder.load_file(soubor)).
 
+Úkol 3: Pomocí Kivy language rozdělte část v Pythonu, která umožňuje pro vzhled aplikace, aby je do souboru .kv
 
 - helloworld.py
 ```
@@ -110,6 +112,8 @@ if __name__ == "__main__":
 
   
 # Layout 
+
+Úkol 4: Vytvořte vzhled jednoduché kalkulačky, která obsahuje čísla, operace +, -, *, /, a smázání
 
 Kalkulačka 
 

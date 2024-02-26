@@ -202,7 +202,7 @@ class Jidlo(Widget):
         #self.pos = [randint(0, 650), randint(2100,2250)] 1175
         #self.pos = [randint(0, 650), randint(1000,1170)]
         #self.pos = [randint(0, 650), randint(1000,1170)]
-        self.pos = [randint(0, 13) * 50, randint(20,24) * 50]
+        self.pos = [randint(0, 13) * 50, randint(20,23) * 50]
         #self.pos = [randint(0, 13) * 50, randint(200,204) * 50]
         self.rect.pos = self.pos
 
@@ -216,7 +216,6 @@ class SnakeCalculator(Screen):
         self.add_widget(self.jidlo)
         self.smer = 'doprava'
         Clock.schedule_interval(self.pohyb_kont, 1)
-        pozice_jidla = None
 
 
     def pohyb_kont(self, dt):
@@ -266,7 +265,7 @@ class SnakeCalculator(Screen):
 
     def nahodnaLokace(self):
         #return [randint(0, 650), randint(1000,1170)]
-        return [randint(0, 13) * 50, randint(20,24) * 50]
+        return [randint(0, 13) * 50, randint(20,23) * 50]
         
 
 

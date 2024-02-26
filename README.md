@@ -161,31 +161,6 @@ if __name__ == '__main__':
             size: root.width, root.height
     ```
 -  **GridLayout** umožňuje umístit prvky ve maticovém tvaru, určíme počet řádků a sloupců. Prvky jsou umístěny od levého horního rohu, plní se aktuální řádku, a pak se přechází na další řádek.
- ```
-<CalculatorWidget>:
-    BoxLayout
-        orientation: "vertical"
-        size: root.width, root.height
-
-        TextInput:
-            id: vstup
-            text: "0"
-            font_size: 64
-            multiline: False
-            disabled: True # zakaze psat do displeje
-            halign: "right" #odkud kam se zapisuje
-        
-        TextInput:
-            id: vystup
-            text: ""
-            font_size: 64
-            multiline: False
-            halign: "right" #odkud kam se zapisuje
-
-        GridLayout: #udava pocet sloupcu, radku
-            cols: 4
-            rows: 5
-  ```
 
 - **FloatLayout** umožňuje umístit relativně prvky podle šířky a výšky okna. Růžné zařízení mají růžné rozměry, podle kterých budou prvky automaticky se přizpůsobit, mění jejich rozměry a pozice. Jestliže měníme velikost okna, taky prvky budou se přizpůsobit.
   
@@ -204,6 +179,7 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
 **from kivy.uix.<nazev_prvek> import <Nazev_prvek>**  
 
 - **TextInput** = textové pole pro zadání textu od uživatele
+  V naší kalkulačceje potřeba použít TextInput, které zobrazují vstupu a výstupu.
    ```
    <CalculatorWidget>:
     BoxLayout
@@ -224,198 +200,12 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
             font_size: 64
             multiline: False
             halign: "right" #odkud kam se zapisuje
-
-        GridLayout: #udava pocet sloupcu, radku
-            cols: 4
-            rows: 5
     ```
   - multiline = víceřádkový pomocí Enter
 
 - **Button** = tlačítko spouštějí se po stisknutí
-  - **Vytvoření tlačítka**
-    ```
-    <CalculatorWidget>:
-    name: "prvni"
-
-    BoxLayout:
-        id: rezim
-        orientation: "vertical"
-
-        TextInput:
-            id: vstup
-            text: "0"
-            font_size: 32
-            multiline: True
-            readonly: True
-            halign: "right" 
-            size_hint_y: None
-            height: 64
-        
-        TextInput:
-            id: vystup
-            text: ""
-            font_size: 32
-            multiline: True
-            readonly: True
-            halign: "right" 
-            size_hint_y: None
-            height: 128
-
-        GridLayout:
-            cols: 4
-            rows: 6
-            
-            # Sloupec 1
-
-            Button:
-                id: rezim_button_1
-                text: "AC"
-                font_size: 32
-                on_press: root.smaz()
-                background_color: (0, 0, 0, 1)if root.ids.vstup.text == 'Error' else (0.7, 0.7, 0.7, 1)
-            
-            Button:
-                id: rezim_button_2
-                text: "C"
-                font_size: 32
-                on_press: root.vymaz_jedno()
-                background_color: (0.7, 0.7, 0.7, 1)
-            
-            Button:
-                font_size: 32
-                on_press: root.zmen_rezim()
-                background_normal: 'Day_night.jpeg'
-
-            Button:
-                background_normal: 'veda.jpg'
-                font_size: 32
-                #on_press: root.vedecka_kalkulacka_velikost()  
-                #on_press: root.current = 'sc_kalkulacka'
-                on_release: 
-                    root.vedecka_kalkulacka_velikost()  
-                    app.root.current = "druhy"
-                    root.manager.transition.direction = "left"
-
-            # SLOUPEC 2
-            Button:
-                id: rezim_button_3
-                text: "7"
-                font_size: 32
-                on_press: root.cisla(7) if root.ids.vstup.text[-1] not in ('=') else None
-                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
-
-            Button:
-                id: rezim_button_4
-                text: "8"
-                font_size: 32
-                on_press: root.cisla(8) if root.ids.vstup.text[-1] not in ('=') else None
-                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
-
-            Button:
-                id: rezim_button_5
-                text: "9"
-                font_size: 32
-                on_press: root.cisla(9) if root.ids.vstup.text[-1] not in ('=') else None
-                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
-
-            Button:
-                id: rezim_button_6
-                text: "*"
-                font_size: 32
-                on_press: root.operace("*") 
-                background_color: (0.7, 0.7, 0.7, 1)
-
-            # SLOUPEC 3
-            Button:
-                id: rezim_button_7
-                text: "4"
-                font_size: 32
-                on_press: root.cisla(4) if root.ids.vstup.text[-1] not in ('=') else None
-                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
-
-            Button:
-                id: rezim_button_8
-                text: "5"
-                font_size: 32
-                on_press: root.cisla(5) if root.ids.vstup.text[-1] not in ('=') else None
-                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
-
-            Button:
-                id: rezim_button_9
-                text: "6"
-                font_size: 32
-                on_press: root.cisla(6) if root.ids.vstup.text[-1] not in ('=') else None
-                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
-
-            Button:
-                id: rezim_button_10
-                text: "-"
-                font_size: 32
-                on_press: root.operace("-")
-                background_color: (0.7, 0.7, 0.7, 1)
-
-            # SLOUPEC 4
-            Button:
-                id: rezim_button_11
-                text: "1"
-                font_size: 32
-                on_press: root.cisla(1) if root.ids.vstup.text[-1] not in ('=') else None
-                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
-
-            Button:
-                id: rezim_button_12
-                text: "2"
-                font_size: 32
-                on_press: root.cisla(2) if root.ids.vstup.text[-1] not in ('=') else None
-                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
-
-            Button:
-                id: rezim_button_13
-                text: "3"
-                font_size: 32
-                on_press: root.cisla(3) if root.ids.vstup.text[-1] not in ('=') else None
-                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
-
-
-            Button:
-                id: rezim_button_14
-                text: "+"
-                font_size: 32
-                on_press: root.operace("+") 
-                background_color: (0.7, 0.7, 0.7, 1)
-
-            # SLOUPEC 5
-            
-            Button:
-                id: rezim_button_15
-                text: "."
-                font_size: 32
-                on_press: root.operace(".")
-                background_color: (0.7, 0.7, 0.7, 1)
-            Button:
-                id: rezim_button_16
-                text: "0"
-                font_size: 32
-                on_press: root.cisla(0)
-                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
-            
-
-            Button:
-                id: rezim_button_17
-                text: "="
-                font_size: 32
-                on_press: root.vypocitej()
-                background_color: (0.7, 0.7, 0.7, 1)
-            
-
-            Button:
-                id: rezim_button_18
-                text: "/"
-                font_size: 32
-                on_press: root.operace("/")
-                background_color: (0.7, 0.7, 0.7, 1)
-    ```
-    
+    Dále potřebujeme vytvořit tlačítka kalkulačky, které jsou čísla a operace. Můžeme provést několik změn nebo přidání funkcí k tlačítkům.
+  
   - **Styl**
     - font_size = velikost písma
     - background_color = barva pozadí
@@ -433,25 +223,10 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
     - background_normal =  zobrazí, kdy není stisknuto
     - background_down = zobrazí, kdy je stisknuto
     - background_disabled_normal = zobrazí, kdy není stisknuto a zároveň není aktivováno
-   
-      ```
-      Button:
-                font_size: 32
-                on_press: root.zmen_rezim()
-                background_normal: 'Day_night.jpeg'
-
-            Button:
-                background_normal: 'veda.jpg'
-                font_size: 32
-                #on_press: root.vedecka_kalkulacka_velikost()  
-                #on_press: root.current = 'sc_kalkulacka'
-                on_release: app.root.current = "second"
-      ```
       
   - **Funkce**
 
     Používáme **on_press** pro přídání funkce. Pokud uživatel stiskne tlačítko, tak volá funkce
-    
     
     ```
     <CalculatorWidget>:
@@ -681,6 +456,7 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
     if __name__ == '__main__':
         MyApp().run() #my.kv se spousti podle tridy MyApp, neco jako C# oddeli velky pismena jako slovo
     ```
+Kivy má další různé prvky (widget), např. 
 
 - **Label** = slouží pro výpis
 
@@ -755,7 +531,9 @@ if __name__ == '__main__':
 	CheckBoxApp().run()
 
 ```
+
 - **Dropdown list** umožňuje zobrazit seznam voleb. Může být tlačítko, fotka, ...
+  
 ```
 import kivy 
 from kivy.uix.dropdown import DropDown

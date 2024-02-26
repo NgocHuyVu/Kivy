@@ -189,6 +189,13 @@ class SnakeHlava(Widget):
         self.pos = [self.pos[0] + dx, self.pos[1] + dy]
         self.rect.pos = self.pos
 
+class SnakeTelo(Widget):
+    def __init__(self, pos):
+        super().__init__(pos=pos)
+        self.size = (50, 50)
+        with self.canvas:
+            self.rect = Rectangle(pos=self.pos, size=self.size)
+
 class Jidlo(Widget):
     def __init__(self, pos):
         super().__init__(pos=pos)
@@ -209,10 +216,9 @@ class Jidlo(Widget):
 class SnakeCalculator(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.snake = SnakeHlava((300, 1100))
-        #self.jidlo = Jidlo(self.nahodnaLokace())
+        self.snake = [SnakeHlava((300, 1100))]
         self.jidlo = Jidlo(self.nahodnaLokace())
-        self.add_widget(self.snake)
+        self.add_widget(self.snake[0])
         self.add_widget(self.jidlo)
         self.smer = 'doprava'
         Clock.schedule_interval(self.pohyb_kont, 1)
@@ -222,34 +228,41 @@ class SnakeCalculator(Screen):
         dx = 0
         dy = 1100
         if self.smer == 'nahoru':
-            self.snake.pohyb(0, 50)
+            self.snake[0].pohyb(0, 50)
         elif self.smer == 'dolu':
-            self.snake.pohyb(0, -50)
+            self.snake[0].pohyb(0, -50)
         elif self.smer == 'doleva':
-            self.snake.pohyb(-50, 0)
+            self.snake[0].pohyb(-50, 0)
         elif self.smer == 'doprava':
-            self.snake.pohyb(50, 0)
+            self.snake[0].pohyb(50, 0)
 
-        novy_x = self.snake.pos[0] + dx
-        novy_y = self.snake.pos[1] + dy
+        novy_x = self.snake[0].pos[0] + dx
+        novy_y = self.snake[0].pos[1] + dy
 
-        print(novy_x, novy_y) #0-650 sirka
-        print(f"Pozice jídla: {self.pos}")
+        #print(novy_x, novy_y) #0-650 sirka
+        #print(f"Pozice jídla: {self.pos}")
         if novy_x > 650:
-            self.snake.pohyb(-50, 0)
+            self.snake[0].pohyb(-50, 0)
         elif novy_x < 0:
-            self.snake.pohyb(50, 0)
+            self.snake[0].pohyb(50, 0)
         elif novy_y > 2250:
-            self.snake.pohyb(0,-50)
+            self.snake[0].pohyb(0,-50)
         elif novy_y < 2100:
-            self.snake.pohyb(0,50)
+            self.snake[0].pohyb(0,50)
         
-        if self.snake.collide_widget(self.jidlo):
-            dx = abs(self.snake.center_x - self.jidlo.center_x)
-            dy = abs(self.snake.center_y - self.jidlo.center_y)
+        if self.snake[0].collide_widget(self.jidlo):
+            dx = abs(self.snake[0].center_x - self.jidlo.center_x)
+            dy = abs(self.snake[0].center_y - self.jidlo.center_y)
             if dx < 50 / 2 and dy < 50 / 2:  # polovina velikosti widgetu
                 print(True)
                 self.jidlo.premisti()
+                nova_cast_tela = SnakeTelo(self.snake[-1].pos)
+                self.snake.append(nova_cast_tela)
+                self.add_widget(nova_cast_tela)
+
+        for i in range(len(self.snake)-1, 0, -1):
+            self.snake[i].pos = self.snake[i-1].pos
+            self.snake[i].rect.pos = self.snake[i].pos
 
     def pohyb_nahoru(self, instance):
         self.smer = 'nahoru'
@@ -265,7 +278,7 @@ class SnakeCalculator(Screen):
 
     def nahodnaLokace(self):
         #return [randint(0, 650), randint(1000,1170)]
-        return [randint(0, 13) * 50, randint(20,23) * 50]
+        return [randint(1, 13) * 50, randint(20,23) * 50]
         
 
 

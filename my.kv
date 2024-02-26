@@ -4,6 +4,7 @@
 CalculatorManager:
     CalculatorWidget:
     ScienceCalculatorWidget:
+    SnakeCalculator:
 
 <CalculatorWidget>:
     name: "prvni"
@@ -11,15 +12,13 @@ CalculatorManager:
     BoxLayout:
         id: rezim
         orientation: "vertical"
-        height: 600
-        width: 350
 
         TextInput:
             id: vstup
             text: "0"
             font_size: 32
             multiline: True
-            disabled: True # zakaze psat do displeje
+            readonly: True
             halign: "right" #odkud kam se zapisuje
             size_hint_y: None
             height: 64
@@ -29,14 +28,14 @@ CalculatorManager:
             text: ""
             font_size: 32
             multiline: True
-            disabled: True 
+            readonly: True
             halign: "right" #odkud kam se zapisuje
             size_hint_y: None
             height: 128
 
         GridLayout: #udava pocet sloupcu, radku
             cols: 4
-            rows: 5
+            rows: 6
             
             # Sloupec 1
 
@@ -187,9 +186,22 @@ CalculatorManager:
                 font_size: 32
                 on_press: root.operace("/")
                 background_color: (0.7, 0.7, 0.7, 1)
-
             
-     
+        Button:
+            id: rezim_button_19
+            text: "had"
+            font_size: 32
+            size_hint_y : None
+            background_color: (0.7, 0.7, 0.7, 1)
+            on_release: 
+                app.root.current = "snake"
+                #root.manager.transition: NoTransition
+                root.manager.transition.direction = "down"
+
+
+###################################################################
+###################################################################
+###################################################################
 <ScienceCalculatorWidget>:
     name: "druhy"
 
@@ -204,7 +216,7 @@ CalculatorManager:
             text: "0"
             font_size: 32
             multiline: True
-            disabled: True # zakaze psat do displeje
+            readonly: True
             halign: "right" #odkud kam se zapisuje
             size_hint_y: None
             height: 64
@@ -214,7 +226,7 @@ CalculatorManager:
             text: ""
             font_size: 32
             multiline: True
-            disabled: True 
+            readonly: True
             halign: "right" #odkud kam se zapisuje
             size_hint_y: None
             height: 128
@@ -296,7 +308,7 @@ CalculatorManager:
 
             Button:
                 id: rezim_button_8
-                text: "PI"
+                text: "π" #PI
                 font_size: 32
                 on_press: root.cisla("PI") if root.ids.vstup.text[-1] not in ('=') else None
                 background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
@@ -430,5 +442,189 @@ CalculatorManager:
                 text: "/"
                 font_size: 32
                 on_press: root.operace("/")
-                background_color: (0.7, 0.7, 0.7, 1)  
+                background_color: (0.7, 0.7, 0.7, 1)
+
+<SnakeCalculator>
+    name: "snake"
+
+    BoxLayout:
+        #id: rezim
+        orientation: "vertical"
+
+        TextInput:
+            id: had
+            text: ""
+            font_size: 32
+            multiline: True
+            readonly: True
+            halign: "right" #odkud kam se zapisuje
+            size_hint_y: None
+            height: 200
+            background_color: (0,0,0,0)
+            foreground_color: (1,0,1,1)
+
+        GridLayout: #udava pocet sloupcu, radku
+            cols: 4
+            rows: 6
+            
+            # Sloupec 1
+
+            Button:
+                id: rezim_button_1
+                text: "AC"
+                font_size: 32
+                on_press: root.smaz()
+                #background_color: (0, 0, 0, 1)if root.ids.vstup.text == 'Error' else (0.7, 0.7, 0.7, 1)
+            
+            Button:
+                id: rezim_button_2
+                text: "C"
+                font_size: 32
+                on_press: root.vymaz_jedno()
+                background_color: (0.7, 0.7, 0.7, 1)
+            
+            Button:
+                font_size: 32
+                on_press: root.zmen_rezim()
+                background_normal: 'Day_night.jpeg'
+
+            Button:
+                background_normal: 'veda.jpg'
+                font_size: 32
+                #on_press: root.vedecka_kalkulacka_velikost()  
+                #on_press: root.current = 'sc_kalkulacka'
+                on_release: 
+                    root.vedecka_kalkulacka_velikost()  
+                    app.root.current = "druhy"
+                    root.manager.transition.direction = "left"
+
+            # SLOUPEC 2
+            Button:
+                id: rezim_button_3
+                text: "7"
+                font_size: 32
+                on_press: root.cisla(7) if root.ids.vstup.text[-1] not in ('=') else None
+                #background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_4
+                text: "8"
+                font_size: 32
+                on_press: root.pohyb_nahoru(self)
+                #background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_5
+                text: "9"
+                font_size: 32
+                on_press: root.cisla(9) if root.ids.vstup.text[-1] not in ('=') else None
+                #background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_6
+                text: "*"
+                font_size: 32
+                on_press: root.operace("*") 
+                #background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 3
+            Button:
+                id: rezim_button_7
+                text: "4"
+                font_size: 32
+                on_press: root.pohyb_vlevo(self)
+                #background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_8
+                text: "5"
+                font_size: 32
+                #on_press: root.pohyb_nahoru()
+                #background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_9
+                text: "6"
+                font_size: 32
+                on_press: root.pohyb_vpravo(self)
+                #background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_10
+                text: "-"
+                font_size: 32
+                on_press: root.operace("-")
+                #background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 4
+            Button:
+                id: rezim_button_11
+                text: "1"
+                font_size: 32
+                #background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_12
+                text: "2"
+                font_size: 32
+                on_press: root.pohyb_dolu(self)
+                #background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_13
+                text: "3"
+                font_size: 32
+                on_press: root.cisla(3) if root.ids.vstup.text[-1] not in ('=') else None
+                #background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+
+            Button:
+                id: rezim_button_14
+                text: "+"
+                font_size: 32
+                on_press: root.operace("+") 
+                #background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 5
+            
+            Button:
+                id: rezim_button_15
+                text: "."
+                font_size: 32
+                on_press: root.operace(".")
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            Button:
+                id: rezim_button_16
+                text: "0"
+                font_size: 32
+                on_press: root.cisla(0)
+                #background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.#text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+            
+
+            Button:
+                id: rezim_button_17
+                text: "="
+                font_size: 32
+                on_press: root.vypocitej()
+                background_color: (0.7, 0.7, 0.7, 1)
+            
+
+            Button:
+                id: rezim_button_18
+                text: "/"
+                font_size: 32
+                on_press: root.operace("/")
+                background_color: (0.7, 0.7, 0.7, 1)
+            
+        Button:
+            id: rezim_button_19
+            text: "Kalkulačka"
+            font_size: 32
+            size_hint_y : None
+            background_color: (0.7, 0.7, 0.7, 1)
+            on_release: 
+                app.root.current = "prvni"
+                #root.manager.transition: NoTransition
+                root.manager.transition.direction = "up"
             

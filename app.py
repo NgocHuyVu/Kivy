@@ -8,6 +8,9 @@ from kivy.uix.textinput import TextInput
 from kivy.core.window import Window
 from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import NoTransition
+from kivy.graphics import Rectangle
+from kivy.clock import Clock
 import math
 
 #Builder.load_file("./my.kv") #loadnes file z root slozky
@@ -83,8 +86,6 @@ class CalculatorWidget(Screen):
 
 class ScienceCalculatorWidget(Screen):
     temp_cislo = "" #pro to abychom mohli tamto cos chtel
-    #rezim_barva = 0
-    rezim_velikost = 0
 
     def smaz(self):
         self.ids.vstup.text = "0"
@@ -173,6 +174,69 @@ class ScienceCalculatorWidget(Screen):
     
     def vedecka_kalkulacka_velikost(self):
         Window.size = (350,600)
+
+
+class SnakePart(Widget):
+    def __init__(self, pos):
+        super().__init__(pos=pos)
+        self.size = (50, 50)
+        with self.canvas:
+            self.rect = Rectangle(pos=self.pos, size=self.size)
+
+    def pohyb(self, dx, dy):
+        self.pos = [self.pos[0] + dx, self.pos[1] + dy]
+        self.rect.pos = self.pos
+
+class SnakeCalculator(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.snake = SnakePart((300, 1100))
+        self.add_widget(self.snake)
+        self.smer = 'doprava'
+        Clock.schedule_interval(self.pohyb_kont, 1)
+
+    #def pohyb_kont(self, dt):
+    #    self.snake.pohyb(dt, 0)
+
+    def pohyb_kont(self, dt):
+        dx = 0
+        dy = 1100
+        if self.smer == 'nahoru':
+            self.snake.pohyb(0, 50)
+        elif self.smer == 'dolu':
+            self.snake.pohyb(0, -50)
+        elif self.smer == 'doleva':
+            self.snake.pohyb(-50, 0)
+        elif self.smer == 'doprava':
+            self.snake.pohyb(50, 0)
+
+        novy_x = self.snake.pos[0] + dx
+        novy_y = self.snake.pos[1] + dy
+        #print(novy_x) #0-650 sirka
+        #print(novy_y) #2100-2250 vyska
+        if novy_x > 650:
+            #self.snake.pohyb(650, dy)
+            self.snake.pohyb(-50, 0)
+        elif novy_x < 0:
+            #self.snake.pohyb(650, dy)
+            self.snake.pohyb(50, 0)
+        elif novy_y > 2250:
+            self.snake.pohyb(0,-50)
+        elif novy_y < 2100:
+            self.snake.pohyb(0,50)
+        
+
+    def pohyb_nahoru(self, instance):
+        self.smer = 'nahoru'
+
+    def pohyb_dolu(self, instance):
+        self.smer = 'dolu'
+
+    def pohyb_vlevo(self, instance):
+        self.smer = 'doleva'
+
+    def pohyb_vpravo(self, instance):
+        self.smer = 'doprava'
 
 
 class CalculatorManager(ScreenManager):

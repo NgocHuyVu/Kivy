@@ -10,8 +10,10 @@ from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.screenmanager import NoTransition
 from kivy.graphics import Rectangle
+from kivy.graphics import Color
 from kivy.clock import Clock
 import math
+from random import randint
 
 #Builder.load_file("./my.kv") #loadnes file z root slozky
 Window.size = (350, 600) #velikost okna, sirka/vyska
@@ -176,7 +178,7 @@ class ScienceCalculatorWidget(Screen):
         Window.size = (350,600)
 
 
-class SnakePart(Widget):
+class SnakeHlava(Widget):
     def __init__(self, pos):
         super().__init__(pos=pos)
         self.size = (50, 50)
@@ -187,11 +189,27 @@ class SnakePart(Widget):
         self.pos = [self.pos[0] + dx, self.pos[1] + dy]
         self.rect.pos = self.pos
 
+class Jidlo(Widget):
+    def __init__(self, pos):
+        super().__init__(pos=pos)
+        self.size = (50, 50)
+        with self.canvas:
+            Color(1,0,0)
+            self.rect = Rectangle(pos=self.pos, size=self.size)
+    
+    def premisti(self):
+        #self.pos = [randint(0, Window.width - 50), randint(0, Window.height - 50)]
+        #self.pos = [randint(0, 650), randint(2100,2250)]
+        self.pos = [randint(0, 650), randint(1000,1170)]
+        self.rect.pos = self.pos
+
 class SnakeCalculator(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.snake = SnakePart((300, 1100))
+        self.snake = SnakeHlava((300, 1100))
+        self.jidlo = Jidlo(self.nahodnaLokace())
         self.add_widget(self.snake)
+        self.add_widget(self.jidlo)
         self.smer = 'doprava'
         Clock.schedule_interval(self.pohyb_kont, 1)
 
@@ -215,15 +233,15 @@ class SnakeCalculator(Screen):
         #print(novy_x) #0-650 sirka
         #print(novy_y) #2100-2250 vyska
         if novy_x > 650:
-            #self.snake.pohyb(650, dy)
             self.snake.pohyb(-50, 0)
         elif novy_x < 0:
-            #self.snake.pohyb(650, dy)
             self.snake.pohyb(50, 0)
         elif novy_y > 2250:
             self.snake.pohyb(0,-50)
         elif novy_y < 2100:
             self.snake.pohyb(0,50)
+        elif self.snake.collide_widget(self.jidlo): #tohle predelat
+                self.jidlo.premisti()
         
 
     def pohyb_nahoru(self, instance):
@@ -237,6 +255,9 @@ class SnakeCalculator(Screen):
 
     def pohyb_vpravo(self, instance):
         self.smer = 'doprava'
+
+    def nahodnaLokace(self):
+        return [randint(0, 650), randint(2100,2250)]
 
 
 class CalculatorManager(ScreenManager):

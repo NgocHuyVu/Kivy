@@ -201,7 +201,8 @@ class Jidlo(Widget):
         #self.pos = [randint(0, Window.width - 50), randint(0, Window.height - 50)]
         #self.pos = [randint(0, 650), randint(2100,2250)] 1175
         #self.pos = [randint(0, 650), randint(1000,1170)]
-        self.pos = [randint(0, 650), randint(1000,1170)]
+        #self.pos = [randint(0, 650), randint(1000,1170)]
+        self.pos = [randint(0, 13) * 50, randint(20,24) * 50]
         #self.pos = [randint(0, 13) * 50, randint(200,204) * 50]
         self.rect.pos = self.pos
 
@@ -215,6 +216,7 @@ class SnakeCalculator(Screen):
         self.add_widget(self.jidlo)
         self.smer = 'doprava'
         Clock.schedule_interval(self.pohyb_kont, 1)
+        pozice_jidla = None
 
 
     def pohyb_kont(self, dt):
@@ -242,12 +244,13 @@ class SnakeCalculator(Screen):
             self.snake.pohyb(0,-50)
         elif novy_y < 2100:
             self.snake.pohyb(0,50)
-
-        #if self.snake.collide_widget(self.jidlo): #tohle predelat
-        #   self.jidlo.premisti()
-        #else:
-        #    pass
         
+        if self.snake.collide_widget(self.jidlo):
+            dx = abs(self.snake.center_x - self.jidlo.center_x)
+            dy = abs(self.snake.center_y - self.jidlo.center_y)
+            if dx < 50 / 2 and dy < 50 / 2:  # polovina velikosti widgetu
+                print(True)
+                self.jidlo.premisti()
 
     def pohyb_nahoru(self, instance):
         self.smer = 'nahoru'
@@ -264,6 +267,7 @@ class SnakeCalculator(Screen):
     def nahodnaLokace(self):
         #return [randint(0, 650), randint(1000,1170)]
         return [randint(0, 13) * 50, randint(20,24) * 50]
+        
 
 
 class CalculatorManager(ScreenManager):

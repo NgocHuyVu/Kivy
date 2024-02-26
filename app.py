@@ -199,22 +199,23 @@ class Jidlo(Widget):
     
     def premisti(self):
         #self.pos = [randint(0, Window.width - 50), randint(0, Window.height - 50)]
-        #self.pos = [randint(0, 650), randint(2100,2250)]
+        #self.pos = [randint(0, 650), randint(2100,2250)] 1175
+        #self.pos = [randint(0, 650), randint(1000,1170)]
         self.pos = [randint(0, 650), randint(1000,1170)]
+        #self.pos = [randint(0, 13) * 50, randint(200,204) * 50]
         self.rect.pos = self.pos
 
 class SnakeCalculator(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.snake = SnakeHlava((300, 1100))
+        #self.jidlo = Jidlo(self.nahodnaLokace())
         self.jidlo = Jidlo(self.nahodnaLokace())
         self.add_widget(self.snake)
         self.add_widget(self.jidlo)
         self.smer = 'doprava'
         Clock.schedule_interval(self.pohyb_kont, 1)
 
-    #def pohyb_kont(self, dt):
-    #    self.snake.pohyb(dt, 0)
 
     def pohyb_kont(self, dt):
         dx = 0
@@ -230,10 +231,8 @@ class SnakeCalculator(Screen):
 
         novy_x = self.snake.pos[0] + dx
         novy_y = self.snake.pos[1] + dy
-        #print(novy_x)
-        #print(novy_y)
+
         print(novy_x, novy_y) #0-650 sirka
-        #print(novy_y) #2100-2250 vyska
         print(f"Pozice jídla: {self.pos}")
         if novy_x > 650:
             self.snake.pohyb(-50, 0)
@@ -244,8 +243,10 @@ class SnakeCalculator(Screen):
         elif novy_y < 2100:
             self.snake.pohyb(0,50)
 
-        if self.snake.collide_widget(self.jidlo): #tohle predelat
-            self.jidlo.premisti()
+        #if self.snake.collide_widget(self.jidlo): #tohle predelat
+        #   self.jidlo.premisti()
+        #else:
+        #    pass
         
 
     def pohyb_nahoru(self, instance):
@@ -261,7 +262,8 @@ class SnakeCalculator(Screen):
         self.smer = 'doprava'
 
     def nahodnaLokace(self):
-        return [randint(0, 650), randint(2100,2250)]
+        #return [randint(0, 650), randint(1000,1170)]
+        return [randint(0, 13) * 50, randint(20,24) * 50]
 
 
 class CalculatorManager(ScreenManager):

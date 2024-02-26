@@ -114,7 +114,7 @@ if __name__ == "__main__":
   
 # Layout 
 
-##Úkol 4: Vytvořte vzhled jednoduché kalkulačky, která obsahuje čísla, operace +, -, *, /, a smázání##
+**Úkol 4: Vytvořte vzhled jednoduché kalkulačky, která obsahuje čísla, operace +, -, *, /, a smázání**
 
 Kalkulačka 
 

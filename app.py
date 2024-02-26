@@ -230,8 +230,11 @@ class SnakeCalculator(Screen):
 
         novy_x = self.snake.pos[0] + dx
         novy_y = self.snake.pos[1] + dy
-        #print(novy_x) #0-650 sirka
+        #print(novy_x)
+        #print(novy_y)
+        print(novy_x, novy_y) #0-650 sirka
         #print(novy_y) #2100-2250 vyska
+        print(f"Pozice jídla: {self.pos}")
         if novy_x > 650:
             self.snake.pohyb(-50, 0)
         elif novy_x < 0:
@@ -240,8 +243,9 @@ class SnakeCalculator(Screen):
             self.snake.pohyb(0,-50)
         elif novy_y < 2100:
             self.snake.pohyb(0,50)
-        elif self.snake.collide_widget(self.jidlo): #tohle predelat
-                self.jidlo.premisti()
+
+        if self.snake.collide_widget(self.jidlo): #tohle predelat
+            self.jidlo.premisti()
         
 
     def pohyb_nahoru(self, instance):

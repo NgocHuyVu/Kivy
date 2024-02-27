@@ -310,7 +310,7 @@ CalculatorManager:
                 id: rezim_button_8
                 text: "π" #PI
                 font_size: 32
-                on_press: root.cisla("PI") if root.ids.vstup.text[-1] not in ('=') else None
+                on_press: root.pi() if root.ids.vstup.text[-1] not in ('=') else None
                 background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
 
             Button:

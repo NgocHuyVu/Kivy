@@ -341,7 +341,7 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
             else:
                 self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
         
-        def vypocitej(self): #nakonec jsem udelal to pocitani, jen tam osetri deleni 0 a asi nejspis pridej horizontalni polohu
+        def vypocitej(self):
             vstup = self.ids.vstup.text
             self.ids.vystup.text = str(eval(vstup))
         
@@ -351,7 +351,7 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
     
     
     if __name__ == '__main__':
-        MyApp().run() #my.kv se spousti podle tridy MyApp, neco jako C# oddeli velky pismena jako slovo
+        MyApp().run()
     ```
 Kivy má další různé prvky (widget), např. 
 

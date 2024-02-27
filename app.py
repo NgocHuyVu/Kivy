@@ -252,7 +252,6 @@ class SnakeCalculator(Screen):
         self.smer = 'doprava'
         Clock.schedule_interval(self.pohyb_kont, 1)
 
-
     def pohyb_kont(self, dt):
         dx = 0
         dy = 1100
@@ -311,9 +310,8 @@ class SnakeCalculator(Screen):
 
     def nahodnaLokace(self):
         #return [randint(0, 650), randint(1000,1170)]
-        return [randint(1, 13) * 50, randint(20,23) * 50]
-        
-
+        #return [randint(1, 13) * 50, randint(20,23) * 50]
+        return [350, 1100]
 
 class CalculatorManager(ScreenManager):
     pass

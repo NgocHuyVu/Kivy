@@ -84,9 +84,9 @@ if __name__ == "__main__":
     
 # Kivy language
 
-**Kivy language** se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho oddělíme od zdrojového logického kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale jestliže používáme kivy language, pak kód je čitelnější, a je snadnější údržbu a správu aplikace.
+**Kivy language** se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho oddělíme od zdrojového logického kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale pokud používáme kivy language, pak je kód čitelnější, snažší pro údržbu a správu aplikace.
 
-Kivi soubor by se měl jmenovat stejně jako název třídy aplikace. Nemusí se nutně jmenovat stejně, ale pokud ho Kivy nenajde podle názvu třídy aplikace, museli bychom jej importovat ručně pomocí Builder.load_file(soubor)).
+Kivy soubor by se měl jmenovat stejně jako název třídy aplikace. Nemusí se nutně jmenovat stejně, ale pokud ho Kivy nenajde podle názvu třídy aplikace, pak bychom jej museli importovat ručně pomocí Builder.load_file(soubor)).
 
 **Úkol 4: Pomocí Kivy language rozdělte část v Pythonu, která umožňuje pro vzhled aplikace, aby je psán do souboru .kv**
 
@@ -1228,4 +1228,16 @@ if __name__ == '__main__':
 - Čára
 
 # APK 
+
+# Atributy
+
+# BUTTON
+'''
+text: Text, který se má zobrazit na tlačítku.
+font_size: Velikost písma.
+background_color: Barva pozadí tlačítka.
+background_normal a background_down: Obrázky použité pro výchozí grafické zobrazení, když je tlačítko stisknuto a nestisknuto.
+on_press, on_release, a on_state: Události, které se vyvolají při stisknutí, uvolnění a změně stavu tlačítka.
+'''
+
   

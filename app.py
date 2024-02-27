@@ -322,6 +322,8 @@ class MyApp(App):
     def build(self):
         if(platform == 'android' or platform == 'ios'):
             Window.maximize()
+        elif(Window.width == 1920 and Window.height == 1080):
+            Window.size = (350 * (1920/2880), 600 * (1080/1800))
         else:
             Window.size = (350, 600)
         return kv

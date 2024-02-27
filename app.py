@@ -29,7 +29,6 @@ Config.set('graphics', 'height', '1080')
 #Config.set('graphics', 'width', '350')
 #Config.set('graphics', 'height', '600')
 
-#Přepsal jsem z widget na Screen
 class CalculatorWidget(Screen):
     temp_cislo = ""
 
@@ -80,7 +79,6 @@ class CalculatorWidget(Screen):
             self.ids.vystup.text = str(eval(vstup))
             self.ids.vstup.text  = self.ids.vstup.text + "="
             CalculatorWidget.temp_cislo = self.ids.vystup.text
-            #print(CalculatorWidget.temp_cislo)
         except:
             self.ids.vystup.text = "Error"
             self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
@@ -191,7 +189,7 @@ class ScienceCalculatorWidget(Screen):
             self.ids.vystup.text = str(eval(vstup))
             self.ids.vstup.text  = self.ids.vstup.text + "="
             CalculatorWidget.temp_cislo = self.ids.vystup.text
-            #print(CalculatorWidget.temp_cislo)
+            
         except:
             self.ids.vystup.text = "Error"
             self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu

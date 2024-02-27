@@ -1234,9 +1234,13 @@ if __name__ == '__main__':
 # BUTTON
 ```
 text: Text, který se má zobrazit na tlačítku.
+
 font_size: Velikost písma.
+
 background_color: Barva pozadí tlačítka.
+
 background_normal a background_down: Obrázky použité pro výchozí grafické zobrazení, když je tlačítko stisknuto a nestisknuto.
+
 on_press, on_release, a on_state: Události, které se vyvolají při stisknutí, uvolnění a změně stavu tlačítka.
 ```
 

@@ -31,9 +31,9 @@ Config.set('graphics', 'height', '1080')
 
 #Přepsal jsem z widget na Screen
 class CalculatorWidget(Screen):
-    temp_cislo = "" #pro to abychom mohli tamto cos chtel
+    temp_cislo = ""
 
-    def smaz(self): #funkce na mazani, je tam chyba
+    def smaz(self):
         self.ids.vstup.text = "0"
         self.ids.vystup.text = ""
         CalculatorWidget.temp_cislo = ""
@@ -98,7 +98,7 @@ class CalculatorWidget(Screen):
         Window.size = (700,400)
 
 class ScienceCalculatorWidget(Screen):
-    temp_cislo = "" #pro to abychom mohli tamto cos chtel
+    temp_cislo = ""
 
     def smaz(self):
         self.ids.vstup.text = "0"
@@ -214,6 +214,7 @@ class SnakeHlava(Widget):
         #self.size = (50, 50)
         self.size = (dp(25), dp(25))
         with self.canvas:
+            Color(0,1,0)
             self.rect = Rectangle(pos=self.pos, size=self.size)
 
     def pohyb(self, dx, dy):

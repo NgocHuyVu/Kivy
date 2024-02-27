@@ -110,44 +110,44 @@ class ScienceCalculatorWidget(Screen):
             self.ids.vstup.text = self.ids.vstup.text[:-1]
         else:
             self.ids.vstup.text = "0"
-
-    def vedecka_kalkulacka(self, operace):
+    def jeden_deli_x(self):
         vstup_cisla = self.ids.vstup.text
+        if float(vstup_cisla) == 0:
+            self.ids.vstup.text = "Error"
+        else: 
+            self.ids.vstup.text = str(1 / float(vstup_cisla))
+    def druha_mocnina(self):
+        vstup_cisla = self.ids.vstup.text
+        self.ids.vstup.text = str(float(vstup_cisla) ** 2)
 
-        if operace == "1/x":
-            if float(vstup_cisla) == 0:
-                self.ids.vstup.text = "Error"
-            else: 
-                self.ids.vstup.text = str(1 / float(vstup_cisla))
-                
-        elif operace == "x^2":
-            self.ids.vstup.text = str(float(vstup_cisla) ** 2)
+    def treti_mocnina(self):
+        vstup_cisla = self.ids.vstup.text
+        self.ids.vstup.text = str(float(vstup_cisla) ** 3)
 
-        elif operace == "x^3":
-            self.ids.vstup.text = str(float(vstup_cisla) ** 3)
+    def druha_odmocnina(self):
+        vstup_cisla = self.ids.vstup.text
+        if float(vstup_cisla) <= 0:
+            self.ids.vstup.text = "Error"
+        else:
+            self.ids.vstup.text = str(float(vstup_cisla) ** 0.5)
 
-        elif operace == "√":
-            if float(vstup_cisla) <= 0:
-                self.ids.vstup.text = "Error"
-            else:
-                self.ids.vstup.text = str(float(vstup_cisla) ** 0.5)
+    def umocnovani_desitkou(self):
+        vstup_cisla = self.ids.vstup.text
+        self.ids.vstup.text = str(10 ** float(vstup_cisla))
 
-        elif operace == "10^x":
-            self.ids.vstup.text = str(10 ** float(vstup_cisla))
+    def logaritmus_o_zakladu_10(self):
+        vstup_cisla = self.ids.vstup.text
+        if float(vstup_cisla) <= 0:
+            self.ids.vstup.text = "Error"
+        else:
+            self.ids.vstup.text = str(math.log10(float(vstup_cisla)))
 
-        elif operace == "log":
-            if float(vstup_cisla) <= 0:
-                self.ids.vstup.text = "Error"
-            else:
-                self.ids.vstup.text = str(math.log10(float(vstup_cisla)))
-            
-        elif operace == "ln":
-            if float(vstup_cisla) <= 0:
-                self.ids.vstup.text = "Error"
-            else:
-                self.ids.vstup.text = str(math.log(float(vstup_cisla)))
-
-
+    def prirozeny_logaritmus(self):
+        vstup_cisla = self.ids.vstup.text
+        if float(vstup_cisla) <= 0:
+            self.ids.vstup.text = "Error"
+        else:
+            self.ids.vstup.text = str(math.log(float(vstup_cisla)))
 
     def cisla(self, cislo): #funkce na cisla
         vstup_cisla = self.ids.vstup.text
@@ -184,6 +184,7 @@ class ScienceCalculatorWidget(Screen):
         else:
             self.ids.vstup.text  = (f"{vstup_cisla}{pi_num}")
         vstup_cisla = self.ids.vstup.text
+        
     def vypocitej(self):
         vstup = self.ids.vstup.text
         try:

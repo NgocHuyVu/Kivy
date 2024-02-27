@@ -9,17 +9,19 @@ from kivy.core.window import Window
 from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.screenmanager import NoTransition
+
+
 from kivy.graphics import Rectangle
 from kivy.graphics import Color
 from kivy.clock import Clock
-#from kivy.config import Config
+from kivy.config import Config
 from kivy.utils import platform
 import math
 from random import randint
 
 
-#Config.set('graphics', 'width', '1920')
-#Config.set('graphics', 'height', '1080')
+Config.set('graphics', 'width', '1920')
+Config.set('graphics', 'height', '1080')
 #Builder.load_file("./my.kv") #loadnes file z root slozky
 #Window.size = (350, 600) #velikost okna, sirka/vyska
 #Config.set('graphics', 'resizable', False)
@@ -50,7 +52,7 @@ class CalculatorWidget(Screen):
             self.ids.vstup.text = ""
             self.ids.vstup.text += (f"{cislo}")
         elif vstup_cisla == "PI":
-            self.ids.vstup.text = str(math.pi)
+            self.ids.vstup.text += str(math.pi)
         else:
             self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
     
@@ -111,26 +113,39 @@ class ScienceCalculatorWidget(Screen):
     def vedecka_kalkulacka(self, operace):
         vstup_cisla = self.ids.vstup.text
 
-        if operace == "1/x" and (float(vstup_cisla) > 0 or float(vstup_cisla) < 0):
-            self.ids.vstup.text = str(1 / float(vstup_cisla))
-
+        if operace == "1/x":
+            if float(vstup_cisla) == 0:
+                self.ids.vstup.text = "Error"
+            else: 
+                self.ids.vstup.text = str(1 / float(vstup_cisla))
+                
         elif operace == "x^2":
             self.ids.vstup.text = str(float(vstup_cisla) ** 2)
 
         elif operace == "x^3":
             self.ids.vstup.text = str(float(vstup_cisla) ** 3)
 
-        elif operace == "√" and (float(vstup_cisla) >= 0):
-            self.ids.vstup.text = str(float(vstup_cisla) ** 0.5)
+        elif operace == "√":
+            if float(vstup_cisla) <= 0:
+                self.ids.vstup.text = "Error"
+            else:
+                self.ids.vstup.text = str(float(vstup_cisla) ** 0.5)
 
         elif operace == "10^x":
             self.ids.vstup.text = str(10 ** float(vstup_cisla))
 
-        elif operace == "log" and (float(vstup_cisla) >= 0):
-            self.ids.vstup.text = str(math.log10(float(vstup_cisla)))
+        elif operace == "log":
+            if float(vstup_cisla) <= 0:
+                self.ids.vstup.text = "Error"
+            else:
+                self.ids.vstup.text = str(math.log10(float(vstup_cisla)))
             
-        elif operace == "ln" and (float(vstup_cisla) >= 0):
-            self.ids.vstup.text = str(math.log(float(vstup_cisla)))
+        elif operace == "ln":
+            if float(vstup_cisla) <= 0:
+                self.ids.vstup.text = "Error"
+            else:
+                self.ids.vstup.text = str(math.log(float(vstup_cisla)))
+
 
 
     def cisla(self, cislo): #funkce na cisla
@@ -140,8 +155,6 @@ class ScienceCalculatorWidget(Screen):
         if vstup_cisla == "0":
             self.ids.vstup.text = ""
             self.ids.vstup.text += (f"{cislo}")
-        elif vstup_cisla == "PI":
-            self.ids.vstup.text = str(math.pi)
         else:
             self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
     
@@ -161,7 +174,15 @@ class ScienceCalculatorWidget(Screen):
                     self.ids.vstup.text = vstup_znaku[:-1] + znak
                 else:
                     self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
-    
+    def pi(self):
+        vstup_cisla = self.ids.vstup.text
+        pi_num = math.pi
+
+        if vstup_cisla == "0":
+            self.ids.vstup.text = str(pi_num)
+        else:
+            self.ids.vstup.text  = (f"{vstup_cisla}{pi_num}")
+        vstup_cisla = self.ids.vstup.text
     def vypocitej(self):
         vstup = self.ids.vstup.text
         try:
@@ -290,8 +311,8 @@ class SnakeCalculator(Screen):
 
     def nahodnaLokace(self):
         #return [randint(0, 650), randint(1000,1170)]
-        #return [randint(1, 13) * 50, randint(20,23) * 50]
-        return [350, 1100]
+        return [randint(1, 13) * 50, randint(20,23) * 50]
+        
 
 
 class CalculatorManager(ScreenManager):

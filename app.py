@@ -291,6 +291,7 @@ class SnakeCalculator(Screen):
         for i in range(len(self.snake)-1, 0, -1):
             self.snake[i].pos = self.snake[i-1].pos
             self.snake[i].rect.pos = self.snake[i].pos
+        print(self.snake[0].pos)
 
     def pohyb_nahoru(self, instance):
         if self.smer != 'dolu':

@@ -12,14 +12,14 @@ from kivy.uix.screenmanager import NoTransition
 from kivy.graphics import Rectangle
 from kivy.graphics import Color
 from kivy.clock import Clock
-from kivy.config import Config
+#from kivy.config import Config
 from kivy.utils import platform
 import math
 from random import randint
 
 
-Config.set('graphics', 'width', '1920')
-Config.set('graphics', 'height', '1080')
+#Config.set('graphics', 'width', '1920')
+#Config.set('graphics', 'height', '1080')
 #Builder.load_file("./my.kv") #loadnes file z root slozky
 #Window.size = (350, 600) #velikost okna, sirka/vyska
 #Config.set('graphics', 'resizable', False)

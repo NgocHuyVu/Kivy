@@ -9,6 +9,7 @@ from kivy.core.window import Window
 from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.screenmanager import NoTransition
+from kivy.metrics import dp
 
 
 from kivy.graphics import Rectangle
@@ -210,7 +211,8 @@ class ScienceCalculatorWidget(Screen):
 class SnakeHlava(Widget):
     def __init__(self, pos):
         super().__init__(pos=pos)
-        self.size = (50, 50)
+        #self.size = (50, 50)
+        self.size = (dp(25), dp(25))
         with self.canvas:
             self.rect = Rectangle(pos=self.pos, size=self.size)
 
@@ -323,8 +325,8 @@ class MyApp(App):
     def build(self):
         if(platform == 'android' or platform == 'ios'):
             Window.maximize()
-        elif(Window.width == 1920 and Window.height == 1080):
-            Window.size = (350 * (1920/2880), 600 * (1080/1800))
+        #elif(Window.width == 1920 and Window.height == 1080):
+        #    Window.size = (350 * (1920/2880), 600 * (1080/1800))
         else:
             Window.size = (350, 600)
         return kv

@@ -4,6 +4,7 @@ Kivy je open-source framework Pythonu, který umožňuje vytvořit aplikace pro 
 # Co podporuje Kivy?
 - **multi-touch**: je ideální pro tvorbu her a aplikací na dotyková zařížení
 - **multi-platform**: vytvoříme kód jednou, pak ho můžeme spouštět na různých operačních systémech a zařízeních, tedy zobrazuje stejný nebo podobný vzhled na všech platformách
+- Podpora pro zvuk a video
 
 # Instalace
 Vytvoření nového virtuální prostředí pro svůj projekt Kivy. Virtuální prostředí zabrání možným instalačním konfliktům s jinými verzemi a balíčky Pythonu. Je to volitelné, ale důrazně se doporučuje:

@@ -6,9 +6,6 @@ Kivy je open-source framework Pythonu, který umožňuje vytvořit aplikace pro 
 - **multi-platform**: vytvoříme kód jednou, pak ho můžeme spouštět na různých operačních systémech a zařízeních, tedy zobrazuje stejný nebo podobný vzhled na všech platformách
 
 # Instalace
-```
-py -m pip install kivy
-```
 Vytvoření nového virtuální prostředí pro svůj projekt Kivy. Virtuální prostředí zabrání možným instalačním konfliktům s jinými verzemi a balíčky Pythonu. Je to volitelné, ale důrazně se doporučuje:
 ```
 python -m venv kivy_venv
@@ -21,6 +18,11 @@ Linux nebo MacOS
 ```
 source kivy_venv/bin/activate
 ```
+2. možnost
+```
+py -m pip install kivy
+```
+
 
 # První aplikace 
 

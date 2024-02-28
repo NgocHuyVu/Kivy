@@ -29,7 +29,74 @@ source kivy_venv/bin/activate
 ```
 py -m pip install kivy
 ```
+# Widgets a jejich atributy
+- ovládací prvky
+**BoxLayout**: Uspořádává své potomky do řady nebo sloupce, v závislosti na orientaci.
+- Orientation: 'vertical' nebo 'horizontal'
 
+**Button**: Tlačítko
+
+**Label**: Zobrazení textu
+
+-color: - Font_size:
+- [b][/b] -> tučný
+- [i][/i] -> kurzíva
+- [u][/u] -> podtržení
+- [s][/s] -> přeškrtnut
+
+**TextInput**: Používá se k získání vstupu od uživatele
+
+**Image**: Zobrazení obrázku
+
+**Slider**: Umožňuje uživatelům vybrat hodnotu posunem
+
+**Switch**: Umožňuje uživatelům zapnout/vypnout stav
+
+**CheckBox**: Umožňuje uživatelům vybrat nebo zrušit výběr
+
+**Popup**: Překryvného okno
+
+**ProgressBar**: Ukazuje průběh operace
+
+**ScreenManager**: Spravuje více oken (Screen widgets). 
+- Má metody jako add_widget (pro přidání okna),
+- remove_widget (pro odebrání okna),
+- current (pro získání nebo nastavení aktuálního okna) atd.
+
+Pokud poutřebujeme použít některý prvek, tak ho nejprve musíme importovat pomocí vzoru: from kivy.uix.<nazev_prvku> import <Nazev_prvku>
+
+# Atributy
+**text, tlacitka...**
+- color:
+- background_color:
+- Font_size:
+(TextInput)
+- hint_text: nápověda
+- password: vstup jako heslo
+
+**text**
+- markup
+- [b][/b] -> tučný
+- [i][/i] -> kurzíva
+- [u][/u] -> podtržení
+- [s][/s] -> přeškrtnut
+
+**multimedia**
+- source:
+- allow_stretch:
+- size:
+
+**Operace**
+(Switch/CheckBox)
+- active:
+(Slider/ProgressBar)
+- max:
+- min:
+- value:
+(Popup)
+- Title:
+- Content:
+- size_hint:
 
 # První aplikace 
 

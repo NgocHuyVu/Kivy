@@ -124,7 +124,7 @@ class Priklad(App):
 Priklad().run()
 
 ```
-**PŘÍKLAD 1.1: Aplikace, která zobrazuje nějaký text na obrazovce pomocí prvku Label za použítí kivy language.**
+**PŘÍKLAD 1.1: Aplikace, která zobrazí text na obrazovce pomocí prvku Label za použítí kivy language.**
 prvniAppka.py
 ```
 from kivy.app import App
@@ -144,7 +144,7 @@ Label:
     color: 1,0,0
     text: "Hi mom"
 ```
-**PŘÍKLAD 1.2: Aplikace, která zobrazuje nějaký text na obrazovce pomocí prvku Label za použítí kivy language přímo v py.**
+**PŘÍKLAD 1.2: Aplikace, která zobrazí text na obrazovce pomocí prvku Label za použítí kivy language přímo v py.**
 prvniAppka_loader.py
 ```
 from kivy.app import App

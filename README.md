@@ -913,8 +913,9 @@ CalculatorManager:
 
 - Úkol 2: Implementujte funkce, které vyvolají při stisknutí tlačítka
 
-  app.py
-'''
+app.py
+
+```
 class CalculatorWidget(Screen):
     temp_cislo = ""
 

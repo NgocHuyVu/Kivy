@@ -474,17 +474,19 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 Pro každé kalkulačky, které bychom chtěli vytvořit, musíme vytvořit třídy CalculatorWidget a ScienceCalculatorWidget, které dědí z třídy Screen. Pokud budeme pracovat s více než jedním oknem, musíme vytvořit třídu CalculatorManager, která bude řídit navigaci mezi těmito okny. Tato třída bude muset zdědit ze ScreenManager.
 ```
 class CalculatorWidget(Screen):
-    temp_cislo = "" #pro to abychom mohli tamto cos chtel
-    #rezim_barva = 0
-    rezim_velikost = 0
+    temp_cislo = ""
 
-    def smaz(self): #funkce na mazani, je tam chyba
+    def smaz(self):
         self.ids.vstup.text = "0"
         self.ids.vystup.text = ""
         CalculatorWidget.temp_cislo = ""
 
     def vymaz_jedno(self):
-        self.ids.vstup.text = self.ids.vstup.text[:-1]
+        if len(self.ids.vstup.text) > 1:
+            self.ids.vstup.text = self.ids.vstup.text[:-1]
+        else:
+            self.ids.vstup.text = "0"
+
 
     def cisla(self, cislo): #funkce na cisla
         vstup_cisla = self.ids.vstup.text
@@ -493,6 +495,8 @@ class CalculatorWidget(Screen):
         if vstup_cisla == "0":
             self.ids.vstup.text = ""
             self.ids.vstup.text += (f"{cislo}")
+        elif vstup_cisla == "PI":
+            self.ids.vstup.text += str(math.pi)
         else:
             self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
     
@@ -519,7 +523,6 @@ class CalculatorWidget(Screen):
             self.ids.vystup.text = str(eval(vstup))
             self.ids.vstup.text  = self.ids.vstup.text + "="
             CalculatorWidget.temp_cislo = self.ids.vystup.text
-            #print(CalculatorWidget.temp_cislo)
         except:
             self.ids.vystup.text = "Error"
             self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
@@ -534,44 +537,59 @@ class CalculatorWidget(Screen):
                     button.background_color = [0, 1, 1, 1]
     
     def vedecka_kalkulacka_velikost(self):
-        if CalculatorWidget.rezim_velikost == 0:
-            Window.size = (600,350)
-            CalculatorWidget.rezim_velikost = 1
-            #self.sm.current = "sc_kalkulacka"
-            #Builder.unload_file("./my.kv")
-        else:
-            Window.size = (350,600)
-            CalculatorWidget.rezim_velikost = 0
+        Window.size = (700,400)
 
 class ScienceCalculatorWidget(Screen):
-    temp_cislo = "" #pro to abychom mohli tamto cos chtel
-    #rezim_barva = 0
-    rezim_velikost = 0
+    temp_cislo = ""
 
-    def smaz(self): #funkce na mazani, je tam chyba
+    def smaz(self):
         self.ids.vstup.text = "0"
         self.ids.vystup.text = ""
         CalculatorWidget.temp_cislo = ""
 
     def vymaz_jedno(self):
-        self.ids.vstup.text = self.ids.vstup.text[:-1]
-
-    def vedecka_kalkulacka(self, operace):
+        if len(self.ids.vstup.text) > 1:
+            self.ids.vstup.text = self.ids.vstup.text[:-1]
+        else:
+            self.ids.vstup.text = "0"
+    def jeden_deli_x(self):
         vstup_cisla = self.ids.vstup.text
-
-        if operace == "1/x" and (float(vstup_cisla) > 0 or float(vstup_cisla) < 0):
+        if float(vstup_cisla) == 0:
+            self.ids.vstup.text = "Error"
+        else: 
             self.ids.vstup.text = str(1 / float(vstup_cisla))
+    def druha_mocnina(self):
+        vstup_cisla = self.ids.vstup.text
+        self.ids.vstup.text = str(float(vstup_cisla) ** 2)
 
-        elif operace == "x^2":
-            self.ids.vstup.text = str(float(vstup_cisla) ** 2)
-        
-        
-        elif operace == "x^3":
-            self.ids.vstup.text = str(float(vstup_cisla) ** 3)
+    def treti_mocnina(self):
+        vstup_cisla = self.ids.vstup.text
+        self.ids.vstup.text = str(float(vstup_cisla) ** 3)
 
-        elif operace == "√":
-             self.ids.vstup.text = str(float(vstup_cisla) ** 0.5)
+    def druha_odmocnina(self):
+        vstup_cisla = self.ids.vstup.text
+        if float(vstup_cisla) <= 0:
+            self.ids.vstup.text = "Error"
+        else:
+            self.ids.vstup.text = str(float(vstup_cisla) ** 0.5)
 
+    def umocnovani_desitkou(self):
+        vstup_cisla = self.ids.vstup.text
+        self.ids.vstup.text = str(10 ** float(vstup_cisla))
+
+    def logaritmus_o_zakladu_10(self):
+        vstup_cisla = self.ids.vstup.text
+        if float(vstup_cisla) <= 0:
+            self.ids.vstup.text = "Error"
+        else:
+            self.ids.vstup.text = str(math.log10(float(vstup_cisla)))
+
+    def prirozeny_logaritmus(self):
+        vstup_cisla = self.ids.vstup.text
+        if float(vstup_cisla) <= 0:
+            self.ids.vstup.text = "Error"
+        else:
+            self.ids.vstup.text = str(math.log(float(vstup_cisla)))
 
     def cisla(self, cislo): #funkce na cisla
         vstup_cisla = self.ids.vstup.text
@@ -599,14 +617,23 @@ class ScienceCalculatorWidget(Screen):
                     self.ids.vstup.text = vstup_znaku[:-1] + znak
                 else:
                     self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
-    
+    def pi(self):
+        vstup_cisla = self.ids.vstup.text
+        pi_num = math.pi
+
+        if vstup_cisla == "0":
+            self.ids.vstup.text = str(pi_num)
+        else:
+            self.ids.vstup.text  = (f"{vstup_cisla}{pi_num}")
+        vstup_cisla = self.ids.vstup.text
+        
     def vypocitej(self):
         vstup = self.ids.vstup.text
         try:
             self.ids.vystup.text = str(eval(vstup))
             self.ids.vstup.text  = self.ids.vstup.text + "="
             CalculatorWidget.temp_cislo = self.ids.vystup.text
-            #print(CalculatorWidget.temp_cislo)
+            
         except:
             self.ids.vystup.text = "Error"
             self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
@@ -621,16 +648,7 @@ class ScienceCalculatorWidget(Screen):
                     button.background_color = [0, 1, 1, 1]
     
     def vedecka_kalkulacka_velikost(self):
-        if CalculatorWidget.rezim_velikost == 0:
-            Window.size = (600,350)
-            CalculatorWidget.rezim_velikost = 1
-            #self.sm.current = "sc_kalkulacka"
-            #Builder.unload_file("./my.kv")
-        else:
-            Window.size = (350,600)
-            CalculatorWidget.rezim_velikost = 0
-
-
+        Window.size = (350,600)
 class CalculatorManager(ScreenManager):
     pass
 ```

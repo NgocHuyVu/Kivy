@@ -78,7 +78,10 @@ TextInput
 
 Button
 
-on_press, on_release, a on_state: Události, které se vyvolají při stisknutí, uvolnění a změně stavu tlačítka.
+-on_press, on_release, a on_state: Události, které se vyvolají při stisknutí, uvolnění a změně stavu tlačítka.
+-background_normal a background_down: Obrázky použité pro výchozí grafické zobrazení, když je tlačítko stisknuto a nestisknuto.
+-border = kulaté rohy
+ -např. border = (30, 30, 30, 30)
 
 **text markup**
 - Pro použití markupu použijeme - markup: True
@@ -590,30 +593,6 @@ BoxLayout:
             halign: "right" #odkud kam se zapisuje
     ```
    
-   Atributy
-  
-  - multiline = víceřádkový pomocí Enter
-  - readonly: Pouze pro čtení, lze kopírovat
-  - halign: zarovnání
-  - font_size = velikost písma 
-
-- **Button** = tlačítko spouštějí se po stisknutí
-    Dále potřebujeme vytvořit tlačítka kalkulačky, které jsou čísla a operace. Můžeme provést několik změn nebo přidání funkcí k tlačítkům.
-  
-  - **Styl(atributy)**
-    - **text** = text, který se má zobrazit na tlačítku.
-    - **font_size** = velikost písma
-    - **background_color** = barva pozadí tlačítka
-    - **background_normal** a **background_down**: Obrázky použité pro výchozí grafické zobrazení, když je tlačítko stisknuto a nestisknuto.
-    - **color** = barvat extu
-    - **size** = velikost
-    - **size_hint** = relativní velikost tlačítka
-      size_hint=(None, None) = pevná velikost
-    - **pos** = pozice tlačítka
-    - **multiline**: Určuje, zda TextInput podporuje více řádků.
-    - **border** = kulaté rohy
-      
-      např. border = (30, 30, 30, 30)
       
       
   - **Přídání fotky do pozadí tlačítka**

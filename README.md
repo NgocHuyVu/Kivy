@@ -777,7 +777,9 @@ CalculatorManager:
                 background_color: (0.7, 0.7, 0.7, 1)
 ```
 
-- Úkol 2: Implementujte funkce, které vyvolají při stisknutí tlačítka
+- Úkol 2: Implementace funkcí pro tlačítka s čísly
+- Úkol 3: Implementace funkcí pro operátory 
+- Úkol 4: Implementace funkce pro výpočet 
 
 app.py
 

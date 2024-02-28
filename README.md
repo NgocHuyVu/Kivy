@@ -859,6 +859,28 @@ class CalculatorWidget(Screen):
 app.py
 
 ```
+from kivy.app import App
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.widget import Widget
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
+from kivy.core.window import Window
+from kivy.lang.builder import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import NoTransition
+from kivy.metrics import dp
+import math
+from random import randint
+from kivy.config import Config
+from kivy.utils import platform
+
+
+from kivy.graphics import Rectangle
+from kivy.graphics import Color
+from kivy.clock import Clock
+
 class CalculatorWidget(Screen):
     temp_cislo = ""
     def zmen_rezim(self):
@@ -919,6 +941,26 @@ class CalculatorWidget(Screen):
         except:
             self.ids.vystup.text = "Error"
             self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
+
+class CalculatorWidget(Screen):
+    pass
+
+class CalculatorManager(ScreenManager):
+    pass
+
+kv = Builder.load_file("./my.kv")
+
+class MyApp(App):
+    def build(self):
+        if(platform == 'android' or platform == 'ios'):
+            Window.maximize()
+        else:
+            Window.size = (350, 600)
+        return kv
+
+
+if __name__ == '__main__':
+    MyApp().run() 
     
 ```
 

@@ -82,6 +82,7 @@ Pokud poutřebujeme použít některý prvek, tak ho nejprve musíme importovat 
 - size:
 
 **Operace**
+
 Switch/CheckBox
 - active:
 Slider/ProgressBar

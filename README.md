@@ -71,12 +71,18 @@ Pokud poutřebujeme použít některý prvek, tak ho nejprve musíme importovat 
 - hint_text: nápověda
 - password: vstup jako heslo
 
-**text**
-- markup
+**text markup**
+- Pro použití markupu použijeme - markup: True
+
 - [b][/b] -> tučný
 - [i][/i] -> kurzíva
 - [u][/u] -> podtržení
 - [s][/s] -> přeškrtnut
+- [font=][/font] ->  typ písma
+- [size=][/size]] ->  velikost písma
+- [color=#][/color] -> barva textu
+- [sub][/sub] -> zobrazí text na pozici dolního indexu vzhledem k textu před ním.
+- [sup][/sup] -> zobrazí text na pozici horního indexu vzhledem k textu před ním.
 
 **multimedia**
 - source:
@@ -97,6 +103,17 @@ Popup
 - Title:
 - Content:
 - size_hint:
+
+# Kivy language
+
+**Kivy language**
+používá se pro pozicování a vzhled aplikace. 
+
+Má podobný účel jako css soubor nebo html. 
+
+Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho oddělíme od zdrojového logického kódu v Pythonu.
+
+Můžeme měnit vzhled aplikace přímo pomocí Pythonu, ale pokud používáme kivy language, pak je kód čitelnější, lepší pro údržbu a správu aplikace.
 
 # Aplikace 
 
@@ -236,7 +253,7 @@ BoxLayout:
 ```
 **PŘÍKLAD 3: Vytvoření tlačítka, funkce, změna barvy**
 
-- RGBA
+- RGBA: red green blue alpha
 - V kivy jsou barvy ve formátu 1 == 255
 - [r/255.0, g/255.0, b/255.0, a/255.0]
 - https://rgbcolorpicker.com/0-1
@@ -319,6 +336,8 @@ class Priklad(App):
 
 Priklad().run()
 ```
+**Příklad 4.1: Slider, ProgressBar a BoxLayout**
+
 Slider_kv.py
 ```
 from kivy.app import App
@@ -351,52 +370,12 @@ BoxLayout:
         max: 100
         value: slider.value
 ```
-
-
-
-**Úkol 2: Předchozí aplikace má bílý text. Změňte barvu textu, tak aby byl fialový ve formátu RGBA (0.41, 0.42, 0.74, 1)**
- - Mění barvu Label
-   Nástroj umožňuje vybírat barvy a získávat k nim příslušné hodnoty RGB: https://rgbcolorpicker.com/0-1
-   RGBA: red green blue alpha
-  ```
-  class HelloWorld(App):
-    def build(self):
-        # Vrátí label, který se má zobrazit Hello World
-        return Label(text ="Hello World", color =(0.41, 0.42, 0.74, 1))
-  ```
-  -  Pouzíváme **Text Markup**, abychom mohli měnit **formát textu**
-    **[formát]text[/formát], markup = True**
-
- 
-  - [b][/b] -> tučný
-  - [i][/i] -> kurzíva
-  - [u][/u] -> podtržení
-  - [s][/s] -> přeškrtnut
-  - [font=][/font] ->  typ písma
-  - [size=][/size]] ->  velikost písma
-  - [color=#][/color] -> barva textu
-  - [sub][/sub] -> zobrazí text na pozici dolního indexu vzhledem k textu před ním.
-  - [sup][/sup] -> zobrazí text na pozici horního indexu vzhledem k textu před ním.
-
-**Úkol 3: Zobrazuje text "Hello World" v tučném písmu.**
- ```
- class HelloWorld(App):
- def build(self):
- 	# Vrátí label, který se má zobrazit Hello World
-	return Label(text ="[b]Hello World[b]", color =(0.41, 0.42, 0.74, 1), markup = True)
-  ```
     
 # Kivy language
 
 **Kivy language** se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho oddělíme od zdrojového logického kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale pokud používáme kivy language, pak je kód čitelnější, a je lepší pro údržbu a správu aplikace.
 
 Kivy soubor by se měl jmenovat stejně jako název třídy aplikace. Nemusí se nutně jmenovat stejně, ale pokud ho Kivy nenajde podle názvu třídy aplikace, pak bychom jej museli importovat ručně pomocí Builder.load_file(soubor)).
-
-**Úkol 4: Pomocí Kivy language rozdělte část v Pythonu, která umožňuje pro vzhled aplikace, aby je psán do souboru .kv**
-
-```
-
- ```
 
   
 # Layout 

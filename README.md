@@ -676,5 +676,7 @@ if __name__ == '__main__':
 - Čára
 
 
+# Multimédia 
+- Přídání audio pomocí kv language = modul SoundLoader 
 
   

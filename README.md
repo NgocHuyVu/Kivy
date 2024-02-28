@@ -504,7 +504,7 @@ class Priklad(App):
 
 Priklad().run()
 ```
-**Příklad 6.1: MULTIMEDIA**
+**Příklad 6.1: Multimedia**
 multimedia_kv.py
 ```
 from kivy.app import App
@@ -574,7 +574,7 @@ class Priklad(App):
 
 Priklad().run()
 ```
-**Příklad 9: Okna a jejich management**
+**Příklad 8: Okna a jejich management**
 multi_screen.py
 ```
 from kivy.app import App

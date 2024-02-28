@@ -1271,17 +1271,6 @@ CalculatorManager:
                 #font_size: 32
                 on_press: root.operace("/")
                 background_color: (0.7, 0.7, 0.7, 1)
-            
-        Button:
-            id: rezim_button_19
-            text: "had"
-            #font_size: 32
-            size_hint_y : None
-            background_color: (0.7, 0.7, 0.7, 1)
-            on_release: 
-                app.root.current = "snake"
-                #root.manager.transition: NoTransition
-                root.manager.transition.direction = "down"
 ```
 
   

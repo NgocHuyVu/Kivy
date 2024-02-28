@@ -13,3 +13,5 @@ mainbutton = Button(text ='Pohlaví', size_hint =(None, None), pos =(600, 300))
 mainbutton.bind(on_release = dropdown.open)
 dropdown.bind(on_select = lambda instance, x: setattr(mainbutton, 'text', x))
 runTouchApp(mainbutton)
+
+# Dropdown list umožňuje zobrazit seznam voleb. Může být tlačítko, fotka, ...

@@ -2,10 +2,8 @@ from kivy.app import App
 from kivy.uix.slider import Slider
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
-from kivy.lang.builder import Builder
 from kivy.uix.progressbar import ProgressBar
 
-#kv = Builder.load_file("./Slider.kv")
 
 class Priklad(App):
     def build(self):
@@ -23,10 +21,5 @@ class Priklad(App):
         layout.add_widget(slider)
         layout.add_widget(progress_bar)
         return layout
-    
-'''
-class Priklad(App):
-    def build(self):
-        return kv
-'''
+
 Priklad().run()

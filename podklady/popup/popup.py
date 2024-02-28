@@ -5,7 +5,7 @@ import random
 
 class Priklad(App):
     def otevri_popup(self, button):
-        for i in range(3):
+        for i in range(10):
             popup = Popup(title='Testovací Popup', content=Button(text='Zavřít'), size_hint=(random.random(),random.random()))
             zavri_popup = Button(text='Zavřít')
             zavri_popup.bind(on_release=popup.dismiss)  # Přidáno

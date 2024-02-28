@@ -98,7 +98,7 @@ Popup
 - Content:
 - size_hint:
 
-# První aplikace 
+# Aplikace 
 
 **PŘÍKLAD 1: Aplikace, která zobrazuje nějaký text na obrazovce pomocí prvku Label.**
 
@@ -236,6 +236,11 @@ BoxLayout:
 ```
 **PŘÍKLAD 3: Vytvoření tlačítka, funkce, změna barvy**
 
+- RGBA
+- V kivy jsou barvy ve formátu 1 == 255
+- [r/255.0, g/255.0, b/255.0, a/255.0]
+- https://rgbcolorpicker.com/0-1
+
 button_barvy.py
 ```
 from kivy.app import App
@@ -254,7 +259,7 @@ class Priklad(App):
 
 Priklad().run()
 ```
-**PŘÍKLAD 3: Vytvoření tlačítka, funkce, změna barvy KV**
+**PŘÍKLAD 3.1: Vytvoření tlačítka, funkce, změna barvy KV**
 
 button_barvy_kv.py
 ```
@@ -283,6 +288,71 @@ BoxLayout:
         background_color: 1, 1, 1, 1
         on_press: self.background_color = app.klik()
 ```
+
+**Příklad 4: Slider, ProgressBar a BoxLayout**
+
+Slider.py
+```
+from kivy.app import App
+from kivy.uix.slider import Slider
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.uix.progressbar import ProgressBar
+
+
+class Priklad(App):
+    def build(self):
+        layout = BoxLayout(orientation="vertical")
+        slider = Slider(min=0, max=100, value=50)
+        text = Label(text=str(slider.value))
+        progress_bar = ProgressBar(max= slider.max, value = slider.value)
+
+        def hodnota_slider(instance, value):
+            text.text = str(value)
+            progress_bar.value = int(value)
+
+        slider.bind(value=hodnota_slider)
+        layout.add_widget(text)
+        layout.add_widget(slider)
+        layout.add_widget(progress_bar)
+        return layout
+
+Priklad().run()
+```
+Slider_kv.py
+```
+from kivy.app import App
+from kivy.lang.builder import Builder
+
+kv = Builder.load_file("./Slider.kv")
+
+
+class Priklad(App):
+    def build(self):
+        return kv
+
+Priklad().run()
+```
+Slider_kv.kv
+```
+BoxLayout:
+    orientation: 'vertical'
+    Label:
+        id: my_label
+        text: str(slider.value)
+    Slider:
+        id: slider
+        min: 0
+        max: 100
+        value: 50
+        on_value: my_label.text = str(self.value)
+    ProgressBar:
+        id: progress_bar
+        max: 100
+        value: slider.value
+```
+
+
 
 **Úkol 2: Předchozí aplikace má bílý text. Změňte barvu textu, tak aby byl fialový ve formátu RGBA (0.41, 0.42, 0.74, 1)**
  - Mění barvu Label

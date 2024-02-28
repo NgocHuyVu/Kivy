@@ -85,10 +85,12 @@ Pokud poutřebujeme použít některý prvek, tak ho nejprve musíme importovat 
 
 Switch/CheckBox
 - active:
+  
 Slider/ProgressBar
 - max:
 - min:
 - value:
+  
 Popup
 - Title:
 - Content:

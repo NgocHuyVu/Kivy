@@ -15,6 +15,10 @@ Vytvoření nového virtuální prostředí pro svůj projekt Kivy. Virtuální 
 ```
 python -m venv kivy_venv
 ```
+2. možnost
+```
+py -m pip install kivy
+```
 # Aktivace
 
 Windows
@@ -24,10 +28,6 @@ kivy_venv\Scripts\activate
 Linux nebo MacOS
 ```
 source kivy_venv/bin/activate
-```
-2. možnost
-```
-py -m pip install kivy
 ```
 # Widgets a jejich atributy
 - ovládací prvky

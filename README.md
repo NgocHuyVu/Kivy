@@ -64,12 +64,15 @@ Pokud poutřebujeme použít některý prvek, tak ho nejprve musíme importovat 
 
 # Atributy
 **text, tlacitka...**
-- color:
-- background_color:
-- Font_size:
+- color: barva písma
+- background_color: barva pozadí
+- Font_size: velikost písma 
 (TextInput)
 - hint_text: nápověda
 - password: vstup jako heslo
+- multiline = víceřádkový pomocí Enter
+- readonly: Pouze pro čtení, lze kopírovat
+- halign: zarovnání
 
 **text markup**
 - Pro použití markupu použijeme - markup: True
@@ -85,23 +88,23 @@ Pokud poutřebujeme použít některý prvek, tak ho nejprve musíme importovat 
 - [sup][/sup] -> zobrazí text na pozici horního indexu vzhledem k textu před ním.
 
 **multimedia**
-- source:
-- allow_stretch:
-- size:
+- source: zdroj
+- allow_stretch: roztahování
+- size: velikost
 
 **Operace**
 
 Switch/CheckBox
-- active:
+- active: 
   
 Slider/ProgressBar
 - max:
 - min:
-- value:
+- value: současná hodnota
   
 Popup
-- Title:
-- Content:
+- Title: jméno okna
+- Content: 
 - size_hint:
 
 # Kivy language
@@ -370,25 +373,123 @@ BoxLayout:
         max: 100
         value: slider.value
 ```
-    
-# Kivy language
+**Příklad 5: MULTIMEDIA**
 
-**Kivy language** se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho oddělíme od zdrojového logického kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale pokud používáme kivy language, pak je kód čitelnější, a je lepší pro údržbu a správu aplikace.
+multimedia.py
+```
+from kivy.app import App
+from kivy.uix.button import Button
+from kivy.uix.popup import Popup
+import random
 
-Kivy soubor by se měl jmenovat stejně jako název třídy aplikace. Nemusí se nutně jmenovat stejně, ale pokud ho Kivy nenajde podle názvu třídy aplikace, pak bychom jej museli importovat ručně pomocí Builder.load_file(soubor)).
+class Priklad(App):
+    def otevri_popup(self, button):
+        for i in range(10):
+            popup = Popup(title='Testovací Popup', content=Button(text='Zavřít'), size_hint=(random.random(),random.random()))
+            zavri_popup = Button(text='Zavřít')
+            zavri_popup.bind(on_release=popup.dismiss)  # Přidáno
+            popup.content = zavri_popup
+            popup.pos_hint = {'x': random.random(), 'y': random.random()}
+            popup.open()
 
-  
+    def build(self):
+        button = Button(text='Otevři popup')
+        button.bind(on_press=self.otevri_popup)
+        return button
+
+Priklad().run()
+```
+
+
+```
+from kivy.app import App
+from kivy.uix.image import Image
+from kivy.uix.button import Button
+from kivy.uix.boxlayout import BoxLayout
+from kivy.core.audio import SoundLoader
+
+class Priklad(App):
+    def build(self):
+        self.zvuk = SoundLoader.load('bird.mp3')
+        if self.zvuk:
+            print(f"Délka zvuku: {self.zvuk.length}")
+
+        layout = BoxLayout(orientation='vertical')
+
+        layout.add_widget(Image(source='pan.jpg'))
+
+        button_layout = BoxLayout(orientation='horizontal')
+        play_button = Button(text='Spusť')
+        play_button.bind(on_press=self.play_sound)
+        button_layout.add_widget(play_button)
+
+        stop_button = Button(text='Zastav')
+        stop_button.bind(on_press=self.stop_sound)
+        button_layout.add_widget(stop_button)
+
+        layout.add_widget(button_layout)
+
+        return layout
+
+    def play_sound(self, instance):
+        self.zvuk.play()
+
+    def stop_sound(self, instance):
+        self.zvuk.stop()
+
+Priklad().run()
+```
+**Příklad 5.1: MULTIMEDIA**
+multimedia_kv.py
+```
+from kivy.app import App
+from kivy.lang.builder import Builder
+
+kv = Builder.load_file("./multimedia.kv")
+
+class Priklad(App):
+    def build(self):
+        return kv
+
+Priklad().run()
+```
+multimedia_kv.kv
+```
+BoxLayout:
+    orientation: "vertical"
+
+    GridLayout:
+        row: 3
+        cols: 3
+
+        Image:
+            source: "./pan.jpg"
+            size_hint_y: None
+            size: 100,100
+            allow_stretch: True
+        Image:
+            source: "./pan.jpg"
+        Image:
+            source: "./pan.jpg"
+        # sloupec 2
+        Image:
+            source: "./pan.jpg"
+        Image:
+            source: "./pan.jpg"
+        Image:
+            source: "./pan.jpg"
+        Image:
+            source: "./pan.jpg"
+        Image:
+            source: "./pan.jpg"
+        Image:
+            source: "./pan.jpg"
+```
+
 # Layout 
 
 **Layout** zajišťuje uspořádání a pozicování prvků GUI. Máme růžné typy rozložení:
 
-Úkol 4: Vytvořte vzhled jednoduché kalkulačky, která obsahuje čísla, operace +, -, *, /, a smázání
-
-Kalkulačka 
-
-- app.py
-  
-    ```
 -  **GridLayout** umožňuje umístit prvky ve maticovém tvaru, určíme počet řádků a sloupců. Prvky jsou umístěny od levého horního rohu, plní se aktuální řádku, a pak se přechází na další řádek.
 
 - **FloatLayout** umožňuje umístit relativně prvky podle šířky a výšky okna. Růžné zařízení mají růžné rozměry, podle kterých budou prvky automaticky se přizpůsobit, mění jejich rozměry a pozice. Jestliže měníme velikost okna, taky prvky budou se přizpůsobit.
@@ -403,9 +504,6 @@ Kalkulačka
 - **RelativeLayout** umožňuje umístit relativně prvky podle šířky a výšky Layout
   
   
-# Ovládací prvky = widget 
-Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomocí vzoru: 
-**from kivy.uix.<nazev_prvek> import <Nazev_prvek>**  
 
 - **TextInput** = textové pole pro zadání textu od uživatele
   V naší kalkulačce je potřeba použít TextInput, které zobrazují vstupu a výstupu.
@@ -579,37 +677,6 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
     ```
 Kivy má další různé prvky (widget), např. 
 
-- **Label** = slouží pro výpis
-
-  - Mění barvu Label
-
-  ```
-  class HelloWorld(App):
-    def build(self):
-        # Vrátí label, který se má zobrazit Hello World
-        return Label(text ="Hello World", color =(0.41, 0.42, 0.74, 1))
-  ```
-    Pouzíváme Text Markup, aby můžeme měnit styl textu
-    [styl]text[/styl]
-
-  ```
-  class HelloWorld(App):
-  def build(self):
-      # Vrátí label, který se má zobrazit Hello World
-      return Label(text ="[b]Hello World[b]", color =(0.41, 0.42, 0.74, 1), markup = True)
-  ```
-  - [b][/b] -> tučný
-  - [i][/i] -> kurzíva
-  - [u][/u] -> Podtržení
-  - [s][/s] -> Přeškrtnut
-  - [font=][/font] ->  typ písma
-  - [size=][/size]] ->  velikost písma
-  - [color=#][/color] -> barva textu
-  - [sub][/sub] -> Zobrazí text na pozici dolního indexu vzhledem k textu před ním.
-  - [sup][/sup] -> Zobrazí text na pozici horního indexu vzhledem k textu před ním.
-  
-    
-
 
 - **Checkbox** umožňuje provést dvě volbu, např. ano/ne, muž/žena, ...
 ```
@@ -737,7 +804,7 @@ if __name__ == '__main__':
 
   
 # Cvičení - Kalkulačka
-- Úkol 1: Vytvořte grafické uživatelské rozhraní kalkulačky. Kalkulačka obsahuje tláčika pro čísla, operace +, -, *, /, smázání, .... Dále obsahuje 2 TextInput. První TextInput slouží pro zadávání čísel a operací, která budou použita pro provedení vypočítání. Druhý TextInput slouží pro výpis výsledku
+- Úkol 1: Vytvořte grafické uživatelské rozhraní kalkulačky. Kalkulačka obsahuje tláčika pro čísla, operace +, -, *, /, smázání, .... Dále obsahuje 2x TextInput. První TextInput slouží pro zadávání čísel a operací, která budou použita pro provedení vypočítání. Druhý TextInput slouží pro výpis výsledku
   
   ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/56aedebe-b500-45e8-bdd5-b872ea9568a4)
 
@@ -1325,7 +1392,7 @@ CalculatorManager:
   
 
   
-- Úkol 6: Vytvořte grafické uživatelské rozhraní vědecké kalkulačky.Přidejte další tlačitka pro speciální matemetické funkce jako mocnina, odmocnina, logaritmus, ... 
+- Úkol 6: Vytvořte grafické uživatelské rozhraní vědecké kalkulačky. Přidejte další tlačitka pro speciální matemetické funkce jako je mocnina, odmocnina, logaritmus, ... 
 
   ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/77f7e1b9-e599-420a-af7d-0a1c86cab7a9)
 
@@ -1563,7 +1630,7 @@ CalculatorManager:
                 background_color: (0.7, 0.7, 0.7, 1)
 ```
 
-- Úkol 7: Vytvoření funkci tlačítka, která slouží pro navigace mezi základní kalkulačkou a vědeckou kalkulačkou.
+- Úkol 7: Vytvoření funkce tlačítka, která slouží pro navigaci mezi základní kalkulačkou a vědeckou kalkulačkou.
 
   app.py
   

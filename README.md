@@ -135,7 +135,7 @@ if __name__ == "__main__":
 
 **Layout** zajišťuje uspořádání a pozicování prvků GUI. Máme růžné typy rozložení:
 
-**Úkol 4: Vytvořte vzhled jednoduché kalkulačky, která obsahuje čísla, operace +, -, *, /, a smázání**
+Úkol 4: Vytvořte vzhled jednoduché kalkulačky, která obsahuje čísla, operace +, -, *, /, a smázání
 
 Kalkulačka 
 
@@ -194,7 +194,7 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
 **from kivy.uix.<nazev_prvek> import <Nazev_prvek>**  
 
 - **TextInput** = textové pole pro zadání textu od uživatele
-  V naší kalkulačceje potřeba použít TextInput, které zobrazují vstupu a výstupu.
+  V naší kalkulačce je potřeba použít TextInput, které zobrazují vstupu a výstupu.
    ```
    <CalculatorWidget>:
     BoxLayout
@@ -216,30 +216,39 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
             multiline: False
             halign: "right" #odkud kam se zapisuje
     ```
+   
+   Atributy
+  
   - multiline = víceřádkový pomocí Enter
+  - readonly: Pouze pro čtení, lze kopírovat
+  - halign: zarovnání
 
 - **Button** = tlačítko spouštějí se po stisknutí
     Dále potřebujeme vytvořit tlačítka kalkulačky, které jsou čísla a operace. Můžeme provést několik změn nebo přidání funkcí k tlačítkům.
   
-  - **Styl**
-    - font_size = velikost písma
-    - background_color = barva pozadí
-    - color = barvatextu
-    - size = velikost
-    - size_hint = relativní velikost tlačítka
-      - size_hint=(None, None) = pevná velikost
-    - pos = pozice tlačítka
-    - border = kulaté rohy
+  - **Styl(atributy)**
+    - **text** = text, který se má zobrazit na tlačítku.
+    - **font_size** = velikost písma
+    - **background_color** = barva pozadí tlačítka
+    - **background_normal** a **background_down**: Obrázky použité pro výchozí grafické zobrazení, když je tlačítko stisknuto a nestisknuto.
+    - **color** = barvat extu
+    - **size** = velikost
+    - **size_hint** = relativní velikost tlačítka
+      size_hint=(None, None) = pevná velikost
+    - **pos** = pozice tlačítka
+    - **multiline**: Určuje, zda TextInput podporuje více řádků.
+    - **border** = kulaté rohy
       
       např. border = (30, 30, 30, 30)
       
       
   - **Přídání fotky do pozadí tlačítka**
-    - background_normal =  zobrazí, kdy není stisknuto
-    - background_down = zobrazí, kdy je stisknuto
-    - background_disabled_normal = zobrazí, kdy není stisknuto a zároveň není aktivováno
+    - **background_normal** =  zobrazí, kdy není stisknuto
+    - **background_down** = zobrazí, kdy je stisknuto
+    - **background_disabled_normal** = zobrazí, kdy není stisknuto a zároveň není aktivováno
       
   - **Funkce**
+    on_press, on_release, a on_state: Události, které se vyvolají při stisknutí, uvolnění a změně stavu tlačítka.
 
     Používáme **on_press** pro přídání funkce. Pokud uživatel stiskne tlačítko, tak volá funkce
     
@@ -387,7 +396,7 @@ Kivy má další různé prvky (widget), např.
     
 
 
-- **Checkbox** umožňuje provést dvě volbu, např. ano nebo ne
+- **Checkbox** umožňuje provést dvě volbu, např. ano/ne, muž/žena, ...
 ```
 import kivy
 from kivy.app import App
@@ -626,8 +635,6 @@ class CalculatorManager(ScreenManager):
     pass
 ```
 
-GUI
-```
 # Animace
 - **Canvas** je grafický kontejner, do kterého můžeme kreslit různé prvky např. čáry, obdélníky, čtverce, elipsy a další.
   - Obdélník (čtverec)
@@ -663,37 +670,10 @@ class MyApp(App):
 
 if __name__ == '__main__':
     MyApp().run()
-```
 - Elipsa
-  
+ 
 - Čára
 
-# APK 
 
-# Atributy
-
-# BUTTON
-```
-text: Text, který se má zobrazit na tlačítku.
-
-font_size: Velikost písma.
-
-background_color: Barva pozadí tlačítka.
-
-background_normal a background_down: Obrázky použité pro výchozí grafické zobrazení, když je tlačítko stisknuto a nestisknuto.
-
-on_press, on_release, a on_state: Události, které se vyvolají při stisknutí, uvolnění a změně stavu tlačítka.
-```
-
-# TextInput
-```
-text: Text, který se má zobrazit.
-
-multiline: Určuje, zda TextInput podporuje více řádků.
-
-readonly: Pouze pro čtení, lze kopírovat
-
-halign: zarovnání
-```
 
   

@@ -31,6 +31,7 @@ source kivy_venv/bin/activate
 ```
 # Widgets a jejich atributy
 - ovládací prvky
+  
 **BoxLayout**: Uspořádává své potomky do řady nebo sloupce, v závislosti na orientaci.
 - Orientation: 'vertical' nebo 'horizontal'
 

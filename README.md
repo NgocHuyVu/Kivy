@@ -973,7 +973,7 @@ class CalculatorWidget(Screen):
 
 my.kv 
 
-'''
+```
 <Button@Button>
     #background_normal: ''
     font_size: "16sp"
@@ -1148,12 +1148,15 @@ CalculatorManager:
                 #font_size: 32
                 on_press: root.operace("/")
                 background_color: (0.7, 0.7, 0.7, 1)
-'''
+```
+
   
 - Úkol 3: Vytvořte funkci jednoho tlačítka, která slouží pro přepínání mezi nočním a denním režimem, po stisknutí budou tlačítka měnit svou barvu.
 
-  '''
-  class CalculatorWidget(Screen):
+  app.py
+
+```
+class CalculatorWidget(Screen):
     temp_cislo = ""
 
     def zmen_rezim(self):
@@ -1164,18 +1167,17 @@ CalculatorManager:
                     button.background_color = [0.7, 0.7, 0.7, 1]
                 else:
                     button.background_color = [0, 1, 1, 1]
-  '''
+```
+
   
 - Úkol 4: Vytvořte grafické uživatelské rozhraní vědecké kalkulačky.Přidejte další tlačitka pro speciální matemetické funkce jako mocnina, odmocnina, logaritmus, ... A implementujte funkce tlačítka. Dále vytvořte funkci jednoho tlačítka, která slouží pro navigace mezi základní kalkulačkou a vědeckou kalkulačkou.
 
   ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/77f7e1b9-e599-420a-af7d-0a1c86cab7a9)
 
-app.py
-'''
-'''
 
 my.kv
-'''
+
+```
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
@@ -1395,11 +1397,10 @@ class MyApp(App):
 
 if __name__ == '__main__':
     MyApp().run() 
-'''
-
+```
 my.kv
 
-'''
+```
 <Button@Button>
     #background_normal: ''
     font_size: "16sp"
@@ -1822,4 +1823,4 @@ CalculatorManager:
                 #font_size: 32
                 on_press: root.operace("/")
                 background_color: (0.7, 0.7, 0.7, 1)
-'''
+```

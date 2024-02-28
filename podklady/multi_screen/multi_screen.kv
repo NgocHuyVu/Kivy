@@ -1,0 +1,27 @@
+ScreenManager:
+    MenuScreen:
+    SettingsScreen:
+
+<MenuScreen>:
+    name: "menu"
+
+    BoxLayout:
+        Button:
+            text: 'do nastavení'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'nastaveni'
+        Label:
+            text: "Menu"
+
+<SettingsScreen>:
+    name: "nastaveni"
+
+    BoxLayout:
+        Label:
+            text: "Nastavení"
+        Button:
+            text: 'Zpět do menu'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'

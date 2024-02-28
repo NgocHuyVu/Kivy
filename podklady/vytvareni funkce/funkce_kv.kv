@@ -11,4 +11,7 @@ BoxLayout:
 
     Button:
         text: 'ok'
-        on_press: app.prepis()
+        on_press: app.root.ids.vstup.text = "něco"
+        #app referuje na instanci aplikace
+        #root referu na kořen widgetu aplikace
+        #ids je slovník všech widgetu v kv souboru

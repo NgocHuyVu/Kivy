@@ -94,10 +94,80 @@ Label:
 
 Priklad().run()
 ```
+**PŘÍKLAD 2: Vytváření a přiřazení funkce**
+funkce.py
+```
+from kivy.app import App
+from kivy.lang.builder import Builder
+
+kv = Builder.load_file("./funkce.kv")
+
+class Priklad(App):
+    def build(self):
+        return kv
+    
+    def prepis(self):
+        self.root.ids.vstup.text = 'Něco'
+
+Priklad().run()
+```
+funkce.kv
+```
+BoxLayout:
+    orientation: 'vertical'
+
+    TextInput:
+        id: vstup
+        text: 'nic'
+        font_size: 64
+        #readonly: True
+        #halign: "center" #left, center, right
+
+
+    Button:
+        text: 'ok'
+        on_press: app.prepis()
+```
+**PŘÍKLAD 2.1: Vytváření a přiřazení funkce v kivy language**
+funkce_kv.py
+```
+from kivy.app import App
+from kivy.lang.builder import Builder
+
+kv = Builder.load_file("./funkce_kv.kv")
+
+class Priklad(App):
+    def build(self):
+        return kv
+
+Priklad().run()
+
+```
+funkce_kv.kv
+```
+BoxLayout:
+    orientation: 'vertical'
+
+    TextInput:
+        id: vstup
+        text: 'nic'
+        font_size: 64
+        #readonly: True
+        #halign: "center" #left, center, right
+
+
+    Button:
+        text: 'ok'
+        on_press: app.root.ids.vstup.text = "něco"
+        #app referuje na instanci aplikace
+        #root referu na kořen widgetu aplikace
+        #ids je slovník všech widgetu v kv souboru
+```
 
 **Úkol 2: Předchozí aplikace má bílý text. Změňte barvu textu, tak aby byl fialový ve formátu RGBA (0.41, 0.42, 0.74, 1)**
  - Mění barvu Label
-   Nástroj umožňuje vybírat barvy a získávat k nim příslušné hodnoty RGB: https://rgbcolorpicker.com/0-1	
+   Nástroj umožňuje vybírat barvy a získávat k nim příslušné hodnoty RGB: https://rgbcolorpicker.com/0-1
+   RGBA: red green blue alpha
   ```
   class HelloWorld(App):
     def build(self):
@@ -498,7 +568,7 @@ if __name__ == '__main__':
 
   
 # Cvičení - Kalkulačka
-- Úkol 1: Vytvořte grafické uživatelské rozhraní kalkulačky. Kalkulačka obsahuje tláčiko pro čísla, operace +, -, *, /, smázání, .... Dále obsahuje 2 TextInput. První TextInput slouží pro zadávání čísel a operací, která budou použita pro provedení vypočítání. Druhý TextInput slouží pro výpis výsledku
+- Úkol 1: Vytvořte grafické uživatelské rozhraní kalkulačky. Kalkulačka obsahuje tláčika pro čísla, operace +, -, *, /, smázání, .... Dále obsahuje 2 TextInput. První TextInput slouží pro zadávání čísel a operací, která budou použita pro provedení vypočítání. Druhý TextInput slouží pro výpis výsledku
   
   ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/56aedebe-b500-45e8-bdd5-b872ea9568a4)
 

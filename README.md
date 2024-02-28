@@ -336,8 +336,46 @@ BoxLayout:
         background_color: 1, 1, 1, 1
         on_press: self.background_color = app.klik()
 ```
+**Příklad 4: Styly a jejich dědičnost**
+```
+from kivy.app import App
+from kivy.lang.builder import Builder
+from kivy.clock import Clock
+import random
 
-**Příklad 4: Slider, ProgressBar a BoxLayout**
+kv = Builder.load_file("./styl.kv")
+
+class Priklad(App):
+    def zmen_barvu(self, dt): # dt = delta time, časový interval od posledního volání funkce
+        self.root.ids.tlacitko_clock.background_color = [random.random() for _ in range(3)] + [1]
+
+    def build(self):
+        Clock.schedule_interval(self.zmen_barvu, 3)
+        return kv
+
+Priklad().run()
+
+```
+styl_kv.kv
+```
+<StylTlacitka@Button>:
+    font_size: 20
+    background_color: 1, 0, 0, 1 
+    color: 1, 1, 1, 1
+
+<NovyStylTlacitka@StylTlacitka>:
+    font_size: 32
+
+BoxLayout:
+    StylTlacitka:
+        text: 'Tlačítko 1'
+    NovyStylTlacitka:
+        id: tlacitko_clock
+        text: 'Tlačítko 2'
+
+```
+
+**Příklad 5: Slider, ProgressBar a BoxLayout**
 
 Slider.py
 ```
@@ -367,7 +405,7 @@ class Priklad(App):
 
 Priklad().run()
 ```
-**Příklad 4.1: Slider, ProgressBar a BoxLayout**
+**Příklad 5.1: Slider, ProgressBar a BoxLayout**
 
 Slider_kv.py
 ```
@@ -401,7 +439,7 @@ BoxLayout:
         max: 100
         value: slider.value
 ```
-**Příklad 5: MULTIMEDIA**
+**Příklad 6: MULTIMEDIA**
 
 multimedia.py
 ```
@@ -467,7 +505,7 @@ class Priklad(App):
 
 Priklad().run()
 ```
-**Příklad 5.1: MULTIMEDIA**
+**Příklad 6.1: MULTIMEDIA**
 multimedia_kv.py
 ```
 from kivy.app import App
@@ -513,7 +551,7 @@ BoxLayout:
         Image:
             source: "./pan.jpg"
 ```
-**Příklad 6: POPUP**
+**Příklad 7: POPUP**
 ```
 from kivy.app import App
 from kivy.uix.button import Button
@@ -537,185 +575,62 @@ class Priklad(App):
 
 Priklad().run()
 ```
-**Příklad 7: Styly a jejich dědičnost**
+**Příklad 9: Okna a jejich management**
+multi_screen.py
 ```
-styl.kv
 from kivy.app import App
-from kivy.lang.builder import Builder
+from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
 
-kv = Builder.load_file("./styl.kv")
+
+class MenuScreen(Screen):
+    pass
+
+class SettingsScreen(Screen):
+    pass
+
+class ManagerScreen(ScreenManager):
+    pass
+
+kv = Builder.load_file("./multi_screen.kv")
 
 class Priklad(App):
     def build(self):
         return kv
 
 Priklad().run()
+
 ```
-styl_kv.kv
+multi_screen.kv
 ```
-<StylTlacitka@Button>:
-    font_size: 20
-    background_color: 1, 0, 0, 1 
-    color: 1, 1, 1, 1
+ScreenManager:
+    MenuScreen:
+    SettingsScreen:
 
-<NovyStylTlacitka@StylTlacitka>:
-    font_size: 32
+<MenuScreen>:
+    name: "menu"
 
-BoxLayout:
-    StylTlacitka:
-        text: 'Tlačítko 1'
-    NovyStylTlacitka:
-        text: 'Tlačítko 2'
+    BoxLayout:
+        Button:
+            text: 'do nastavení'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'nastaveni'
+        Label:
+            text: "Menu"
+
+<SettingsScreen>:
+    name: "nastaveni"
+
+    BoxLayout:
+        Label:
+            text: "Nastavení"
+        Button:
+            text: 'Zpět do menu'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'menu'
 ```
-
-
-- **TextInput** = textové pole pro zadání textu od uživatele
-  V naší kalkulačce je potřeba použít TextInput, které zobrazují vstupu a výstupu.
-   ```
-   <CalculatorWidget>:
-    BoxLayout
-        orientation: "vertical"
-        size: root.width, root.height
-
-        TextInput:
-            id: vstup
-            text: "0"
-            font_size: 64
-            multiline: False
-            disabled: True # zakaze psat do displeje
-            halign: "right" #odkud kam se zapisuje
-        
-        TextInput:
-            id: vystup
-            text: ""
-            font_size: 64
-            multiline: False
-            halign: "right" #odkud kam se zapisuje
-    ```
-   
-      
-      
-  - **Přídání fotky do pozadí tlačítka**
-    - **background_normal** =  zobrazí, kdy není stisknuto
-    - **background_down** = zobrazí, kdy je stisknuto
-    - **background_disabled_normal** = zobrazí, kdy není stisknuto a zároveň není aktivováno
-      
-  - **Funkce**
-    on_press, on_release, a on_state: Události, které se vyvolají při stisknutí, uvolnění a změně stavu tlačítka.
-
-    Používáme **on_press** pro přídání funkce. Pokud uživatel stiskne tlačítko, tak volá funkce
-    
-    ```
-    <CalculatorWidget>:
-        BoxLayout:
-            id: rezim
-            orientation: "vertical"
-            size: root.width, root.height
-    
-            TextInput:
-                id: vstup
-                text: "0"
-                font_size: 32
-                multiline: True
-                disabled: True 
-                halign: "right"
-                size_hint_y: None
-                height: 64
-            
-            TextInput:
-                id: vystup
-                text: ""
-                font_size: 32
-                multiline: True
-                disabled: True 
-                halign: "right" #odkud kam se zapisuje
-                size_hint_y: None
-                height: 128
-    
-            GridLayout: #udava pocet sloupcu, radku
-                cols: 4
-                rows: 5
-                
-                # Sloupec 1
-    
-                Button:
-                    id: rezim_button_19
-                    text: "AC"
-                    font_size: 32
-                    on_press: root.smaz()
-                    background_color: (0, 0, 0, 1)if root.ids.vstup.text == 'Error' else (0.7, 0.7, 0.7, 1)
-                
-                Button:
-                    id: rezim_button_22
-                    text: "C"
-                    font_size: 32
-                    on_press: root.vymaz_jedno()
-                    background_color: (0.7, 0.7, 0.7, 1)
-                
-                Button:
-                    font_size: 32
-                    on_press: root.zmen_rezim()
-                    background_normal: 'Day_night.jpeg'
-    
-                Button:
-                    background_normal: 'veda.jpg'
-                    font_size: 32
-                    #on_press: root.vedecka_kalkulacka_velikost()  
-                    #on_press: root.current = 'sc_kalkulacka'
-                    on_release: app.root.current = "second"
-    ```
-
-    - app.py
-    ```
-    from kivy.app import App
-    from kivy.uix.gridlayout import GridLayout
-    from kivy.uix.boxlayout import BoxLayout
-    from kivy.uix.widget import Widget
-    from kivy.uix.label import Label
-    from kivy.uix.button import Button
-    from kivy.uix.textinput import TextInput
-    from kivy.core.window import Window
-    from kivy.lang.builder import Builder
-    
-    Builder.load_file("./my.kv") #loadnes file z root slozky
-    Window.size = (350, 600) #velikost okna, sirka/vyska
-    
-    class CalculatorWidget(Widget):
-    
-        def smaz(self): #funkce na mazani, je tam chyba
-            self.ids.vstup.text = "0"
-    
-        def tlacitka_cisla(self, cislo): #funkce na cisla
-            vstup_cisla = self.ids.vstup.text
-    
-            if vstup_cisla == "0":
-                self.ids.vstup.text = ""
-                self.ids.vstup.text += (f"{cislo}")
-            else:
-                self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
-        
-        def pridej_znak(self, znak):
-            znaky = ["+", "-", "*", "/"]
-            vstup_znaku = self.ids.vstup.text
-    
-            if vstup_znaku[-1] in znaky or (len(vstup_znaku) < 2 and vstup_znaku == 0): # logiku aby neslo pridat znamenko 1.
-                pass
-            else:
-                self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
-        
-        def vypocitej(self):
-            vstup = self.ids.vstup.text
-            self.ids.vystup.text = str(eval(vstup))
-        
-    class MyApp(App):
-        def build(self):
-            return CalculatorWidget()
-    
-    
-    if __name__ == '__main__':
-        MyApp().run()
-    ```
-Kivy má další různé prvky (widget), např. 
 
 
 - **Checkbox** umožňuje provést dvě volbu, např. ano/ne, muž/žena, ...
@@ -784,21 +699,6 @@ runTouchApp(mainbutton)
 ```
 ```
 
-# Navigace mezi multi-screen
-
-**Úkol 5: Vytvořte vědeckou kalkulačku, která obsahuje druhou mocninu, třetí mocninu, odmocninu, ...**
-
-Import modulů
-```
-from kivy.uix.screenmanager import ScreenManager, Screen
-```
-
-Pro každé kalkulačky, které bychom chtěli vytvořit, musíme vytvořit třídy CalculatorWidget a ScienceCalculatorWidget, které dědí z třídy Screen. Pokud budeme pracovat s více než jedním oknem, musíme vytvořit třídu CalculatorManager, která bude řídit navigaci mezi těmito okny. Tato třída bude muset zdědit ze ScreenManager.
-```
-
-```
-
-# Animace
 - **Canvas** je grafický kontejner, do kterého můžeme kreslit různé prvky např. čáry, obdélníky, čtverce, elipsy a další.
   - Obdélník (čtverec)
 ```
@@ -834,13 +734,6 @@ class MyApp(App):
 if __name__ == '__main__':
     MyApp().run()
 ```
-- Elipsa
- 
-- Čára
-
-
-# Multimédia 
-- Přídání audio pomocí kv language = modul SoundLoader 
 
   
 # Cvičení - Kalkulačka

@@ -107,6 +107,25 @@ Popup
 - Content: 
 - size_hint:
 
+# Layout 
+
+**Layout** zajišťuje uspořádání a pozicování prvků GUI. Máme růžné typy rozložení:
+
+-  **BoxLayout** uspořádává prvky buď ve vertikálním nebo horizontálním boxu.
+  
+-  **GridLayout** umožňuje umístit prvky v maticovém tvaru, určíme počet řádků a sloupců. Prvky jsou umístěny od levého horního rohu, plní se podle řádku, pak přechází na další řádek.
+
+- **FloatLayout** umožňuje umístit relativně prvky podle šířky a výšky okna. Růžné zařízení mají růžné rozměry, podle kterých budou prvky automaticky přizpůsobovat, měnit jejich rozměry a pozice. Jestliže měníme velikost okna, tak se prvky budou přizpůsobovat.
+  
+- **AnchorLayout** = prvky jsou umíštěny v rohu nebo na středu
+  - **anchor_x**: "left", "right" a "center"
+  - **anchor_y**: "top",  "bottom" a "center"
+  - Např. Vlevo nahoře: anchor_x="left", anchor_y="top"
+    
+    ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/2301dfce-9c65-43c9-8dc0-46df86447e4b)
+
+- **RelativeLayout** umožňuje umístit relativně prvky podle šířky a výšky Layout
+
 # Kivy language
 
 **Kivy language**
@@ -509,25 +528,6 @@ class Priklad(App):
 
 Priklad().run()
 ```
-
-# Layout 
-
-**Layout** zajišťuje uspořádání a pozicování prvků GUI. Máme růžné typy rozložení:
-
--  **GridLayout** umožňuje umístit prvky ve maticovém tvaru, určíme počet řádků a sloupců. Prvky jsou umístěny od levého horního rohu, plní se aktuální řádku, a pak se přechází na další řádek.
-
-- **FloatLayout** umožňuje umístit relativně prvky podle šířky a výšky okna. Růžné zařízení mají růžné rozměry, podle kterých budou prvky automaticky se přizpůsobit, mění jejich rozměry a pozice. Jestliže měníme velikost okna, taky prvky budou se přizpůsobit.
-  
-- **AnchorLayout** = prvky jsou umíštěny ve rohu nebo střed
-  - **anchor_x**: "left", "right" a "center"
-  - **anchor_y**: "top",  "bottom" a "center"
-  - Např. Vlevo nahoře: anchor_x="left", anchor_y="top"
-    
-    ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/2301dfce-9c65-43c9-8dc0-46df86447e4b)
-
-- **RelativeLayout** umožňuje umístit relativně prvky podle šířky a výšky Layout
-  
-  
 
 - **TextInput** = textové pole pro zadání textu od uživatele
   V naší kalkulačce je potřeba použít TextInput, které zobrazují vstupu a výstupu.

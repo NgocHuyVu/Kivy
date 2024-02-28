@@ -940,26 +940,28 @@ from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.screenmanager import NoTransition
 from kivy.metrics import dp
-import math
-from random import randint
-from kivy.config import Config
-from kivy.utils import platform
 
 
 from kivy.graphics import Rectangle
 from kivy.graphics import Color
 from kivy.clock import Clock
+from kivy.config import Config
+from kivy.utils import platform
+import math
+from random import randint
+
+
+Config.set('graphics', 'width', '1920')
+Config.set('graphics', 'height', '1080')
+#Builder.load_file("./my.kv") #loadnes file z root slozky
+#Window.size = (350, 600) #velikost okna, sirka/vyska
+#Config.set('graphics', 'resizable', False)
+#Config.set('graphics', 'width', '350')
+#Config.set('graphics', 'height', '600')
 
 class CalculatorWidget(Screen):
     temp_cislo = ""
-    def zmen_rezim(self):
-        for button_id in self.ids.keys():
-            button = self.ids[button_id]
-            if isinstance(button, Button):
-                if button.background_color == [0, 1, 1, 1]:
-                    button.background_color = [0.7, 0.7, 0.7, 1]
-                else:
-                    button.background_color = [0, 1, 1, 1]
+
     def smaz(self):
         self.ids.vstup.text = "0"
         self.ids.vystup.text = ""
@@ -979,8 +981,6 @@ class CalculatorWidget(Screen):
         if vstup_cisla == "0":
             self.ids.vstup.text = ""
             self.ids.vstup.text += (f"{cislo}")
-        elif vstup_cisla == "PI":
-            self.ids.vstup.text += str(math.pi)
         else:
             self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
     
@@ -1010,10 +1010,20 @@ class CalculatorWidget(Screen):
         except:
             self.ids.vystup.text = "Error"
             self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
+    
+    def zmen_rezim(self):
+        for button_id in self.ids.keys():
+            button = self.ids[button_id]
+            if isinstance(button, Button):
+                if button.background_color == [0, 1, 1, 1]:
+                    button.background_color = [0.7, 0.7, 0.7, 1]
+                else:
+                    button.background_color = [0, 1, 1, 1]
+    
+    def vedecka_kalkulacka_velikost(self):
+        Window.size = (700,400)
 
-class CalculatorWidget(Screen):
-    pass
-
+        
 class CalculatorManager(ScreenManager):
     pass
 
@@ -1023,14 +1033,15 @@ class MyApp(App):
     def build(self):
         if(platform == 'android' or platform == 'ios'):
             Window.maximize()
+        #elif(Window.width == 1920 and Window.height == 1080):
+        #    Window.size = (350 * (1920/2880), 600 * (1080/1800))
         else:
             Window.size = (350, 600)
         return kv
 
 
 if __name__ == '__main__':
-    MyApp().run() 
-    
+    MyApp().run()
 ```
 
 my.kv 
@@ -1051,6 +1062,7 @@ CalculatorManager:
     CalculatorWidget:
 
 <CalculatorWidget>:
+    name: "prvni"
 
     BoxLayout: #-- sestaveniElementu
         orientation: "vertical"
@@ -1210,6 +1222,17 @@ CalculatorManager:
                 #font_size: 32
                 on_press: root.operace("/")
                 background_color: (0.7, 0.7, 0.7, 1)
+            
+        Button:
+            id: rezim_button_19
+            text: "had"
+            #font_size: 32
+            size_hint_y : None
+            background_color: (0.7, 0.7, 0.7, 1)
+            on_release: 
+                app.root.current = "snake"
+                #root.manager.transition: NoTransition
+                root.manager.transition.direction = "down"
 ```
 
   

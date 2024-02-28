@@ -534,6 +534,37 @@ class Priklad(App):
 
 Priklad().run()
 ```
+**Příklad 7: Styly a jejich dědičnost**
+```
+styl.kv
+from kivy.app import App
+from kivy.lang.builder import Builder
+
+kv = Builder.load_file("./styl.kv")
+
+class Priklad(App):
+    def build(self):
+        return kv
+
+Priklad().run()
+```
+styl_kv.kv
+```
+<StylTlacitka@Button>:
+    font_size: 20
+    background_color: 1, 0, 0, 1 
+    color: 1, 1, 1, 1
+
+<NovyStylTlacitka@StylTlacitka>:
+    font_size: 32
+
+BoxLayout:
+    StylTlacitka:
+        text: 'Tlačítko 1'
+    NovyStylTlacitka:
+        text: 'Tlačítko 2'
+```
+
 
 - **TextInput** = textové pole pro zadání textu od uživatele
   V naší kalkulačce je potřeba použít TextInput, které zobrazují vstupu a výstupu.

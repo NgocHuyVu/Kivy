@@ -705,7 +705,7 @@ if __name__ == '__main__':
   
 # Cvičení - Kalkulačka
 - Úkol 1: Vytvořte grafické uživatelské rozhraní kalkulačky. Kalkulačka obsahuje tláčiko pro čísla, operace +, -, *, /, smázání, .... Dále obsahuje 2 TextInput. První TextInput slouží pro zadávání čísel a operací, která budou použita pro provedení vypočítání. Druhý TextInput slouží pro výpis výsledku
-  ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/64981699-827d-45d9-8fe4-f25a1326d200)
+  ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/5f4a99fb-c2c8-43c9-9fd8-6fd113098aa0)
   
 - Úkol 2: Implementujte funkce, které vyvolají při stisknutí tlačítka
   

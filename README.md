@@ -29,8 +29,7 @@ Linux nebo MacOS
 ```
 source kivy_venv/bin/activate
 ```
-# Widgets a jejich atributy
-- ovládací prvky
+# Widgets - Ovládací prvky
   
 **BoxLayout**: Uspořádává své potomky do řady nebo sloupce, v závislosti na orientaci.
 - Orientation: 'vertical' nebo 'horizontal'
@@ -62,13 +61,14 @@ Pokud poutřebujeme použít některý prvek, tak ho nejprve musíme importovat 
 
 **from kivy.uix.<nazev_prvku> import <Nazev_prvku>**
 
-# Atributy
+# Atributy widgetů
+
 **text, tlacitka...**
 - color: barva písma
 - background_color: barva pozadí
 - Font_size: velikost písma
   
-TextInput
+**TextInput**
 
 - hint_text: nápověda
 - password: vstup jako heslo
@@ -76,14 +76,14 @@ TextInput
 - readonly: Pouze pro čtení, lze kopírovat
 - halign: zarovnání
 
-Button
+**Button**
 
--on_press, on_release, a on_state: Události, které se vyvolají při stisknutí, uvolnění a změně stavu tlačítka.
--background_normal a background_down: Obrázky použité pro výchozí grafické zobrazení, když je tlačítko stisknuto a nestisknuto.
--border = kulaté rohy
+- on_press, on_release, a on_state: Události, které se vyvolají při stisknutí, uvolnění a změně stavu tlačítka.
+- background_normal a background_down: Obrázky použité pro výchozí grafické zobrazení, když je tlačítko stisknuto a nestisknuto.
+- border = kulaté rohy
  -např. border = (30, 30, 30, 30)
 
-**text markup**
+**Text Markup**
 - Pro použití markupu použijeme - markup: True
 
 - [b][/b] -> tučný
@@ -96,22 +96,22 @@ Button
 - [sub][/sub] -> zobrazí text na pozici dolního indexu vzhledem k textu před ním.
 - [sup][/sup] -> zobrazí text na pozici horního indexu vzhledem k textu před ním.
 
-**multimedia**
+**Multimedia**
 - source: zdroj
 - allow_stretch: roztahování
 - size: velikost
 
 **Operace**
 
-Switch/CheckBox
+**Switch/CheckBox**
 - active: 
   
-Slider/ProgressBar
+**Slider/ProgressBar**
 - max:
 - min:
 - value: současná hodnota
   
-Popup
+**Popup**
 - Title: jméno okna
 - Content: 
 - size_hint:
@@ -137,29 +137,28 @@ Popup
 
 # Kivy language
 
-**Kivy language**
-používá se pro pozicování a vzhled aplikace. 
+Používá se pro pozicování a vzhled aplikace. 
 
 Má podobný účel jako css soubor nebo html. 
 
-Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho oddělíme od zdrojového logického kódu v Pythonu.
+Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho **oddělíme od zdrojového logického kódu** v Pythonu.
 
 Můžeme měnit vzhled aplikace přímo pomocí Pythonu, ale pokud používáme kivy language, pak je kód čitelnější, lepší pro údržbu a správu aplikace.
 
 # Aplikace 
 
-**PŘÍKLAD 1: Aplikace, která zobrazuje nějaký text na obrazovce pomocí prvku Label.**
+**Příklad 1: Aplikace, která zobrazuje nějaký text na obrazovce pomocí prvku Label.**
 
 Potřebujeme prvek (widget) **Label**, který slouží pro zápis textu. Ten zobrazoví HelloWorld na obrázovce. 
 
 Když poutřebujeme použít některý prvek, tak ho nejprve musíme importovat pomocí vzoru: 
 **from kivy.uix.<nazev_prvek> import <Nazev_prvek>** 
 
-kivy.app: Tento modul obsahuje App třídu, která je základem každé Kivy aplikace.
+**kivy.app**: Tento modul obsahuje App třídu, která je základem každé Kivy aplikace.
 
-kivy.uix: Tento modul obsahuje třídy pro tvorbu uživatelského rozhraní (UI). uix v názvu modulu znamená “User Interface eXperience”.
+**kivy.uix**: Tento modul obsahuje třídy pro tvorbu uživatelského rozhraní (UI). uix v názvu modulu znamená “User Interface eXperience”.
 
-kivy.lang: Tento modul obsahuje třídu Builder, která umožňuje vytvářet uživatelské rozhraní pomocí Kivy jazyka, což je jednoduchý jazyk speciálně navržený pro definování uživatelských rozhraní v Kivy.
+**kivy.lang**: Tento modul obsahuje třídu Builder, která umožňuje vytvářet uživatelské rozhraní pomocí Kivy jazyka, což je jednoduchý jazyk speciálně navržený pro definování uživatelských rozhraní v Kivy.
 
 V našem případě potřebujeme importovat Label.
 
@@ -174,7 +173,7 @@ class Priklad(App):
 Priklad().run()
 
 ```
-**PŘÍKLAD 1.1: Aplikace, která zobrazí text na obrazovce pomocí prvku Label za použítí kivy language.**
+**Příklad 1.1: Aplikace, která zobrazí text na obrazovce pomocí prvku Label za použítí kivy language.**
 prvniAppka.py
 ```
 from kivy.app import App
@@ -194,7 +193,7 @@ Label:
     color: 1,0,0
     text: "Hi mom"
 ```
-**PŘÍKLAD 1.2: Aplikace, která zobrazí text na obrazovce pomocí prvku Label za použítí kivy language přímo v py.**
+**Příklad 1.2: Aplikace, která zobrazí text na obrazovce pomocí prvku Label za použítí kivy language přímo v py.**
 prvniAppka_loader.py
 ```
 from kivy.app import App
@@ -211,7 +210,7 @@ Label:
 
 Priklad().run()
 ```
-**PŘÍKLAD 2: Vytváření a přiřazení funkce**
+**Příklad 2: Vytváření a přiřazení funkce**
 
 funkce.py
 ```
@@ -246,7 +245,7 @@ BoxLayout:
         text: 'ok'
         on_press: app.prepis()
 ```
-**PŘÍKLAD 2.1: Vytváření a přiřazení funkce v kivy language**
+**Příklad 2.1: Vytváření a přiřazení funkce v kivy language**
 
 funkce_kv.py
 ```
@@ -282,7 +281,7 @@ BoxLayout:
         #root referu na kořen widgetu aplikace
         #ids je slovník všech widgetu v kv souboru
 ```
-**PŘÍKLAD 3: Vytvoření tlačítka, funkce, změna barvy**
+**Příklad 3: Vytvoření tlačítka, funkce, změna barvy**
 
 - RGBA: red green blue alpha
 - V kivy jsou barvy ve formátu 1 == 255
@@ -307,7 +306,7 @@ class Priklad(App):
 
 Priklad().run()
 ```
-**PŘÍKLAD 3.1: Vytvoření tlačítka, funkce, změna barvy KV**
+**Příklad 3.1: Vytvoření tlačítka, funkce, změna barvy KV**
 
 button_barvy_kv.py
 ```
@@ -439,7 +438,7 @@ BoxLayout:
         max: 100
         value: slider.value
 ```
-**Příklad 6: MULTIMEDIA**
+**Příklad 6: Multimedia**
 
 multimedia.py
 ```

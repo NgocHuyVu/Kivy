@@ -222,6 +222,7 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
   - multiline = víceřádkový pomocí Enter
   - readonly: Pouze pro čtení, lze kopírovat
   - halign: zarovnání
+  - font_size = velikost písma 
 
 - **Button** = tlačítko spouštějí se po stisknutí
     Dále potřebujeme vytvořit tlačítka kalkulačky, které jsou čísla a operace. Můžeme provést několik změn nebo přidání funkcí k tlačítkům.

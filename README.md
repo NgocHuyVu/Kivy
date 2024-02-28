@@ -33,9 +33,9 @@ py -m pip install kivy
 
 # První aplikace 
 
-**Úkol 1: Vytvořte aplikaci Helloworld, která zobrazuje nějaký text na obrazovku pomocí prvku Label.**
+**Úkol 1: Vytvořte aplikaci, která zobrazuje nějaký text na obrazovce pomocí prvku Label.**
 
-Potřebujeme prvek (widget) **Label**, který slouží pro zápis textu. Bude zobrazovat HelloWorld na obrázovce. 
+Potřebujeme prvek (widget) **Label**, který slouží pro zápis textu. Ten zobrazoví HelloWorld na obrázovce. 
 
 Když poutřebujeme použít některý prvek, tak ho nejprve musíme importovat pomocí vzoru: 
 **from kivy.uix.<nazev_prvek> import <Nazev_prvek>** 
@@ -44,7 +44,15 @@ V náš případě potřebujeme importovat Label.
 from kivy.uix.label import Label
 
 ```
-- text
+from kivy.app import App
+from kivy.uix.label import Label
+
+class Priklad(App):
+    def build(self):
+        return Label(text='hi mom', color=(1,0,0))
+
+Priklad().run()
+
 ```
 
 **Úkol 2: Předchozí aplikace má bílý text. Změňte barvu textu, tak aby byl fialový ve formátu RGBA (0.41, 0.42, 0.74, 1)**

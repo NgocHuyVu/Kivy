@@ -778,15 +778,97 @@ CalculatorManager:
 ```
 
 - Úkol 2: Implementace funkcí pro tlačítka s čísly
-- Úkol 3: Implementace funkcí pro operátory 
-- Úkol 4: Implementace funkce pro výpočet 
+
+```
+class CalculatorWidget(Screen):
+    temp_cislo = ""
+    def cisla(self, cislo): #funkce na cisla
+        vstup_cisla = self.ids.vstup.text
+        vystup_cisla = self.ids.vystup.text
+
+        if vstup_cisla == "0":
+            self.ids.vstup.text = ""
+            self.ids.vstup.text += (f"{cislo}")
+        elif vstup_cisla == "PI":
+            self.ids.vstup.text += str(math.pi)
+        else:
+            self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
+```
+
+- Úkol 3: Implementace funkcí pro operátory
+
+```
+class CalculatorWidget(Screen):
+    temp_cislo = ""
+     def operace(self, znak):
+        znaky = ["+", "-", "*", "/", "."]
+        vstup_znaku = self.ids.vstup.text
+        vystup_znaku = self.ids.vystup.text
+
+        if CalculatorWidget.temp_cislo != "":
+            self.ids.vstup.text  = (f"{CalculatorWidget.temp_cislo}{znak}")
+            CalculatorWidget.temp_cislo = ""
+        else:
+            if (len(vstup_znaku) <= 1 and vstup_znaku == "0"): #resi znamenka
+                pass
+            else: #zmena znamenek pri duplicitnim pouziti
+                if vstup_znaku[-1] in znaky:
+                    self.ids.vstup.text = vstup_znaku[:-1] + znak
+                else:
+                    self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
+```
+
+- Úkol 4: Implementace funkce pro smázání
+
+ 
+```
+class CalculatorWidget(Screen):
+    temp_cislo = ""
+    def smaz(self):
+        self.ids.vstup.text = "0"
+        self.ids.vystup.text = ""
+        CalculatorWidget.temp_cislo = ""
+
+    def vymaz_jedno(self):
+        if len(self.ids.vstup.text) > 1:
+            self.ids.vstup.text = self.ids.vstup.text[:-1]
+        else:
+            self.ids.vstup.text = "0"
+
+```
+- Úkol 5: Vytvořte funkci jednoho tlačítka, která slouží pro přepínání mezi nočním a denním režimem, po stisknutí budou tlačítka měnit svou barvu.
+
+  app.py
+
+```
+class CalculatorWidget(Screen):
+    temp_cislo = ""
+
+    def zmen_rezim(self):
+        for button_id in self.ids.keys():
+            button = self.ids[button_id]
+            if isinstance(button, Button):
+                if button.background_color == [0, 1, 1, 1]:
+                    button.background_color = [0.7, 0.7, 0.7, 1]
+                else:
+                    button.background_color = [0, 1, 1, 1]
+```
+
+- Celé řešení
 
 app.py
 
 ```
 class CalculatorWidget(Screen):
     temp_cislo = ""
-
+    def zmen_rezim(self):
+        for button_id in self.ids.keys():
+            button = self.ids[button_id]
+            if isinstance(button, Button):
+                if button.background_color == [0, 1, 1, 1]:
+                    button.background_color = [0.7, 0.7, 0.7, 1]
+                else:
+                    button.background_color = [0, 1, 1, 1]
     def smaz(self):
         self.ids.vstup.text = "0"
         self.ids.vystup.text = ""
@@ -1020,31 +1102,284 @@ CalculatorManager:
 ```
 
   
-- Úkol 3: Vytvořte funkci jednoho tlačítka, která slouží pro přepínání mezi nočním a denním režimem, po stisknutí budou tlačítka měnit svou barvu.
-
-  app.py
-
-```
-class CalculatorWidget(Screen):
-    temp_cislo = ""
-
-    def zmen_rezim(self):
-        for button_id in self.ids.keys():
-            button = self.ids[button_id]
-            if isinstance(button, Button):
-                if button.background_color == [0, 1, 1, 1]:
-                    button.background_color = [0.7, 0.7, 0.7, 1]
-                else:
-                    button.background_color = [0, 1, 1, 1]
-```
 
   
-- Úkol 4: Vytvořte grafické uživatelské rozhraní vědecké kalkulačky.Přidejte další tlačitka pro speciální matemetické funkce jako mocnina, odmocnina, logaritmus, ... A implementujte funkce tlačítka. Dále vytvořte funkci jednoho tlačítka, která slouží pro navigace mezi základní kalkulačkou a vědeckou kalkulačkou.
+- Úkol 6: Vytvořte grafické uživatelské rozhraní vědecké kalkulačky.Přidejte další tlačitka pro speciální matemetické funkce jako mocnina, odmocnina, logaritmus, ... 
 
   ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/77f7e1b9-e599-420a-af7d-0a1c86cab7a9)
 
+```
+
+<ScienceCalculatorWidget>:
+    name: "druhy"
+
+    BoxLayout:
+        id: sestaveniElementu
+        orientation: "vertical"
+        #orientation: "horizontal" pozdeji jeste prepsat 
+        size: root.width, root.height
+
+        TextBox:
+            id: vstup
+            text: "0"
+            size_hint_y: None
+            height: 64
+        
+        TextBox:
+            id: vystup
+            text: ""
+            font_size: "32sp"
+            size_hint_y: None
+            height: 128
+
+        GridLayout: #udava pocet sloupcu, radku
+            cols: 4
+            rows: 7
+
+            # Sloupec 1
+
+            Button:
+                id: rezim_button_1
+                text: "AC"
+                on_press: root.smaz()
+                background_color: (0, 0, 0, 1)if root.ids.vstup.text == 'Error' else (0.7, 0.7, 0.7, 1)
+            
+            Button:
+                id: rezim_button_2
+                text: "C"
+                on_press: root.vymaz_jedno()
+                background_color: (0.7, 0.7, 0.7, 1)
+            
+            Button:
+                on_press: root.zmen_rezim()
+                background_normal: 'Day_night.jpeg'
+
+            Button:
+                background_normal: 'veda.jpg'
+                #on_press: root.vedecka_kalkulacka_velikost()  
+                #on_press: root.current = 'sc_kalkulacka'
+                on_release:
+                    root.vedecka_kalkulacka_velikost()  
+                    app.root.current = "prvni"
+                    root.manager.transition.direction = "right"
+
+            # SLOUPEC 2
+
+            #Pokud už používá operace +,-,/,*,= tak nejde použivat vedeckou operace
+            Button:
+                id: rezim_button_3
+                text: "1/x"
+                #font_size: 32
+                on_press: root.jeden_deli_x() if not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_4
+                text: "x^2"
+                #font_size: 32
+                on_press: root.druha_mocnina() if not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_5
+                text: "x^3"
+                #font_size: 32
+                on_press: root.treti_mocnina() if not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_6
+                text: "√"
+                #font_size: 32
+                on_press: root.druha_odmocnina() if not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else (0, 0, 0, 1)
+
+
+            # SLOUPEC 3
+            Button:
+                id: rezim_button_7
+                text: "10^x"
+                #font_size: 32
+                on_press: root.umocnovani_desitkou() if not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_8
+                text: "π" #PI
+                #font_size: 32
+                on_press: root.pi() if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_9
+                text: "log"
+                #font_size: 32
+                on_press: root.logaritmus_o_zakladu_10() if not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_10
+                text: "ln"
+                #font_size: 32
+                on_press: root.prirozeny_logaritmus() if not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and not any(op in root.ids.vstup.text for op in ('/', '*', '-', '+', '=')) else (0, 0, 0, 1)
+
+            # SLOUPEC 3
+            Button:
+                id: rezim_button_11
+                text: "7"
+                #font_size: 32
+                on_press: root.cisla(7) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_12
+                text: "8"
+                #font_size: 32
+                on_press: root.cisla(8) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_13
+                text: "9"
+                #font_size: 32
+                on_press: root.cisla(9) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_14
+                text: "*"
+                #font_size: 32
+                on_press: root.operace("*") 
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 4
+            Button:
+                id: rezim_button_15
+                text: "4"
+                on_press: root.cisla(4) if root.ids.vstup.text[-1] not in ('=') else None
+                #font_size: 32
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_16
+                text: "5"
+                #font_size: 32
+                on_press: root.cisla(5) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_17
+                text: "6"
+                #font_size: 32
+                on_press: root.cisla(6) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_18
+                text: "-"
+                #font_size: 32
+                on_press: root.operace("-")
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 5
+            Button:
+                id: rezim_button_19
+                text: "1"
+                #font_size: 32
+                on_press: root.cisla(1) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_20
+                text: "2"
+                #font_size: 32
+                on_press: root.cisla(2) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+            Button:
+                id: rezim_button_21
+                text: "3"
+                #font_size: 32
+                on_press: root.cisla(3) if root.ids.vstup.text[-1] not in ('=') else None
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+
+
+            Button:
+                id: rezim_button_22
+                text: "+"
+                #font_size: 32
+                on_press: root.operace("+") 
+                background_color: (0.7, 0.7, 0.7, 1)
+
+            # SLOUPEC 6
+            
+            Button:
+                id: rezim_button_23
+                text: "."
+                on_press: root.operace(".")
+                #font_size: 32
+                background_color: (0.7, 0.7, 0.7, 1)
+            Button:
+                id: rezim_button_24
+                text: "0"
+                #font_size: 32
+                on_press: root.cisla(0)
+                background_color: (0.7, 0.7, 0.7, 1) if root.ids.vstup.text and root.ids.vstup.text[-1] != '=' else (0, 0, 0, 1)
+            
+
+            Button:
+                id: rezim_button_25
+                text: "="
+                #font_size: 32
+                on_press: root.vypocitej()
+                background_color: (0.7, 0.7, 0.7, 1)
+            Button:
+                id: rezim_button_26
+                text: "/"
+                #font_size: 32
+                on_press: root.operace("/")
+                background_color: (0.7, 0.7, 0.7, 1)
+```
+
+- Úkol 7: Vytvoření funkci tlačítka, která slouží pro navigace mezi základní kalkulačkou a vědeckou kalkulačkou.
+
+  app.py
+  
+```
+class CalculatorWidget(Screen):
+   ...
+    
+    def vedecka_kalkulacka_velikost(self):
+        Window.size = (700,400)
+
+class ScienceCalculatorWidget(Screen):
+    ...
+    
+    def vedecka_kalkulacka_velikost(self):
+        Window.size = (350,600)
+```
 
 my.kv
+```
+
+	Button:
+                background_normal: 'veda.jpg'
+                id: prepnuti_kalkulacky
+                #font_size: 32
+                #on_press: root.vedecka_kalkulacka_velikost()  
+                #on_press: root.current = 'sc_kalkulacka'
+                on_release: 
+                    root.vedecka_kalkulacka_velikost()  
+                    app.root.current = "druhy"
+                    root.manager.transition.direction = "left"
+```
+
+  
+- Úkol 8: Implementace funkcí tlačítka 
+
+- Celé řešení
+ app.py
 
 ```
 from kivy.app import App

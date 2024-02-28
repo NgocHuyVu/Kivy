@@ -66,13 +66,19 @@ Pokud poutřebujeme použít některý prvek, tak ho nejprve musíme importovat 
 **text, tlacitka...**
 - color: barva písma
 - background_color: barva pozadí
-- Font_size: velikost písma 
-(TextInput)
+- Font_size: velikost písma
+  
+TextInput
+
 - hint_text: nápověda
 - password: vstup jako heslo
 - multiline = víceřádkový pomocí Enter
 - readonly: Pouze pro čtení, lze kopírovat
 - halign: zarovnání
+
+Button
+
+on_press, on_release, a on_state: Události, které se vyvolají při stisknutí, uvolnění a změně stavu tlačítka.
 
 **text markup**
 - Pro použití markupu použijeme - markup: True

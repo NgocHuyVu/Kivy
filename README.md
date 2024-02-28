@@ -82,13 +82,13 @@ Pokud poutřebujeme použít některý prvek, tak ho nejprve musíme importovat 
 - size:
 
 **Operace**
-(Switch/CheckBox)
+Switch/CheckBox
 - active:
-(Slider/ProgressBar)
+Slider/ProgressBar
 - max:
 - min:
 - value:
-(Popup)
+Popup
 - Title:
 - Content:
 - size_hint:

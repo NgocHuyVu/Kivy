@@ -95,6 +95,7 @@ Label:
 Priklad().run()
 ```
 **PŘÍKLAD 2: Vytváření a přiřazení funkce**
+
 funkce.py
 ```
 from kivy.app import App
@@ -129,6 +130,7 @@ BoxLayout:
         on_press: app.prepis()
 ```
 **PŘÍKLAD 2.1: Vytváření a přiřazení funkce v kivy language**
+
 funkce_kv.py
 ```
 from kivy.app import App

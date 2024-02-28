@@ -18,5 +18,4 @@ class Priklad(App):
     def build(self):
         return kv
 
-if __name__ == '__main__':
-    Priklad().run()
+Priklad().run()

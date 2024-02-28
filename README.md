@@ -15,6 +15,8 @@ Vytvoření nového virtuální prostředí pro svůj projekt Kivy. Virtuální 
 ```
 python -m venv kivy_venv
 ```
+# Instalace
+
 Windows
 ```
 kivy_venv\Scripts\activate

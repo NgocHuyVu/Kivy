@@ -15,6 +15,8 @@ Vytvoření nového virtuální prostředí pro svůj projekt Kivy. Virtuální 
 ```
 python -m venv kivy_venv
 ```
+# Aktivace
+
 Windows
 ```
 kivy_venv\Scripts\activate
@@ -42,18 +44,7 @@ V náš případě potřebujeme importovat Label.
 from kivy.uix.label import Label
 
 ```
-#importujme Kivy a další ovládací prvky např. label, button
-import kivy
-from kivy.app import App
-from kivy.uix.label import Label
-
-class HelloWorld(App):
-    def build(self):
-        # Vrátí label, který se má zobrazit Hello World
-        return Label(text ="Hello World")
-    
-if __name__ == "__main__":
-    HelloWorld().run()
+- text
 ```
 
 **Úkol 2: Předchozí aplikace má bílý text. Změňte barvu textu, tak aby byl fialový ve formátu RGBA (0.41, 0.42, 0.74, 1)**
@@ -95,43 +86,8 @@ Kivy soubor by se měl jmenovat stejně jako název třídy aplikace. Nemusí se
 
 **Úkol 4: Pomocí Kivy language rozdělte část v Pythonu, která umožňuje pro vzhled aplikace, aby je psán do souboru .kv**
 
-- helloworld.py
 ```
-import kivy
-from kivy.app import App
-from kivy.uix.label import Label
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.textinput import TextInput
-from kivy.uix.button import Button
-from kivy.uix.widget import Widget
 
-
-class Grid(Widget):
-    pass
-
-
-class MyApp(App):
-    def build(self):
-        return Grid()
-
-
-if __name__ == "__main__":
-    MyApp().run()
-```
-- styl.kv
-  
- ```
-  <Grid>:
-    GridLayout:
-        cols:1
-        size: root.width, root.height
-
-        GridLayout:
-            cols:1
-            Label:
-                text: "Hello World "
-                color: 0.41, 0.42, 0.74, 1
-                markup: True
  ```
 
   
@@ -145,39 +101,6 @@ Kalkulačka
 
 - app.py
   
-```
-from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.widget import Widget
-from kivy.uix.label import Label
-from kivy.uix.button import Button
-from kivy.uix.textinput import TextInput
-
-Builder.load_file("./my.kv")
-
-#velikost okna, sirka/vyska
-Window.size = (350, 600) 
-
-class Calculator(GridLayout):
-    pass
-    
-class MyApp(App):
-    def build(self):
-        return Calculator()
-
-
-if __name__ == '__main__':
-    MyApp().run()
-```
-
-- **BoxLayout** = prvky jsou umístěny podle vertikální nebo horizontální směru.
-  - my.kv
-    ```
-    <CalculatorWidget>:
-        BoxLayout
-            orientation: "vertical"
-            size: root.width, root.height
     ```
 -  **GridLayout** umožňuje umístit prvky ve maticovém tvaru, určíme počet řádků a sloupců. Prvky jsou umístěny od levého horního rohu, plní se aktuální řádku, a pak se přechází na další řádek.
 
@@ -478,184 +401,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 
 Pro každé kalkulačky, které bychom chtěli vytvořit, musíme vytvořit třídy CalculatorWidget a ScienceCalculatorWidget, které dědí z třídy Screen. Pokud budeme pracovat s více než jedním oknem, musíme vytvořit třídu CalculatorManager, která bude řídit navigaci mezi těmito okny. Tato třída bude muset zdědit ze ScreenManager.
 ```
-class CalculatorWidget(Screen):
-    temp_cislo = ""
 
-    def smaz(self):
-        self.ids.vstup.text = "0"
-        self.ids.vystup.text = ""
-        CalculatorWidget.temp_cislo = ""
-
-    def vymaz_jedno(self):
-        if len(self.ids.vstup.text) > 1:
-            self.ids.vstup.text = self.ids.vstup.text[:-1]
-        else:
-            self.ids.vstup.text = "0"
-
-
-    def cisla(self, cislo): #funkce na cisla
-        vstup_cisla = self.ids.vstup.text
-        vystup_cisla = self.ids.vystup.text
-
-        if vstup_cisla == "0":
-            self.ids.vstup.text = ""
-            self.ids.vstup.text += (f"{cislo}")
-        elif vstup_cisla == "PI":
-            self.ids.vstup.text += str(math.pi)
-        else:
-            self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
-    
-    def operace(self, znak):
-        znaky = ["+", "-", "*", "/", "."]
-        vstup_znaku = self.ids.vstup.text
-        vystup_znaku = self.ids.vystup.text
-
-        if CalculatorWidget.temp_cislo != "":
-            self.ids.vstup.text  = (f"{CalculatorWidget.temp_cislo}{znak}")
-            CalculatorWidget.temp_cislo = ""
-        else:
-            if (len(vstup_znaku) <= 1 and vstup_znaku == "0"): #resi znamenka
-                pass
-            else: #zmena znamenek pri duplicitnim pouziti
-                if vstup_znaku[-1] in znaky:
-                    self.ids.vstup.text = vstup_znaku[:-1] + znak
-                else:
-                    self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
-    
-    def vypocitej(self):
-        vstup = self.ids.vstup.text
-        try:
-            self.ids.vystup.text = str(eval(vstup))
-            self.ids.vstup.text  = self.ids.vstup.text + "="
-            CalculatorWidget.temp_cislo = self.ids.vystup.text
-        except:
-            self.ids.vystup.text = "Error"
-            self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
-    
-    def zmen_rezim(self):
-        for button_id in self.ids.keys():
-            button = self.ids[button_id]
-            if isinstance(button, Button):
-                if button.background_color == [0, 1, 1, 1]:
-                    button.background_color = [0.7, 0.7, 0.7, 1]
-                else:
-                    button.background_color = [0, 1, 1, 1]
-    
-    def vedecka_kalkulacka_velikost(self):
-        Window.size = (700,400)
-
-class ScienceCalculatorWidget(Screen):
-    temp_cislo = ""
-
-    def smaz(self):
-        self.ids.vstup.text = "0"
-        self.ids.vystup.text = ""
-        CalculatorWidget.temp_cislo = ""
-
-    def vymaz_jedno(self):
-        if len(self.ids.vstup.text) > 1:
-            self.ids.vstup.text = self.ids.vstup.text[:-1]
-        else:
-            self.ids.vstup.text = "0"
-    def jeden_deli_x(self):
-        vstup_cisla = self.ids.vstup.text
-        if float(vstup_cisla) == 0:
-            self.ids.vstup.text = "Error"
-        else: 
-            self.ids.vstup.text = str(1 / float(vstup_cisla))
-    def druha_mocnina(self):
-        vstup_cisla = self.ids.vstup.text
-        self.ids.vstup.text = str(float(vstup_cisla) ** 2)
-
-    def treti_mocnina(self):
-        vstup_cisla = self.ids.vstup.text
-        self.ids.vstup.text = str(float(vstup_cisla) ** 3)
-
-    def druha_odmocnina(self):
-        vstup_cisla = self.ids.vstup.text
-        if float(vstup_cisla) <= 0:
-            self.ids.vstup.text = "Error"
-        else:
-            self.ids.vstup.text = str(float(vstup_cisla) ** 0.5)
-
-    def umocnovani_desitkou(self):
-        vstup_cisla = self.ids.vstup.text
-        self.ids.vstup.text = str(10 ** float(vstup_cisla))
-
-    def logaritmus_o_zakladu_10(self):
-        vstup_cisla = self.ids.vstup.text
-        if float(vstup_cisla) <= 0:
-            self.ids.vstup.text = "Error"
-        else:
-            self.ids.vstup.text = str(math.log10(float(vstup_cisla)))
-
-    def prirozeny_logaritmus(self):
-        vstup_cisla = self.ids.vstup.text
-        if float(vstup_cisla) <= 0:
-            self.ids.vstup.text = "Error"
-        else:
-            self.ids.vstup.text = str(math.log(float(vstup_cisla)))
-
-    def cisla(self, cislo): #funkce na cisla
-        vstup_cisla = self.ids.vstup.text
-        vystup_cisla = self.ids.vystup.text
-
-        if vstup_cisla == "0":
-            self.ids.vstup.text = ""
-            self.ids.vstup.text += (f"{cislo}")
-        else:
-            self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
-    
-    def operace(self, znak):
-        znaky = ["+", "-", "*", "/", "."]
-        vstup_znaku = self.ids.vstup.text
-        vystup_znaku = self.ids.vystup.text
-
-        if CalculatorWidget.temp_cislo != "":
-            self.ids.vstup.text  = (f"{CalculatorWidget.temp_cislo}{znak}")
-            CalculatorWidget.temp_cislo = ""
-        else:
-            if (len(vstup_znaku) <= 1 and vstup_znaku == "0"): #resi znamenka
-                pass
-            else: #zmena znamenek pri duplicitnim pouziti
-                if vstup_znaku[-1] in znaky:
-                    self.ids.vstup.text = vstup_znaku[:-1] + znak
-                else:
-                    self.ids.vstup.text  = (f"{vstup_znaku}{znak}")
-    def pi(self):
-        vstup_cisla = self.ids.vstup.text
-        pi_num = math.pi
-
-        if vstup_cisla == "0":
-            self.ids.vstup.text = str(pi_num)
-        else:
-            self.ids.vstup.text  = (f"{vstup_cisla}{pi_num}")
-        vstup_cisla = self.ids.vstup.text
-        
-    def vypocitej(self):
-        vstup = self.ids.vstup.text
-        try:
-            self.ids.vystup.text = str(eval(vstup))
-            self.ids.vstup.text  = self.ids.vstup.text + "="
-            CalculatorWidget.temp_cislo = self.ids.vystup.text
-            
-        except:
-            self.ids.vystup.text = "Error"
-            self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
-    
-    def zmen_rezim(self):
-        for button_id in self.ids.keys():
-            button = self.ids[button_id]
-            if isinstance(button, Button):
-                if button.background_color == [0, 1, 1, 1]:
-                    button.background_color = [0.7, 0.7, 0.7, 1]
-                else:
-                    button.background_color = [0, 1, 1, 1]
-    
-    def vedecka_kalkulacka_velikost(self):
-        Window.size = (350,600)
-class CalculatorManager(ScreenManager):
-    pass
 ```
 
 # Animace

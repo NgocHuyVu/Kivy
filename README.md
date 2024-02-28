@@ -58,7 +58,8 @@ source kivy_venv/bin/activate
 - remove_widget (pro odebrání okna),
 - current (pro získání nebo nastavení aktuálního okna) atd.
 
-Pokud poutřebujeme použít některý prvek, tak ho nejprve musíme importovat pomocí vzoru: **from kivy.uix.<nazev_prvku> import <Nazev_prvku> **
+Pokud poutřebujeme použít některý prvek, tak ho nejprve musíme importovat pomocí vzoru: 
+**from kivy.uix.<nazev_prvku> import <Nazev_prvku>**
 
 # Atributy
 **text, tlacitka...**

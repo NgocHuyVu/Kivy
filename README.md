@@ -758,7 +758,7 @@ if __name__ == '__main__':
 ```
 
 my.kv
-'''
+```
 <Button@Button>
     #background_normal: ''
     font_size: "16sp"
@@ -909,7 +909,7 @@ CalculatorManager:
                 text: "/"
                 #font_size: 32
                 background_color: (0.7, 0.7, 0.7, 1)
-'''
+```
 
 - Úkol 2: Implementujte funkce, které vyvolají při stisknutí tlačítka
 
@@ -969,7 +969,7 @@ class CalculatorWidget(Screen):
             self.ids.vystup.text = "Error"
             self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
     
-'''
+```
 
 my.kv 
 

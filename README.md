@@ -39,12 +39,6 @@ source kivy_venv/bin/activate
 
 **Label**: Zobrazení textu
 
--color: - Font_size:
-- [b][/b] -> tučný
-- [i][/i] -> kurzíva
-- [u][/u] -> podtržení
-- [s][/s] -> přeškrtnut
-
 **TextInput**: Používá se k získání vstupu od uživatele
 
 **Image**: Zobrazení obrázku

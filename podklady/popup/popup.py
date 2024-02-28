@@ -1,15 +1,21 @@
 from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.popup import Popup
+import random
 
-class TestApp(App):
+class Priklad(App):
     def otevri_popup(self, button):
-        popup = Popup(title='Testovací Popup', content=Button(text='Zavřít'), size_hint=(.5, .5))
-        popup.open()
+        for i in range(3):
+            popup = Popup(title='Testovací Popup', content=Button(text='Zavřít'), size_hint=(random.random(),random.random()))
+            zavri_popup = Button(text='Zavřít')
+            zavri_popup.bind(on_release=popup.dismiss)  # Přidáno
+            popup.content = zavri_popup
+            popup.pos_hint = {'x': random.random(), 'y': random.random()}
+            popup.open()
 
     def build(self):
-        button = Button(text='Otevřít Popup')
-        button.bind(on_press=self.show_popup)
+        button = Button(text='Otevři popup')
+        button.bind(on_press=self.otevri_popup)
         return button
 
-TestApp().run()
+Priklad().run()

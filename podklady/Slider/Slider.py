@@ -10,7 +10,7 @@ class Priklad(App):
         layout = BoxLayout(orientation="vertical")
         slider = Slider(min=0, max=100, value=50)
         text = Label(text=str(slider.value))
-        progress_bar = ProgressBar(max=100, value = slider.value)
+        progress_bar = ProgressBar(max= slider.max, value = slider.value)
 
         def hodnota_slider(instance, value):
             text.text = str(value)

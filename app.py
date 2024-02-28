@@ -51,8 +51,6 @@ class CalculatorWidget(Screen):
         if vstup_cisla == "0":
             self.ids.vstup.text = ""
             self.ids.vstup.text += (f"{cislo}")
-        elif vstup_cisla == "PI":
-            self.ids.vstup.text += str(math.pi)
         else:
             self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
     

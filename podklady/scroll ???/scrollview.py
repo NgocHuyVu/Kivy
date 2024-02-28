@@ -7,8 +7,8 @@ class TestApp(App):
     def build(self):
         layout = BoxLayout(orientation='vertical', size_hint_y=None)
         layout.bind(minimum_height=layout.setter('height'))
-        for i in range(30):
-            btn = Button(text=str(i), size_hint_y=None, height=40)
+        for i in range(51):
+            btn = Button(text=str(i), size_hint_y=None, height=100)
             layout.add_widget(btn)
         scroll_view = ScrollView()
         scroll_view.add_widget(layout)

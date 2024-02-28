@@ -234,6 +234,55 @@ BoxLayout:
         #root referu na kořen widgetu aplikace
         #ids je slovník všech widgetu v kv souboru
 ```
+**PŘÍKLAD 3: Vytvoření tlačítka, funkce, změna barvy**
+
+button_barvy.py
+```
+from kivy.app import App
+from kivy.uix.button import Button
+import random
+
+
+class Priklad(App):
+    def build(self):
+        self.button = Button(text='Stiskni mě', background_color = (1,1,1,1))
+        self.button.bind(on_press=self.klik) #bind přiřazení funkce
+        return self.button
+
+    def klik(self, instance):
+        self.button.background_color = (random.random(),random.random(),random.random(),1)
+
+Priklad().run()
+```
+**PŘÍKLAD 3: Vytvoření tlačítka, funkce, změna barvy KV**
+
+button_barvy_kv.py
+```
+from kivy.app import App
+from kivy.lang.builder import Builder
+import random
+
+kv = Builder.load_file("./button_barvy.kv")
+
+class Priklad(App):
+    def build(self):
+        return kv
+
+    def klik(self):
+        return (random.random(),random.random(),random.random(),1)
+
+Priklad().run()
+```
+
+button_barvy_kv.kv
+```
+BoxLayout:
+    orientation: 'vertical'
+    Button:
+        text: 'Stiskni mě'
+        background_color: 1, 1, 1, 1
+        on_press: self.background_color = app.klik()
+```
 
 **Úkol 2: Předchozí aplikace má bílý text. Změňte barvu textu, tak aby byl fialový ve formátu RGBA (0.41, 0.42, 0.74, 1)**
  - Mění barvu Label

@@ -703,3 +703,14 @@ if __name__ == '__main__':
 - Přídání audio pomocí kv language = modul SoundLoader 
 
   
+# Cvičení - Kalkulačka
+- Úkol 1: Vytvořte grafické uživatelské rozhraní kalkulačky. Kalkulačka obsahuje tláčiko pro čísla, operace +, -, *, /, smázání, .... Dále obsahuje 2 TextInput. První TextInput slouží pro zadávání čísel a operací, která budou použita pro provedení vypočítání. Druhý TextInput slouží pro výpis výsledku
+  ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/64981699-827d-45d9-8fe4-f25a1326d200)
+  
+- Úkol 2: Implementujte funkce, které vyvolají při stisknutí tlačítka
+  
+- Úkol 3: Vytvořte funkci jednoho tlačítka, která slouží pro přepínání mezi nočním a denním režimem, po stisknutí budou tlačítka měnit svou barvu. 
+  
+- Úkol 4: Vytvořte grafické uživatelské rozhraní vědecké kalkulačky.Přidejte další tlačitka pro speciální matemetické funkce jako mocnina, odmocnina, logaritmus, ... A implementujte funkce tlačítka. Dále vytvořte funkci jednoho tlačítka, která slouží pro navigace mezi základní kalkulačkou a vědeckou kalkulačkou. 
+
+  ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/77f7e1b9-e599-420a-af7d-0a1c86cab7a9)

@@ -108,10 +108,12 @@ Když poutřebujeme použít některý prvek, tak ho nejprve musíme importovat 
 **from kivy.uix.<nazev_prvek> import <Nazev_prvek>** 
 
 kivy.app: Tento modul obsahuje App třídu, která je základem každé Kivy aplikace.
+
 kivy.uix: Tento modul obsahuje třídy pro tvorbu uživatelského rozhraní (UI). uix v názvu modulu znamená “User Interface eXperience”.
+
 kivy.lang: Tento modul obsahuje třídu Builder, která umožňuje vytvářet uživatelské rozhraní pomocí Kivy jazyka, což je jednoduchý jazyk speciálně navržený pro definování uživatelských rozhraní v Kivy.
 
-V náš případě potřebujeme importovat Label.
+V našem případě potřebujeme importovat Label.
 
 ```
 from kivy.app import App

@@ -29,3 +29,5 @@ class MyApp(App):
 
 if __name__ == '__main__':
     MyApp().run()
+
+# Canvas je grafický kontejner, do kterého můžeme kreslit různé prvky např. čáry, obdélníky, čtverce, elipsy a další.

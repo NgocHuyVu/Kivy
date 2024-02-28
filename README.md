@@ -550,7 +550,7 @@ BoxLayout:
         Image:
             source: "./pan.jpg"
 ```
-**Příklad 7: POPUP**
+**Příklad 7: Popup**
 ```
 from kivy.app import App
 from kivy.uix.button import Button

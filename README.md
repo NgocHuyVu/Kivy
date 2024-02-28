@@ -15,6 +15,10 @@ Vytvoření nového virtuální prostředí pro svůj projekt Kivy. Virtuální 
 ```
 python -m venv kivy_venv
 ```
+2. možnost
+```
+py -m pip install kivy
+```
 # Aktivace
 
 Windows
@@ -25,13 +29,96 @@ Linux nebo MacOS
 ```
 source kivy_venv/bin/activate
 ```
-2. možnost
-```
-py -m pip install kivy
-```
+# Widgets a jejich atributy
+- ovládací prvky
+  
+**BoxLayout**: Uspořádává své potomky do řady nebo sloupce, v závislosti na orientaci.
+- Orientation: 'vertical' nebo 'horizontal'
 
+**Button**: Tlačítko
 
-# První aplikace 
+**Label**: Zobrazení textu
+
+**TextInput**: Používá se k získání vstupu od uživatele
+
+**Image**: Zobrazení obrázku
+
+**Slider**: Umožňuje uživatelům vybrat hodnotu posunem
+
+**Switch**: Umožňuje uživatelům zapnout/vypnout stav
+
+**CheckBox**: Umožňuje uživatelům vybrat nebo zrušit výběr
+
+**Popup**: Překryvného okno
+
+**ProgressBar**: Ukazuje průběh operace
+
+**ScreenManager**: Spravuje více oken (Screen widgets). 
+- Má metody jako add_widget (pro přidání okna),
+- remove_widget (pro odebrání okna),
+- current (pro získání nebo nastavení aktuálního okna) atd.
+
+Pokud poutřebujeme použít některý prvek, tak ho nejprve musíme importovat pomocí vzoru: 
+
+**from kivy.uix.<nazev_prvku> import <Nazev_prvku>**
+
+# Atributy
+**text, tlacitka...**
+- color: barva písma
+- background_color: barva pozadí
+- Font_size: velikost písma 
+(TextInput)
+- hint_text: nápověda
+- password: vstup jako heslo
+- multiline = víceřádkový pomocí Enter
+- readonly: Pouze pro čtení, lze kopírovat
+- halign: zarovnání
+
+**text markup**
+- Pro použití markupu použijeme - markup: True
+
+- [b][/b] -> tučný
+- [i][/i] -> kurzíva
+- [u][/u] -> podtržení
+- [s][/s] -> přeškrtnut
+- [font=][/font] ->  typ písma
+- [size=][/size]] ->  velikost písma
+- [color=#][/color] -> barva textu
+- [sub][/sub] -> zobrazí text na pozici dolního indexu vzhledem k textu před ním.
+- [sup][/sup] -> zobrazí text na pozici horního indexu vzhledem k textu před ním.
+
+**multimedia**
+- source: zdroj
+- allow_stretch: roztahování
+- size: velikost
+
+**Operace**
+
+Switch/CheckBox
+- active: 
+  
+Slider/ProgressBar
+- max:
+- min:
+- value: současná hodnota
+  
+Popup
+- Title: jméno okna
+- Content: 
+- size_hint:
+
+# Kivy language
+
+**Kivy language**
+používá se pro pozicování a vzhled aplikace. 
+
+Má podobný účel jako css soubor nebo html. 
+
+Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho oddělíme od zdrojového logického kódu v Pythonu.
+
+Můžeme měnit vzhled aplikace přímo pomocí Pythonu, ale pokud používáme kivy language, pak je kód čitelnější, lepší pro údržbu a správu aplikace.
+
+# Aplikace 
 
 **PŘÍKLAD 1: Aplikace, která zobrazuje nějaký text na obrazovce pomocí prvku Label.**
 
@@ -41,10 +128,12 @@ Když poutřebujeme použít některý prvek, tak ho nejprve musíme importovat 
 **from kivy.uix.<nazev_prvek> import <Nazev_prvek>** 
 
 kivy.app: Tento modul obsahuje App třídu, která je základem každé Kivy aplikace.
+
 kivy.uix: Tento modul obsahuje třídy pro tvorbu uživatelského rozhraní (UI). uix v názvu modulu znamená “User Interface eXperience”.
+
 kivy.lang: Tento modul obsahuje třídu Builder, která umožňuje vytvářet uživatelské rozhraní pomocí Kivy jazyka, což je jednoduchý jazyk speciálně navržený pro definování uživatelských rozhraní v Kivy.
 
-V náš případě potřebujeme importovat Label.
+V našem případě potřebujeme importovat Label.
 
 ```
 from kivy.app import App
@@ -57,7 +146,7 @@ class Priklad(App):
 Priklad().run()
 
 ```
-**PŘÍKLAD 1.1: Aplikace, která zobrazuje nějaký text na obrazovce pomocí prvku Label za použítí kivy language.**
+**PŘÍKLAD 1.1: Aplikace, která zobrazí text na obrazovce pomocí prvku Label za použítí kivy language.**
 prvniAppka.py
 ```
 from kivy.app import App
@@ -77,7 +166,7 @@ Label:
     color: 1,0,0
     text: "Hi mom"
 ```
-**PŘÍKLAD 1.2: Aplikace, která zobrazuje nějaký text na obrazovce pomocí prvku Label za použítí kivy language přímo v py.**
+**PŘÍKLAD 1.2: Aplikace, která zobrazí text na obrazovce pomocí prvku Label za použítí kivy language přímo v py.**
 prvniAppka_loader.py
 ```
 from kivy.app import App
@@ -165,63 +254,242 @@ BoxLayout:
         #root referu na kořen widgetu aplikace
         #ids je slovník všech widgetu v kv souboru
 ```
+**PŘÍKLAD 3: Vytvoření tlačítka, funkce, změna barvy**
 
-**Úkol 2: Předchozí aplikace má bílý text. Změňte barvu textu, tak aby byl fialový ve formátu RGBA (0.41, 0.42, 0.74, 1)**
- - Mění barvu Label
-   Nástroj umožňuje vybírat barvy a získávat k nim příslušné hodnoty RGB: https://rgbcolorpicker.com/0-1
-   RGBA: red green blue alpha
-  ```
-  class HelloWorld(App):
+- RGBA: red green blue alpha
+- V kivy jsou barvy ve formátu 1 == 255
+- [r/255.0, g/255.0, b/255.0, a/255.0]
+- https://rgbcolorpicker.com/0-1
+
+button_barvy.py
+```
+from kivy.app import App
+from kivy.uix.button import Button
+import random
+
+
+class Priklad(App):
     def build(self):
-        # Vrátí label, který se má zobrazit Hello World
-        return Label(text ="Hello World", color =(0.41, 0.42, 0.74, 1))
-  ```
-  -  Pouzíváme **Text Markup**, abychom mohli měnit **formát textu**
-    **[formát]text[/formát], markup = True**
+        self.button = Button(text='Stiskni mě', background_color = (1,1,1,1))
+        self.button.bind(on_press=self.klik) #bind přiřazení funkce
+        return self.button
 
- 
-  - [b][/b] -> tučný
-  - [i][/i] -> kurzíva
-  - [u][/u] -> podtržení
-  - [s][/s] -> přeškrtnut
-  - [font=][/font] ->  typ písma
-  - [size=][/size]] ->  velikost písma
-  - [color=#][/color] -> barva textu
-  - [sub][/sub] -> zobrazí text na pozici dolního indexu vzhledem k textu před ním.
-  - [sup][/sup] -> zobrazí text na pozici horního indexu vzhledem k textu před ním.
+    def klik(self, instance):
+        self.button.background_color = (random.random(),random.random(),random.random(),1)
 
-**Úkol 3: Zobrazuje text "Hello World" v tučném písmu.**
- ```
- class HelloWorld(App):
- def build(self):
- 	# Vrátí label, který se má zobrazit Hello World
-	return Label(text ="[b]Hello World[b]", color =(0.41, 0.42, 0.74, 1), markup = True)
-  ```
-    
-# Kivy language
+Priklad().run()
+```
+**PŘÍKLAD 3.1: Vytvoření tlačítka, funkce, změna barvy KV**
 
-**Kivy language** se používá pro pozicování a vzhled aplikace. Má stejný účel jako css soubor. Kivy language kód píšeme do souboru s příponou .kv , díky tomu ho oddělíme od zdrojového logického kódu v Pythonu. Můžeme měnit vzhled aplikace pomocí Pythonu, ale pokud používáme kivy language, pak je kód čitelnější, snažší pro údržbu a správu aplikace.
+button_barvy_kv.py
+```
+from kivy.app import App
+from kivy.lang.builder import Builder
+import random
 
-Kivy soubor by se měl jmenovat stejně jako název třídy aplikace. Nemusí se nutně jmenovat stejně, ale pokud ho Kivy nenajde podle názvu třídy aplikace, pak bychom jej museli importovat ručně pomocí Builder.load_file(soubor)).
+kv = Builder.load_file("./button_barvy.kv")
 
-**Úkol 4: Pomocí Kivy language rozdělte část v Pythonu, která umožňuje pro vzhled aplikace, aby je psán do souboru .kv**
+class Priklad(App):
+    def build(self):
+        return kv
 
+    def klik(self):
+        return (random.random(),random.random(),random.random(),1)
+
+Priklad().run()
 ```
 
- ```
+button_barvy_kv.kv
+```
+BoxLayout:
+    orientation: 'vertical'
+    Button:
+        text: 'Stiskni mě'
+        background_color: 1, 1, 1, 1
+        on_press: self.background_color = app.klik()
+```
 
-  
+**Příklad 4: Slider, ProgressBar a BoxLayout**
+
+Slider.py
+```
+from kivy.app import App
+from kivy.uix.slider import Slider
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.uix.progressbar import ProgressBar
+
+
+class Priklad(App):
+    def build(self):
+        layout = BoxLayout(orientation="vertical")
+        slider = Slider(min=0, max=100, value=50)
+        text = Label(text=str(slider.value))
+        progress_bar = ProgressBar(max= slider.max, value = slider.value)
+
+        def hodnota_slider(instance, value):
+            text.text = str(value)
+            progress_bar.value = int(value)
+
+        slider.bind(value=hodnota_slider)
+        layout.add_widget(text)
+        layout.add_widget(slider)
+        layout.add_widget(progress_bar)
+        return layout
+
+Priklad().run()
+```
+**Příklad 4.1: Slider, ProgressBar a BoxLayout**
+
+Slider_kv.py
+```
+from kivy.app import App
+from kivy.lang.builder import Builder
+
+kv = Builder.load_file("./Slider.kv")
+
+
+class Priklad(App):
+    def build(self):
+        return kv
+
+Priklad().run()
+```
+Slider_kv.kv
+```
+BoxLayout:
+    orientation: 'vertical'
+    Label:
+        id: my_label
+        text: str(slider.value)
+    Slider:
+        id: slider
+        min: 0
+        max: 100
+        value: 50
+        on_value: my_label.text = str(self.value)
+    ProgressBar:
+        id: progress_bar
+        max: 100
+        value: slider.value
+```
+**Příklad 5: MULTIMEDIA**
+
+multimedia.py
+```
+from kivy.app import App
+from kivy.uix.button import Button
+from kivy.uix.popup import Popup
+import random
+
+class Priklad(App):
+    def otevri_popup(self, button):
+        for i in range(10):
+            popup = Popup(title='Testovací Popup', content=Button(text='Zavřít'), size_hint=(random.random(),random.random()))
+            zavri_popup = Button(text='Zavřít')
+            zavri_popup.bind(on_release=popup.dismiss)  # Přidáno
+            popup.content = zavri_popup
+            popup.pos_hint = {'x': random.random(), 'y': random.random()}
+            popup.open()
+
+    def build(self):
+        button = Button(text='Otevři popup')
+        button.bind(on_press=self.otevri_popup)
+        return button
+
+Priklad().run()
+```
+
+
+```
+from kivy.app import App
+from kivy.uix.image import Image
+from kivy.uix.button import Button
+from kivy.uix.boxlayout import BoxLayout
+from kivy.core.audio import SoundLoader
+
+class Priklad(App):
+    def build(self):
+        self.zvuk = SoundLoader.load('bird.mp3')
+        if self.zvuk:
+            print(f"Délka zvuku: {self.zvuk.length}")
+
+        layout = BoxLayout(orientation='vertical')
+
+        layout.add_widget(Image(source='pan.jpg'))
+
+        button_layout = BoxLayout(orientation='horizontal')
+        play_button = Button(text='Spusť')
+        play_button.bind(on_press=self.play_sound)
+        button_layout.add_widget(play_button)
+
+        stop_button = Button(text='Zastav')
+        stop_button.bind(on_press=self.stop_sound)
+        button_layout.add_widget(stop_button)
+
+        layout.add_widget(button_layout)
+
+        return layout
+
+    def play_sound(self, instance):
+        self.zvuk.play()
+
+    def stop_sound(self, instance):
+        self.zvuk.stop()
+
+Priklad().run()
+```
+**Příklad 5.1: MULTIMEDIA**
+multimedia_kv.py
+```
+from kivy.app import App
+from kivy.lang.builder import Builder
+
+kv = Builder.load_file("./multimedia.kv")
+
+class Priklad(App):
+    def build(self):
+        return kv
+
+Priklad().run()
+```
+multimedia_kv.kv
+```
+BoxLayout:
+    orientation: "vertical"
+
+    GridLayout:
+        row: 3
+        cols: 3
+
+        Image:
+            source: "./pan.jpg"
+            size_hint_y: None
+            size: 100,100
+            allow_stretch: True
+        Image:
+            source: "./pan.jpg"
+        Image:
+            source: "./pan.jpg"
+        # sloupec 2
+        Image:
+            source: "./pan.jpg"
+        Image:
+            source: "./pan.jpg"
+        Image:
+            source: "./pan.jpg"
+        Image:
+            source: "./pan.jpg"
+        Image:
+            source: "./pan.jpg"
+        Image:
+            source: "./pan.jpg"
+```
+
 # Layout 
 
 **Layout** zajišťuje uspořádání a pozicování prvků GUI. Máme růžné typy rozložení:
 
-Úkol 4: Vytvořte vzhled jednoduché kalkulačky, která obsahuje čísla, operace +, -, *, /, a smázání
-
-Kalkulačka 
-
-- app.py
-  
-    ```
 -  **GridLayout** umožňuje umístit prvky ve maticovém tvaru, určíme počet řádků a sloupců. Prvky jsou umístěny od levého horního rohu, plní se aktuální řádku, a pak se přechází na další řádek.
 
 - **FloatLayout** umožňuje umístit relativně prvky podle šířky a výšky okna. Růžné zařízení mají růžné rozměry, podle kterých budou prvky automaticky se přizpůsobit, mění jejich rozměry a pozice. Jestliže měníme velikost okna, taky prvky budou se přizpůsobit.
@@ -236,9 +504,6 @@ Kalkulačka
 - **RelativeLayout** umožňuje umístit relativně prvky podle šířky a výšky Layout
   
   
-# Ovládací prvky = widget 
-Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomocí vzoru: 
-**from kivy.uix.<nazev_prvek> import <Nazev_prvek>**  
 
 - **TextInput** = textové pole pro zadání textu od uživatele
   V naší kalkulačce je potřeba použít TextInput, které zobrazují vstupu a výstupu.
@@ -412,37 +677,6 @@ Kdy poutřebujeme použít některý prvek, tak nejprve musíme importovat pomoc
     ```
 Kivy má další různé prvky (widget), např. 
 
-- **Label** = slouží pro výpis
-
-  - Mění barvu Label
-
-  ```
-  class HelloWorld(App):
-    def build(self):
-        # Vrátí label, který se má zobrazit Hello World
-        return Label(text ="Hello World", color =(0.41, 0.42, 0.74, 1))
-  ```
-    Pouzíváme Text Markup, aby můžeme měnit styl textu
-    [styl]text[/styl]
-
-  ```
-  class HelloWorld(App):
-  def build(self):
-      # Vrátí label, který se má zobrazit Hello World
-      return Label(text ="[b]Hello World[b]", color =(0.41, 0.42, 0.74, 1), markup = True)
-  ```
-  - [b][/b] -> tučný
-  - [i][/i] -> kurzíva
-  - [u][/u] -> Podtržení
-  - [s][/s] -> Přeškrtnut
-  - [font=][/font] ->  typ písma
-  - [size=][/size]] ->  velikost písma
-  - [color=#][/color] -> barva textu
-  - [sub][/sub] -> Zobrazí text na pozici dolního indexu vzhledem k textu před ním.
-  - [sup][/sup] -> Zobrazí text na pozici horního indexu vzhledem k textu před ním.
-  
-    
-
 
 - **Checkbox** umožňuje provést dvě volbu, např. ano/ne, muž/žena, ...
 ```
@@ -570,7 +804,7 @@ if __name__ == '__main__':
 
   
 # Cvičení - Kalkulačka
-- Úkol 1: Vytvořte grafické uživatelské rozhraní kalkulačky. Kalkulačka obsahuje tláčika pro čísla, operace +, -, *, /, smázání, .... Dále obsahuje 2 TextInput. První TextInput slouží pro zadávání čísel a operací, která budou použita pro provedení vypočítání. Druhý TextInput slouží pro výpis výsledku
+- Úkol 1: Vytvořte grafické uživatelské rozhraní kalkulačky. Kalkulačka obsahuje tláčika pro čísla, operace +, -, *, /, smázání, .... Dále obsahuje 2x TextInput. První TextInput slouží pro zadávání čísel a operací, která budou použita pro provedení vypočítání. Druhý TextInput slouží pro výpis výsledku
   
   ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/56aedebe-b500-45e8-bdd5-b872ea9568a4)
 
@@ -871,26 +1105,28 @@ from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.screenmanager import NoTransition
 from kivy.metrics import dp
-import math
-from random import randint
-from kivy.config import Config
-from kivy.utils import platform
 
 
 from kivy.graphics import Rectangle
 from kivy.graphics import Color
 from kivy.clock import Clock
+from kivy.config import Config
+from kivy.utils import platform
+import math
+from random import randint
+
+
+Config.set('graphics', 'width', '1920')
+Config.set('graphics', 'height', '1080')
+#Builder.load_file("./my.kv") #loadnes file z root slozky
+#Window.size = (350, 600) #velikost okna, sirka/vyska
+#Config.set('graphics', 'resizable', False)
+#Config.set('graphics', 'width', '350')
+#Config.set('graphics', 'height', '600')
 
 class CalculatorWidget(Screen):
     temp_cislo = ""
-    def zmen_rezim(self):
-        for button_id in self.ids.keys():
-            button = self.ids[button_id]
-            if isinstance(button, Button):
-                if button.background_color == [0, 1, 1, 1]:
-                    button.background_color = [0.7, 0.7, 0.7, 1]
-                else:
-                    button.background_color = [0, 1, 1, 1]
+
     def smaz(self):
         self.ids.vstup.text = "0"
         self.ids.vystup.text = ""
@@ -910,8 +1146,6 @@ class CalculatorWidget(Screen):
         if vstup_cisla == "0":
             self.ids.vstup.text = ""
             self.ids.vstup.text += (f"{cislo}")
-        elif vstup_cisla == "PI":
-            self.ids.vstup.text += str(math.pi)
         else:
             self.ids.vstup.text  = (f"{vstup_cisla}{cislo}") #pridava cisla
     
@@ -941,10 +1175,20 @@ class CalculatorWidget(Screen):
         except:
             self.ids.vystup.text = "Error"
             self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
+    
+    def zmen_rezim(self):
+        for button_id in self.ids.keys():
+            button = self.ids[button_id]
+            if isinstance(button, Button):
+                if button.background_color == [0, 1, 1, 1]:
+                    button.background_color = [0.7, 0.7, 0.7, 1]
+                else:
+                    button.background_color = [0, 1, 1, 1]
+    
+    def vedecka_kalkulacka_velikost(self):
+        Window.size = (700,400)
 
-class CalculatorWidget(Screen):
-    pass
-
+        
 class CalculatorManager(ScreenManager):
     pass
 
@@ -954,14 +1198,15 @@ class MyApp(App):
     def build(self):
         if(platform == 'android' or platform == 'ios'):
             Window.maximize()
+        #elif(Window.width == 1920 and Window.height == 1080):
+        #    Window.size = (350 * (1920/2880), 600 * (1080/1800))
         else:
             Window.size = (350, 600)
         return kv
 
 
 if __name__ == '__main__':
-    MyApp().run() 
-    
+    MyApp().run()
 ```
 
 my.kv 
@@ -982,6 +1227,7 @@ CalculatorManager:
     CalculatorWidget:
 
 <CalculatorWidget>:
+    name: "prvni"
 
     BoxLayout: #-- sestaveniElementu
         orientation: "vertical"
@@ -1146,7 +1392,7 @@ CalculatorManager:
   
 
   
-- Úkol 6: Vytvořte grafické uživatelské rozhraní vědecké kalkulačky.Přidejte další tlačitka pro speciální matemetické funkce jako mocnina, odmocnina, logaritmus, ... 
+- Úkol 6: Vytvořte grafické uživatelské rozhraní vědecké kalkulačky. Přidejte další tlačitka pro speciální matemetické funkce jako je mocnina, odmocnina, logaritmus, ... 
 
   ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/77f7e1b9-e599-420a-af7d-0a1c86cab7a9)
 
@@ -1384,7 +1630,7 @@ CalculatorManager:
                 background_color: (0.7, 0.7, 0.7, 1)
 ```
 
-- Úkol 7: Vytvoření funkci tlačítka, která slouží pro navigace mezi základní kalkulačkou a vědeckou kalkulačkou.
+- Úkol 7: Vytvoření funkce tlačítka, která slouží pro navigaci mezi základní kalkulačkou a vědeckou kalkulačkou.
 
   app.py
   

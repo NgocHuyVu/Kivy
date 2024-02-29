@@ -899,7 +899,7 @@ class CalculatorWidget(Screen):
             self.ids.vstup.text = "0"
 
 ```
-- Úkol 4:
+- Úkol 5: Vytvořte funkci, která slouží pro vrácení výsledku
 ```
 class CalculatorWidget(Screen):
     temp_cislo = ""
@@ -913,7 +913,7 @@ class CalculatorWidget(Screen):
             self.ids.vystup.text = "Error"
             self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
 ```
-- Úkol 5: Vytvořte funkci jednoho tlačítka, která slouží pro přepínání mezi nočním a denním režimem, po stisknutí budou tlačítka měnit svou barvu.
+- Úkol 6: Vytvořte funkci jednoho tlačítka, která slouží pro přepínání mezi nočním a denním režimem, po stisknutí budou tlačítka měnit svou barvu.
 
   app.py
 
@@ -1235,7 +1235,7 @@ CalculatorManager:
   
 
   
-- Úkol 6: Vytvořte grafické uživatelské rozhraní vědecké kalkulačky. Přidejte další tlačitka pro speciální matemetické funkce jako je mocnina, odmocnina, logaritmus, ... 
+- Úkol 7: Vytvořte grafické uživatelské rozhraní vědecké kalkulačky. Přidejte další tlačitka pro speciální matemetické funkce jako je mocnina, odmocnina, logaritmus, ... 
 
   ![image](https://github.com/NgocHuyVu/Kivy/assets/128366057/77f7e1b9-e599-420a-af7d-0a1c86cab7a9)
 
@@ -1473,7 +1473,7 @@ CalculatorManager:
                 background_color: (0.7, 0.7, 0.7, 1)
 ```
 
-- Úkol 7: Vytvoření funkce tlačítka, která slouží pro navigaci mezi základní kalkulačkou a vědeckou kalkulačkou.
+- Úkol 8: Vytvoření funkce tlačítka, která slouží pro navigaci mezi základní kalkulačkou a vědeckou kalkulačkou.
 
   app.py
   

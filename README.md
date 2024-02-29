@@ -899,6 +899,20 @@ class CalculatorWidget(Screen):
             self.ids.vstup.text = "0"
 
 ```
+- Úkol 4:
+```
+class CalculatorWidget(Screen):
+    temp_cislo = ""
+    def vypocitej(self):
+        vstup = self.ids.vstup.text
+        try:
+            self.ids.vystup.text = str(eval(vstup))
+            self.ids.vstup.text  = self.ids.vstup.text + "="
+            CalculatorWidget.temp_cislo = self.ids.vystup.text
+        except:
+            self.ids.vystup.text = "Error"
+            self.ids.vstup.text = "0" #automaticky to zmeni vstup na nulu
+```
 - Úkol 5: Vytvořte funkci jednoho tlačítka, která slouží pro přepínání mezi nočním a denním režimem, po stisknutí budou tlačítka měnit svou barvu.
 
   app.py
